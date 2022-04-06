@@ -1,0 +1,7 @@
+! If Command error test
+
+let
+  var a : Integer;
+  var b : Integer
+in
+  if (if a < 5 
