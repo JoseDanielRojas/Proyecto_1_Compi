@@ -77,8 +77,8 @@ final class Token extends Object {
     CONST		= 7,
     DO			= 8,
      // se agrega el token de ELSIF
-    ELSIF               = 9,
-    ELSE		= 10,
+    ELSE               = 9,
+    ELSIF		= 10,
     END			= 11,
      // se agrega el token de FOR Y FROM
     FOR                 = 12,
@@ -142,8 +142,8 @@ final class Token extends Object {
     "const",
     "do",
     
-    "elsif",
     "else",
+    "elsif",
     "end",
     
     "for",
@@ -165,6 +165,7 @@ final class Token extends Object {
     "then",
     "type",
     
+    "until",
     "var",
     "when",
     "while",

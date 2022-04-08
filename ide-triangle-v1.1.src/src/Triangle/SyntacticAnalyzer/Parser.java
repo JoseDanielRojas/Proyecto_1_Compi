@@ -32,6 +32,7 @@ import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.Declaration;
 import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.ElsifCommand;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
@@ -292,70 +293,73 @@ public class Parser {
         }
       }
       break;
-      
-      // Se elimina el caso de begin de single command | "begin" Command "end"
+      /*
+       //Se elimina el caso de begin de single command | "begin" Command "end"
     //case Token.BEGIN:
-     // acceptIt();
+      //acceptIt();
       //commandAST = parseCommand();
       //accept(Token.END);
       //break;
       
        // Se elimina el caso de let de single command "let" Declaration "in" single-Command
-   // case Token.LET:
-      //{
-        //acceptIt();
-       // Declaration dAST = parseDeclaration();
-       // accept(Token.IN);
-        //Command cAST = parseSingleCommand();
-       // finish(commandPos);
-        //commandAST = new LetCommand(dAST, cAST, commandPos);
-      //}
-      //break;
+    case Token.LET:
+      {
+        acceptIt();
+        Declaration dAST = parseDeclaration();
+        accept(Token.IN);
+        Command cAST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new LetCommand(dAST, cAST, commandPos);
+      }
+      break;
+      */
+      /*
        // Se elimina el caso de IF de single command "if" Expression "then" single-Command "else" single-Command
-    //case Token.IF:
-      //{
-        //acceptIt();
-       // Expression eAST = parseExpression();
-        //accept(Token.THEN);
-        //Command c1AST = parseSingleCommand();
-        //accept(Token.ELSE);
-        //Command c2AST = parseSingleCommand();
-        //finish(commandPos);
-        //commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
-     // }
-      //break;
+    case Token.IF:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.THEN);
+        Command c1AST = parseSingleCommand();
+        accept(Token.ELSE);
+        Command c2AST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+      }
+      break;
+      */
       // Se elimina el caso de WHILE de single command "while" Expression "do" single-Command
-
-    //case Token.WHILE:
-      //{
-        //acceptIt();
-       // Expression eAST = parseExpression();
-        //accept(Token.DO);
-        //Command cAST = parseSingleCommand();
-        //finish(commandPos);
-       // commandAST = new WhileCommand(eAST, cAST, commandPos);
-     // }
-     // break;
-
+/*
+    case Token.WHILE:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.DO);
+        Command cAST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new WhileCommand(eAST, cAST, commandPos);
+      }
+      break;
+*/
     case Token.SEMICOLON:
     case Token.END:
     case Token.ELSE:
     case Token.IN:
         
         // se quita el comando vacio de single-Command la primera alternativa (?, el comando vacío)3
-
-    //case Token.EOT:
-
-      //finish(commandPos);
-      //commandAST = new EmptyCommand(commandPos);
-      //break;
-    // se agrega el caso de nothing a single command
-    case Token.NOTHING:
+/*
+    case Token.EOT:
 
       finish(commandPos);
       commandAST = new EmptyCommand(commandPos);
       break;
-      
+        */
+    // se agrega el caso de nothing a single command
+    case Token.NOTHING:
+      acceptIt();
+      finish(commandPos);
+      commandAST = new EmptyCommand(commandPos);
+      break;
     case Token.LET:
       {
         acceptIt();
@@ -374,21 +378,42 @@ public class Parser {
         Expression eAST = parseExpression();
         accept(Token.THEN);
         Command c1AST = parseCommand();
-        while(currentToken.kind == Token.ELSIF){
-            accept(Token.ELSIF);
-            Expression elsifAST = parseExpression();
-            accept(Token.THEN);
-            Command cElsifAST = parseCommand();
-        };
-        
-        accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
-        finish(commandPos);
-        accept(Token.END);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+        switch (currentToken.kind) {
+            case Token.ELSIF:
+            {
+                Command ElsifC = null;
+                while(currentToken.kind == Token.ELSIF){
+                    accept(Token.ELSIF);
+                    Expression eElsifAST = parseExpression();
+                    accept(Token.THEN);
+                    Command cElsifAST = parseCommand();
+                    ElsifC = new ElsifCommand(eElsifAST, cElsifAST, commandPos);   
+                    }
+                accept(Token.ELSE);
+                Command c2AST = parseSingleCommand();
+                accept(Token.END);
+                finish(commandPos);
+                ElsifC = new SequentialCommand(ElsifC, c2AST, commandPos);
+                commandAST = new IfCommand(eAST, c1AST, ElsifC, commandPos);
+            }
+                break;
+            case Token.ELSE:
+            {
+                accept(Token.ELSE);
+                Command c2AST = parseSingleCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+            }
+                break;
+        default:
+          syntacticError("\"%\" cannot start a command",
+           currentToken.spelling);
+          break;
+        }
       }
       break;
-
+      
     default:
       syntacticError("\"%\" cannot start a command",
         currentToken.spelling);
