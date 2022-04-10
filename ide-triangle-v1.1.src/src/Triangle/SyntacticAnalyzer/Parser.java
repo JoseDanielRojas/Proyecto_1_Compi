@@ -38,6 +38,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForCommand;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -63,6 +64,10 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -360,14 +365,15 @@ public class Parser {
       finish(commandPos);
       commandAST = new EmptyCommand(commandPos);
       break;
+    
     case Token.LET:
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
         accept(Token.IN);
         Command cAST = parseCommand();
-        finish(commandPos);
         accept(Token.END);
+        finish(commandPos);
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
       break;
@@ -390,22 +396,23 @@ public class Parser {
                     ElsifC = new ElsifCommand(eElsifAST, cElsifAST, commandPos);   
                     }
                 accept(Token.ELSE);
-                Command c2AST = parseSingleCommand();
+                Command c2AST = parseCommand();
+                ElsifC = new SequentialCommand(ElsifC, c2AST, commandPos);
                 accept(Token.END);
                 finish(commandPos);
-                ElsifC = new SequentialCommand(ElsifC, c2AST, commandPos);
                 commandAST = new IfCommand(eAST, c1AST, ElsifC, commandPos);
             }
-                break;
+            break;
             case Token.ELSE:
             {
                 accept(Token.ELSE);
-                Command c2AST = parseSingleCommand();
+                Command c2AST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
                 commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
             }
                 break;
+                
         default:
           syntacticError("\"%\" cannot start a command",
            currentToken.spelling);
@@ -413,6 +420,207 @@ public class Parser {
         }
       }
       break;
+      
+    case Token.CHOOSE:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.FROM);
+        //Cases casesAST = parseCommand();
+        accept(Token.END);
+        finish(commandPos);
+        //commandAST = new LetCommand(dAST, cAST, commandPos);
+      }
+      break;
+      
+    case Token.REPEAT:
+     {
+        acceptIt();
+        switch (currentToken.kind) {
+            case Token.WHILE:
+            {
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command c1AST = parseCommand();
+                if(currentToken.kind == Token.LEAVE){
+                    acceptIt();
+                    Command c2AST = parseCommand();
+                    accept(Token.END);
+                    finish(commandPos);
+                    // hacer el ast
+                    commandAST = new RepeatWhileCommand(eAST, c1AST,c2AST,commandPos);
+                }
+                else{
+                    Command c2AST = new EmptyCommand(commandPos);
+                    accept(Token.END);
+                    finish(commandPos);
+                    commandAST = new RepeatWhileCommand(eAST, c1AST,c2AST,commandPos);
+                }
+            }
+            break;
+            case Token.UNTIL:
+            {
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command c1AST = parseCommand();
+                if(currentToken.kind == Token.LEAVE){
+                    acceptIt();
+                    Command c2AST = parseCommand();
+                    accept(Token.END);
+                    finish(commandPos);
+                    // hacer el ast
+                    commandAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
+                }
+                else{
+                    Command c2AST = new EmptyCommand(commandPos);
+                    accept(Token.END);
+                    finish(commandPos);
+                    commandAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
+                }
+            }
+            break;
+            case Token.DO:
+            {
+                acceptIt();
+                Command c1AST = parseCommand();
+                switch (currentToken.kind) {
+                    case Token.WHILE:
+                    {
+                        acceptIt();
+                        Expression eAST = parseExpression();
+                        if(currentToken.kind == Token.LEAVE){
+                            acceptIt();
+                            Command c2AST = parseCommand();
+                            accept(Token.END);
+                            finish(commandPos);
+                            // hacer el ast
+                            commandAST = new RepeatDoWhileCommand(c1AST, eAST,c2AST, commandPos);
+                        }
+                        else{
+                            Command c2AST = new EmptyCommand(commandPos);
+                            accept(Token.END);
+                            finish(commandPos);
+                            commandAST = new RepeatDoWhileCommand(c1AST, eAST,c2AST, commandPos);
+                        }
+                        
+                    }
+                    break;
+                    case Token.UNTIL:
+                    {
+                        acceptIt();
+                        Expression eAST = parseExpression();
+                        if(currentToken.kind == Token.LEAVE){
+                            acceptIt();
+                            Command c2AST = parseCommand();
+                            accept(Token.END);
+                            finish(commandPos);
+                            // hacer el ast
+                            commandAST = new RepeatDoUntilCommand(c1AST, eAST,c2AST, commandPos);
+                        }
+                        else{
+                            Command c2AST = new EmptyCommand(commandPos);
+                            accept(Token.END);
+                            finish(commandPos);
+                            commandAST = new RepeatDoUntilCommand(c1AST, eAST,c2AST, commandPos);
+                        }
+                     break;
+                    }
+                default:
+                syntacticError("\"%\" cannot start a command",
+                currentToken.spelling);
+                break;
+                }
+                
+            }
+            break;
+            default:
+                syntacticError("\"%\" cannot start a command",
+                currentToken.spelling);
+                break;
+        }
+      }
+      break;
+      
+    case Token.FOR:
+      {
+        acceptIt();
+        Identifier iAST = parseIdentifier();
+        accept(Token.FROM);
+        Expression e1AST = parseExpression();
+        accept(Token.DOUBLEDOT);
+        Expression e2AST = parseExpression();
+        switch (currentToken.kind) {
+             case Token.DO:{
+                 acceptIt();
+                 Command c1AST = parseCommand();
+                 if(currentToken.kind == Token.LEAVE){
+                     acceptIt();
+                     Command c2AST = parseCommand();
+                     accept(Token.END);
+                     finish(commandPos);
+                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                 }
+                 else{
+                     accept(Token.END);
+                     finish(commandPos);
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                 }
+                 break;
+             }
+             case Token.WHILE:{
+                 acceptIt();
+                 Expression eAST = parseExpression();
+                 accept(Token.DO);
+                 Command c1AST = parseCommand();
+                 if(currentToken.kind == Token.LEAVE){
+                     acceptIt();
+                     Command c2AST = parseCommand();
+                     accept(Token.END);
+                     finish(commandPos);
+                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
+                     // hacer el ast y agregarlo al for
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                 }
+                 else{
+                     accept(Token.END);
+                     finish(commandPos);
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                }
+             }
+             break;
+             case Token.UNTIL:{
+                 acceptIt();
+                 Expression eAST = parseExpression();
+                 accept(Token.DO);
+                 Command c1AST = parseCommand();
+                 if(currentToken.kind == Token.LEAVE){
+                     acceptIt();
+                     Command c2AST = parseCommand();
+                     accept(Token.END);
+                     finish(commandPos);
+                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
+                     // hacer el ast y agregarlo al for
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                 }
+                 else{
+                     Command c2AST = new EmptyCommand(commandPos);
+                     accept(Token.END);
+                     finish(commandPos);
+                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                }
+             }
+             break;
+             default:
+             syntacticError("\"%\" cannot start a command",
+             currentToken.spelling);
+        break;
+        }
+      }
+      break;
+      
       
     default:
       syntacticError("\"%\" cannot start a command",

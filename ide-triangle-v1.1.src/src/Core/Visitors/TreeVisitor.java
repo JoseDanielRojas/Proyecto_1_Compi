@@ -27,6 +27,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -50,6 +51,10 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -107,6 +112,22 @@ public class TreeVisitor implements Visitor {
     // se agraga al tree visitor la funcion el elsif
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
         return(createBinary("ELSIF Command", ast.E, ast.C)); 
+    }
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+        return(createTernary("RepeatDoUntil Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+        return(createTernary("RepeatDoWhile Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+        return(createTernary("RepeatUntilDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+        return(createTernary("RepeatWhileDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Object visitForCommand(ForCommand ast, Object o) {
+        return(createQuaternary("For Command", ast.I, ast.E1,ast.E2,ast.C)); //To change body of generated methods, choose Tools | Templates.
     }
     
     public Object visitLetCommand(LetCommand ast, Object obj) {
@@ -442,6 +463,4 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
-
-   
 }

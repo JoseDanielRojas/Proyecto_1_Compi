@@ -1,2 +1,1 @@
-if
-   1   then nothing elsif 1 then nothing else nothing end
+repeat do nothing until 1 end
