@@ -24,6 +24,9 @@ import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.IntegerCase;
+import Triangle.AbstractSyntaxTrees.Cases;
+import Triangle.AbstractSyntaxTrees.CharacterCase;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
@@ -81,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 
 public class Parser {
@@ -203,7 +207,7 @@ public class Parser {
     }
     return CL;
   }
-
+  
 // parseIdentifier parses an identifier, and constructs a leaf AST to
 // represent it.
 
@@ -424,6 +428,73 @@ public class Parser {
     return commandAST;
   }
 
+  
+  //Cases
+  
+  Cases parseCases() throws SyntaxError {
+      Cases CasesAst=null;
+      SourcePosition CasesPos = new SourcePosition();
+
+      start (CasesPos); 
+      
+      CasesAst= parseCase();
+       while(currentToken.kind == Token.WHEN){//revisar
+           CasesAst= parseCase();
+           
+       }
+      finish(CasesPos);
+      return CasesAst;
+      
+      
+      
+  }
+ Cases parseCase() throws SyntaxError {
+    Cases CaseAst=null;
+    SourcePosition CasePos = new SourcePosition();
+
+    start (CasePos); 
+    
+    accept(Token.WHEN);//acepta el when
+    Cases cslAST = parseCaseLiteral();//falta [".."]
+     Cases cslAST2 = null;
+    if(currentToken.kind == Token.DOBLEDOT){
+        cslAST2 = parseCaseLiteral();
+    }   
+    accept(Token.THEN);
+    Command cCaseAST = parseCommand();
+    finish(CasePos);
+    
+    CaseAst = new WhenCase(cslAST,cslAST2,cCaseAST, CasePos);
+      
+     
+    return CaseAst;
+ }
+ Cases parseCaseLiteral() throws SyntaxError {
+    Cases CaseLitAst=null;
+    SourcePosition casesPos = new SourcePosition();
+    start(casesPos);
+
+    switch (currentToken.kind) {
+
+    case Token.INTLITERAL:
+      {
+        IntegerLiteral ilAST = parseIntegerLiteral();
+        finish(casesPos);
+        CaseLitAst = new IntegerCase(ilAST, casesPos);
+      }
+      break;
+
+    case Token.CHARLITERAL:
+      {
+        CharacterLiteral clAST= parseCharacterLiteral();
+        finish(casesPos);
+        CaseLitAst = new CharacterCase(clAST, casesPos);
+      }
+      break;
+    }
+    return CaseLitAst;
+ }
+  
 ///////////////////////////////////////////////////////////////////////////////
 //
 // EXPRESSIONS
