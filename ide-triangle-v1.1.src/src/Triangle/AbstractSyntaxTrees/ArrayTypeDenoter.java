@@ -18,7 +18,7 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ArrayTypeDenoter extends TypeDenoter {
 
-  public ArrayTypeDenoter (IntegerLiteral ilAST, TypeDenoter tAST,
+  public ArrayTypeDenoter (IntegerLiteral ilAST, ArrayDeclaration tAST,
                     SourcePosition thePosition) {
     super (thePosition);
     IL = ilAST;
@@ -40,5 +40,5 @@ public class ArrayTypeDenoter extends TypeDenoter {
   }
 
   public IntegerLiteral IL;
-  public TypeDenoter T;
+  public ArrayDeclaration T;
 }

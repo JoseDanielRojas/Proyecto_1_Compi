@@ -17,6 +17,8 @@ package Triangle.ContextualAnalyzer;
 import Triangle.ErrorReporter;
 import Triangle.StdEnvironment;
 import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
+import Triangle.AbstractSyntaxTrees.ArrayDeclarationOF;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
@@ -82,7 +84,9 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarFormalDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
+import Triangle.AbstractSyntaxTrees.VarValueDeclaration;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
@@ -163,7 +167,7 @@ public final class Checker implements Visitor {
   // not use the given object.
 
   public Object visitArrayExpression(ArrayExpression ast, Object o) {
-    TypeDenoter elemType = (TypeDenoter) ast.AA.visit(this, null);
+    ArrayDeclarationOF elemType = (ArrayDeclarationOF) ast.AA.visit(this, null);
     IntegerLiteral il = new IntegerLiteral(new Integer(ast.AA.elemCount).toString(),
                                            ast.position);
     ast.type = new ArrayTypeDenoter(il, elemType, ast.position);
@@ -347,7 +351,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitVarDeclaration(VarDeclaration ast, Object o) {
-    ast.T = (TypeDenoter) ast.T.visit(this, null);
+    ast.T = (Declaration) ast.T.visit(this, null);
     idTable.enter (ast.I.spelling, ast);
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
@@ -588,7 +592,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitArrayTypeDenoter(ArrayTypeDenoter ast, Object o) {
-    ast.T = (TypeDenoter) ast.T.visit(this, null);
+    ast.T = (ArrayDeclarationOF) ast.T.visit(this, null);
     if ((Integer.valueOf(ast.IL.spelling).intValue()) == 0)
       reporter.reportError ("arrays must not be empty", "", ast.IL.position);
     return ast;
@@ -709,7 +713,7 @@ public final class Checker implements Visitor {
         ast.type = ((ConstDeclaration) binding).E.type;
         ast.variable = false;
       } else if (binding instanceof VarDeclaration) {
-        ast.type = ((VarDeclaration) binding).T;
+        ast.type = ((VarFormalDeclaration) binding).E;
         ast.variable = true;
       } else if (binding instanceof ConstFormalParameter) {
         ast.type = ((ConstFormalParameter) binding).T;
@@ -734,7 +738,7 @@ public final class Checker implements Visitor {
         if (! eType.equals(StdEnvironment.integerType))
           reporter.reportError ("Integer expression expected here", "",
 				ast.E.position);
-        ast.type = ((ArrayTypeDenoter) vType).T;
+       // ast.type = ((ArrayTypeDenoter) vType).T.;
       }
     }
     return ast.type;
@@ -944,6 +948,26 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

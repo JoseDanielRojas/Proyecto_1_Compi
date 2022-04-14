@@ -49,10 +49,16 @@ public interface Visitor {
   public abstract Object visitTypeDeclaration(TypeDeclaration ast, Object o);
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
+  public abstract Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o);
+  public abstract Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o);
+  public abstract Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o);
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);
   public abstract Object visitSingleArrayAggregate(SingleArrayAggregate ast, Object o);
+  
+  // Project Aggreguete
+  public abstract Object visitVarValueDeclaration(VarValueDeclaration ast, Object o);
 
   // Record Aggregates
   public abstract Object visitMultipleRecordAggregate(MultipleRecordAggregate ast, Object o);

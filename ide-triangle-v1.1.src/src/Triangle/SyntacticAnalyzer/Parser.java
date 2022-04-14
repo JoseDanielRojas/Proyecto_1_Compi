@@ -18,6 +18,9 @@ import Triangle.ErrorReporter;
 import Triangle.AbstractSyntaxTrees.ActualParameter;
 import Triangle.AbstractSyntaxTrees.ActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.ArrayAggregate;
+import Triangle.AbstractSyntaxTrees.ArrayDeclaration;
+import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
+import Triangle.AbstractSyntaxTrees.ArrayDeclarationOF;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
@@ -81,7 +84,9 @@ import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarFormalDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
+import Triangle.AbstractSyntaxTrees.VarValueDeclaration;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
@@ -741,6 +746,29 @@ public class Parser {
     }
     return declarationAST;
   }
+  
+  Declaration parseVarDeclaration() throws SyntaxError {
+    Declaration declarationAST = null; // in case there's a syntactic error
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    switch (currentToken.kind) {
+
+    case Token.COLON:
+            acceptIt();
+            TypeDenoter tAST = parseTypeDenoter();
+            finish(declarationPos);
+            declarationAST = new VarFormalDeclaration(tAST, declarationPos);
+        break;
+    case Token.BECOMES:
+            acceptIt();
+            Expression eAST = parseExpression();
+            finish(declarationPos);
+            declarationAST = new VarValueDeclaration(eAST, declarationPos);
+        break;
+    }
+    return declarationAST;
+  }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
@@ -765,10 +793,9 @@ public class Parser {
       {
         acceptIt();
         Identifier iAST = parseIdentifier();
-        accept(Token.COLON);
-        TypeDenoter tAST = parseTypeDenoter();
+        Declaration dAST = parseVarDeclaration();
         finish(declarationPos);
-        declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+        declarationAST = new VarDeclaration(iAST, dAST, declarationPos);
       }
       break;
 
@@ -1032,7 +1059,36 @@ public class Parser {
 // TYPE-DENOTERS
 //
 ///////////////////////////////////////////////////////////////////////////////
+  ArrayDeclaration parseArray()throws SyntaxError{
+     ArrayDeclaration typeAST = null; // in case there's a syntactic error
+    SourcePosition typePos = new SourcePosition();
 
+    start(typePos);
+
+    switch (currentToken.kind) {
+
+    case Token.OF:
+      {
+        acceptIt();
+        TypeDenoter tAST = parseTypeDenoter();
+        finish(typePos);
+        typeAST = new ArrayDeclarationOF(tAST,typePos);
+      }
+      break;
+      case Token.DOBLEDOT:
+      {
+        acceptIt();
+        IntegerLiteral ilAST = parseIntegerLiteral();
+        accept(Token.OF);
+        TypeDenoter tAST = parseTypeDenoter();
+        finish(typePos);
+        typeAST = new ArrayDeclarationDOBLEDOT(ilAST,tAST,typePos);
+      }
+      break;
+    }
+    return typeAST;
+  }
+  
   TypeDenoter parseTypeDenoter() throws SyntaxError {
     TypeDenoter typeAST = null; // in case there's a syntactic error
     SourcePosition typePos = new SourcePosition();
@@ -1053,8 +1109,7 @@ public class Parser {
       {
         acceptIt();
         IntegerLiteral ilAST = parseIntegerLiteral();
-        accept(Token.OF);
-        TypeDenoter tAST = parseTypeDenoter();
+        ArrayDeclaration tAST = parseArray();
         finish(typePos);
         typeAST = new ArrayTypeDenoter(ilAST, tAST, typePos);
       }
