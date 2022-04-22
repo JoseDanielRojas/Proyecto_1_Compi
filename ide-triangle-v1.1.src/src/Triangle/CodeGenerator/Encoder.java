@@ -25,8 +25,6 @@ import Triangle.ErrorReporter;
 import Triangle.StdEnvironment;
 import Triangle.AbstractSyntaxTrees.AST;
 import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
-import Triangle.AbstractSyntaxTrees.ArrayDeclarationOF;
 import Triangle.AbstractSyntaxTrees.ArrayExpression;
 import Triangle.AbstractSyntaxTrees.ArrayTypeDenoter;
 import Triangle.AbstractSyntaxTrees.AssignCommand;
@@ -49,6 +47,9 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -72,6 +73,10 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -87,9 +92,7 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
-import Triangle.AbstractSyntaxTrees.VarFormalDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
-import Triangle.AbstractSyntaxTrees.VarValueDeclaration;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -1010,22 +1013,37 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
+    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
+    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForCommand(ForDoCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
