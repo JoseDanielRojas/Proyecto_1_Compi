@@ -27,7 +27,9 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ForCommand;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -126,9 +128,18 @@ public class TreeVisitor implements Visitor {
         return(createTernary("RepeatWhileDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public Object visitForCommand(ForCommand ast, Object o) {
-        return(createQuaternary("For Command", ast.I, ast.E1,ast.E2,ast.C)); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+        return(createQuaternary("For Command", ast.VarDe, ast.E,ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+        return(createTernary("For Command",ast.VarDe ,ast.E,ast.W)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+        return(createTernary("For Command", ast.VarDe, ast.E,ast.U));  //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
     public Object visitLetCommand(LetCommand ast, Object obj) {
         return(createBinary("Let Command", ast.D, ast.C));
@@ -463,4 +474,13 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+    @Override
+    public Object visitForCommand(ForDoCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
+    
 }

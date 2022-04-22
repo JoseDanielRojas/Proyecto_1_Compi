@@ -113,6 +113,12 @@ public interface Visitor {
 
     public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o);
 
-    public Object visitForCommand(ForCommand aThis, Object o);
+    public Object visitForCommand(ForDoCommand aThis, Object o);
+
+    public Object visitForWhileCommand(ForWhileCommand aThis, Object o);
+
+    public Object visitForUntilCommand(ForUntilCommand aThis, Object o);
+
+    public Object visitForDoCommand(ForDoCommand aThis, Object o);
 
 }

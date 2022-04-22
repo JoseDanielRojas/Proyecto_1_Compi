@@ -38,7 +38,9 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
-import Triangle.AbstractSyntaxTrees.ForCommand;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -256,7 +258,7 @@ public class Parser {
 
   Command parseCommand() throws SyntaxError {
     Command commandAST = null; // in case there's a syntactic error
-
+    
     SourcePosition commandPos = new SourcePosition();
 
     start(commandPos);
@@ -549,6 +551,8 @@ public class Parser {
         Identifier iAST = parseIdentifier();
         accept(Token.FROM);
         Expression e1AST = parseExpression();
+        Declaration DeAST = null;
+        DeAST = new ConstDeclaration(iAST, e1AST, commandPos);
         accept(Token.DOUBLEDOT);
         Expression e2AST = parseExpression();
         switch (currentToken.kind) {
@@ -559,14 +563,15 @@ public class Parser {
                      acceptIt();
                      Command c2AST = parseCommand();
                      accept(Token.END);
+                     DeAST = new ConstDeclaration(iAST, e1AST, commandPos);
                      finish(commandPos);
-                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForDoCommand(DeAST, e2AST,c1AST,c1AST, commandPos);
                  }
                  else{
+                     Command c2AST = new EmptyCommand(commandPos);
                      accept(Token.END);
                      finish(commandPos);
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForDoCommand(DeAST, e2AST,c1AST,c1AST, commandPos);
                  }
                  break;
              }
@@ -578,16 +583,18 @@ public class Parser {
                  if(currentToken.kind == Token.LEAVE){
                      acceptIt();
                      Command c2AST = parseCommand();
+                     RepeatWhileCommand WhileAST = new RepeatWhileCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
-                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
                      // hacer el ast y agregarlo al for
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForWhileCommand(DeAST, e2AST,WhileAST,commandPos);
                  }
                  else{
+                     Command c2AST = new EmptyCommand(commandPos);
+                     RepeatWhileCommand WhileAST = new RepeatWhileCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForWhileCommand(DeAST, e2AST,WhileAST,commandPos);
                 }
              }
              break;
@@ -599,17 +606,18 @@ public class Parser {
                  if(currentToken.kind == Token.LEAVE){
                      acceptIt();
                      Command c2AST = parseCommand();
+                     RepeatUntilCommand UntilAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
-                     c1AST = new SequentialCommand(c1AST, c2AST, commandPos);
                      // hacer el ast y agregarlo al for
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForUntilCommand(DeAST, e2AST,UntilAST,commandPos);
                  }
                  else{
                      Command c2AST = new EmptyCommand(commandPos);
+                     RepeatUntilCommand UntilAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
-                     commandAST = new ForCommand(iAST, e1AST,e2AST,c1AST, commandPos);
+                     commandAST = new ForUntilCommand(DeAST, e2AST,UntilAST,commandPos);
                 }
              }
              break;
