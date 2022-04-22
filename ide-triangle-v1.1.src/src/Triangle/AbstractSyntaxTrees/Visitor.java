@@ -111,20 +111,4 @@ public interface Visitor {
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
 
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o);
-
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o);
-
-    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o);
-
-    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o);
-
-    public Object visitForCommand(ForDoCommand aThis, Object o);
-
-    public Object visitForWhileCommand(ForWhileCommand aThis, Object o);
-
-    public Object visitForUntilCommand(ForUntilCommand aThis, Object o);
-
-    public Object visitForDoCommand(ForDoCommand aThis, Object o);
-
 }

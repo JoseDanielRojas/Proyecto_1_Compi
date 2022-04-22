@@ -86,46 +86,46 @@ final class Token extends Object {
     FUNC		= 14,
     IF			= 15,
     IN			= 16,
-    LEAVE               = 17,
-    LET			= 18,
+    LET			= 17,
     // se agrega el token de nothing
-    NOTHING             = 19,
-    OF			= 20,
+    NOTHING             = 18,
+    OF			= 19,
      // se agrega el token de PRIVATE
-    PRIVATE             = 21,
-    PROC		= 22,
-    RECORD		= 23,
+    PRIVATE             = 20,
+    PROC		= 21,
+    RECORD		= 22,
     // se agrega el token de RECURSIVE Y REPEAT
-    RECURSIVE           = 24,
-    REPEAT              = 25,
-    THEN		= 26,
-    TYPE		= 27,
+    RECURSIVE           = 23,
+    REPEAT              = 24,
+    THEN		= 25,
+    TYPE		= 26,
     // se agrega el token de UNTIL
-    UNTIL               = 28,
-    VAR			= 29,
+    UNTIL               = 27,
+    VAR			= 28,
     // se agrega el token de WHEN
-    WHEN                = 30,
-    WHILE		= 31,
+    WHEN                = 29,
+    WHILE		= 30,
 
     // punctuation...
-    DOT			= 32,
-    DOUBLEDOT            = 33,
-    COLON		= 34,
-    SEMICOLON	        = 35,
-    COMMA		= 36,
-    BECOMES		= 37,
-    IS			= 38,
+    DOT			= 31,
+    DOBLEDOT            = 32,
+    COLON		= 33,
+    SEMICOLON	        = 34,
+    COMMA		= 35,
+    BECOMES		= 36,
+    IS			= 37,
+
     // brackets...
-    LPAREN		= 39,
-    RPAREN		= 40,
-    LBRACKET	= 41,
-    RBRACKET	= 42,
-    LCURLY		= 43,
-    RCURLY		= 44,
+    LPAREN		= 38,
+    RPAREN		= 39,
+    LBRACKET	= 40,
+    RBRACKET	= 41,
+    LCURLY		= 42,
+    RCURLY		= 43,
 
     // special tokens...
-    EOT			= 45,
-    ERROR		= 46;
+    EOT			= 44,
+    ERROR		= 45;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -151,8 +151,6 @@ final class Token extends Object {
     "func",
     "if",
     "in",
-    // se agrega el token leave
-    "leave",
     "let",
     
     "nothing",
