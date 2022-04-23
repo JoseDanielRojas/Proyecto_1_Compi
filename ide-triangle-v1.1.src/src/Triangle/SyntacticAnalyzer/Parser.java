@@ -552,6 +552,7 @@ public class Parser {
         accept(Token.FROM);
         Expression e1AST = parseExpression();
         Declaration DeAST = null;
+        // construir el arbo difernere por la declaracion For vat Decl
         DeAST = new ConstDeclaration(iAST, e1AST, commandPos);
         accept(Token.DOUBLEDOT);
         Expression e2AST = parseExpression();
@@ -565,7 +566,7 @@ public class Parser {
                      accept(Token.END);
                      DeAST = new ConstDeclaration(iAST, e1AST, commandPos);
                      finish(commandPos);
-                     commandAST = new ForDoCommand(DeAST, e2AST,c1AST,c1AST, commandPos);
+                     commandAST = new ForDoCommand(DeAST, e2AST,c1AST,c2AST, commandPos);
                  }
                  else{
                      Command c2AST = new EmptyCommand(commandPos);
