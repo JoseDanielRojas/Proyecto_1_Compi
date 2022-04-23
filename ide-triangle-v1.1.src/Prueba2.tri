@@ -1,1 +1,1 @@
-when 1 then nothing
+choose a from when 1 then nothing end

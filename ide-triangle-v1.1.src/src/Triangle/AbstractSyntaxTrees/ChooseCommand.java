@@ -11,16 +11,22 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Pablo
  */
-public class IntegerCase extends Cases {
+public class ChooseCommand extends Command {
 
-    public IntegerCase(IntegerLiteral ilAST, SourcePosition thePosition) {
+    public ChooseCommand(Expression EAST,Cases CasesAST, Command cAST,
+                    SourcePosition thePosition) {
     super (thePosition);
-    IL = ilAST;
+    E = EAST;
+    Cas=CasesAST;
+    C = cAST;
   }
 
     @Override
     public Object visit(Visitor v, Object o) {
-         return v.visitIntegerCase(this,o);
+      return v.visitChooseCommand(this,o);
     }
-    public IntegerLiteral IL;
+
+    public Expression E;
+    public Cases Cas;
+    public Command C;
 }
