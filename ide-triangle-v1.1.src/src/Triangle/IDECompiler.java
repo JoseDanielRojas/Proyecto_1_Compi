@@ -7,6 +7,8 @@ package Triangle;
 
 import Triangle.CodeGenerator.Frame;
 import java.awt.event.ActionListener;
+
+import Triangle.Html.HtmlWriter;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.AbstractSyntaxTrees.Program;
@@ -21,7 +23,7 @@ import Triangle.CodeGenerator.Encoder;
  * to get to the ASTs in order to draw them in the IDE without modifying the
  * original Triangle code.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class IDECompiler {
 
@@ -52,6 +54,9 @@ public class IDECompiler {
         boolean success = false;
         
         rootAST = parser.parseProgram();
+
+        HtmlWriter htmlWriter = new HtmlWriter();
+        htmlWriter.writeHtml(sourceName);
         if (report.numErrors == 0) {
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);

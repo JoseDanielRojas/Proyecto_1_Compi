@@ -217,4 +217,58 @@ public final class Scanner {
     return tok;
   }
 
+  public Token scanCodeToHtml() {
+    Token tok;
+    SourcePosition pos;
+    int kind;
+
+    currentlyScanningToken = true;
+    currentSpelling = new StringBuffer("");
+    pos = new SourcePosition();
+    pos.start = sourceFile.getCurrentLine();
+    System.out.println("currentChar: " + currentChar);
+    if(currentChar == '!'){
+      while (currentChar == '!'){
+        scanSeparator();
+      }
+      kind = -1;
+      pos.finish = sourceFile.getCurrentLine();
+      tok = new Token(kind, currentSpelling.toString(), pos);
+      return tok;
+    }
+    else if(currentChar == ' ' || currentChar == '\t'){
+      while (currentChar == ' '
+              || currentChar == '\t'){
+        scanSeparator();
+      }
+      kind = -2;
+      pos.finish = sourceFile.getCurrentLine();
+      tok = new Token(kind, currentSpelling.toString(), pos);
+      return tok;
+
+    }
+
+    else if(currentChar == '\n'|| currentChar == '\r'){
+      while (currentChar == '\n' || currentChar == '\r'){
+        scanSeparator();
+      }
+      kind = -3;
+      pos.finish = sourceFile.getCurrentLine();
+      tok = new Token(kind, currentSpelling.toString(), pos);
+      return tok;
+
+    }
+
+
+    else{
+      kind = scanToken();
+
+      pos.finish = sourceFile.getCurrentLine();
+      tok = new Token(kind, currentSpelling.toString(), pos);
+      if (debug)
+        System.out.println(tok);
+      return tok;
+    }
+  }
+
 }
