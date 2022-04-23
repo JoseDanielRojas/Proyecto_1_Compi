@@ -29,6 +29,10 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForVarDecl;
+import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -52,6 +56,10 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -112,6 +120,37 @@ public class TreeVisitor implements Visitor {
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
         return(createBinary("ELSIF Command", ast.E, ast.C)); 
     }
+    
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+        return(createTernary("RepeatDoUntil Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+        return(createTernary("RepeatDoWhile Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+        return(createTernary("RepeatUntilDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+        return(createTernary("RepeatWhileDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+        return(createQuaternary("For Command", ast.VarDe, ast.E,ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+        return(createTernary("For Command",ast.VarDe ,ast.E,ast.W)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+        return(createTernary("For Command", ast.VarDe, ast.E,ast.U));  //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public Object visitForVarDecl(ForVarDecl ast, Object o) {
+        return(createBinary("ForVarDecl", ast.I, ast.E));
+    }
+    
     
     public Object visitLetCommand(LetCommand ast, Object obj) {
         return(createBinary("Let Command", ast.D, ast.C));
@@ -466,6 +505,8 @@ public class TreeVisitor implements Visitor {
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 
    
 }

@@ -132,7 +132,7 @@ public final class Scanner {
       takeIt();
       if(currentChar == '.'){
           takeIt();
-          return Token.DOBLEDOT;
+          return Token.DOUBLEDOT;
       }
       else
       return Token.DOT;
