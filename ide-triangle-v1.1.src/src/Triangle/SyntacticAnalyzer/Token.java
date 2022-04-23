@@ -86,46 +86,46 @@ final class Token extends Object {
     FUNC		= 14,
     IF			= 15,
     IN			= 16,
-    LET			= 17,
+    LEAVE               = 17,
+    LET			= 18,
     // se agrega el token de nothing
-    NOTHING             = 18,
-    OF			= 19,
+    NOTHING             = 19,
+    OF			= 20,
      // se agrega el token de PRIVATE
-    PRIVATE             = 20,
-    PROC		= 21,
-    RECORD		= 22,
+    PRIVATE             = 21,
+    PROC		= 22,
+    RECORD		= 23,
     // se agrega el token de RECURSIVE Y REPEAT
-    RECURSIVE           = 23,
-    REPEAT              = 24,
-    THEN		= 25,
-    TYPE		= 26,
+    RECURSIVE           = 24,
+    REPEAT              = 25,
+    THEN		= 26,
+    TYPE		= 27,
     // se agrega el token de UNTIL
-    UNTIL               = 27,
-    VAR			= 28,
+    UNTIL               = 28,
+    VAR			= 29,
     // se agrega el token de WHEN
-    WHEN                = 29,
-    WHILE		= 30,
+    WHEN                = 30,
+    WHILE		= 31,
 
     // punctuation...
-    DOT			= 31,
-    DOBLEDOT            = 32,
-    COLON		= 33,
-    SEMICOLON	        = 34,
-    COMMA		= 35,
-    BECOMES		= 36,
-    IS			= 37,
-
+    DOT			= 32,
+    DOUBLEDOT            = 33,
+    COLON		= 34,
+    SEMICOLON	        = 35,
+    COMMA		= 36,
+    BECOMES		= 37,
+    IS			= 38,
     // brackets...
-    LPAREN		= 38,
-    RPAREN		= 39,
-    LBRACKET	= 40,
-    RBRACKET	= 41,
-    LCURLY		= 42,
-    RCURLY		= 43,
+    LPAREN		= 39,
+    RPAREN		= 40,
+    LBRACKET	= 41,
+    RBRACKET	= 42,
+    LCURLY		= 43,
+    RCURLY		= 44,
 
     // special tokens...
-    EOT			= 44,
-    ERROR		= 45;
+    EOT			= 45,
+    ERROR		= 46;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -151,6 +151,8 @@ final class Token extends Object {
     "func",
     "if",
     "in",
+    // se agrega el token leave
+    "leave",
     "let",
     
     "nothing",
@@ -187,7 +189,8 @@ final class Token extends Object {
     "<error>"
   };
 
-  private final static int	firstReservedWord = Token.ARRAY,
+  private final static int	firstReservedWord = Token.AND,
   				lastReservedWord  = Token.WHILE;
 
 }
+
