@@ -494,22 +494,22 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Formal Declaration", ast.E));
     }
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Value Declaration", ast.V));
     }
 
     @Override
     public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Array Declaration", ast.E));
     }
 
     @Override
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createBinary("Var Array Declaration DD", ast.E, ast.C));
     }
 
     @Override
