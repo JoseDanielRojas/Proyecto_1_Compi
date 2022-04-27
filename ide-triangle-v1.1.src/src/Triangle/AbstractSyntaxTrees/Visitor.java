@@ -139,4 +139,6 @@ public interface Visitor {
 
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o);
 
+    public Object visitSequentialCase(SequentialCase aThis, Object o);
+
 }

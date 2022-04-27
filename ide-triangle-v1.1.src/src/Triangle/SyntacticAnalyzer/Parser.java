@@ -672,6 +672,7 @@ public class Parser {
   
   
   //Cases
+  //Hecho por Pablo
   
   Cases parseCases() throws SyntaxError {
       Cases CasesAst=null;
@@ -696,7 +697,6 @@ public class Parser {
     SourcePosition CasePos = new SourcePosition();
 
     start (CasePos); 
-    
     accept(Token.WHEN);//acepta el when
     Cases cslAST = parseCaseLiteral();//falta [".."]
      Cases cslAST2 = null;
@@ -707,19 +707,12 @@ public class Parser {
         CaseAst = new WhenCase(cslAST,cslAST2,cCaseAST, CasePos);
     }
     else{
-         
        Cases cslemply = new EmptyCase(CasePos);
        accept(Token.THEN);
        Command cCaseAST = parseCommand();
-       CaseAst = new WhenCase(cslAST,cslemply,cCaseAST, CasePos);
-            
+       CaseAst = new WhenCase(cslAST,cslemply,cCaseAST, CasePos);       
     }
-    
-    finish(CasePos);
-    
-   
-      
-     
+    finish(CasePos); 
     return CaseAst;
  }
  Cases parseCaseLiteral() throws SyntaxError {
@@ -978,7 +971,7 @@ public class Parser {
 // DECLARATIONS
 //
 ///////////////////////////////////////////////////////////////////////////////
-
+//Modificado por Pablo
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
@@ -1002,16 +995,14 @@ public class Parser {
         case Token.RECURSIVE:
         {
             acceptIt();
-            CompDeclAST = parseProcFuncs();
-            
+            CompDeclAST = parseProcFuncs();   
             accept( Token.END);
         }
         break;
         case Token.PRIVATE:
         {
             acceptIt();
-            
-            
+               
             Declaration DeclAST1 = parseDeclaration();
             accept( Token.IN);
             Declaration DeclAST2 = parseDeclaration();
@@ -1023,13 +1014,11 @@ public class Parser {
         break;
         default:
         {
-
             CompDeclAST = parseSingleDeclaration();
             finish(CompDeclPos);
         }
         break;
       }
-      
       return CompDeclAST;
   }
   Declaration parseProcFunc() throws SyntaxError {
@@ -1065,8 +1054,7 @@ public class Parser {
             accept(Token.END);
             finish(ProcFuncPos);
             ProcFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
-              ProcFuncPos); 
-            
+              ProcFuncPos);     
         }
         break;
         default:
@@ -1076,7 +1064,6 @@ public class Parser {
         }
         break;
       }
-      
       return ProcFuncAST;
   }
   Declaration parseProcFuncs() throws SyntaxError {
