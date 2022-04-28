@@ -48,7 +48,6 @@ public class HtmlToken {
                 }
                 else if(currentToken.kind == Token.CHARLITERAL ||
                         currentToken.kind == Token.INTLITERAL){
-                    //Literales (caracteres y numerales): en color azul oscuro
                     Element var = document.createElement("font");
                     var.setAttribute("color","Blue");
                     var.setAttribute("size","3");
@@ -58,7 +57,6 @@ public class HtmlToken {
 
                 }
                 else if(currentToken.kind == -1){
-                    //Comentarios: en color verde medio.
                     Element var = document.createElement("font");
                     var.setAttribute("color","Green");
                     var.setAttribute("size","3");
@@ -88,7 +86,6 @@ public class HtmlToken {
 
                 }
                 else{
-                    //Palabras reservadas color negro resaltado
                     Element var = document.createElement("font");
                     Element negrita = document.createElement("b");
                     negrita.setTextContent(currentToken.spelling);
@@ -99,7 +96,7 @@ public class HtmlToken {
                     paragraph.appendChild(var);
 
                 }
-                currentToken = lexicalAnalyser.scanCodeToHtml(); //Sigue escaneando
+                currentToken = lexicalAnalyser.scanCodeToHtml();
             }
             body.appendChild(paragraph);
             html.appendChild(body);

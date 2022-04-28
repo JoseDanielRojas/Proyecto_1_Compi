@@ -65,6 +65,7 @@ import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
+import Triangle.AbstractSyntaxTrees.SequentialCase;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -494,22 +495,22 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Formal Declaration", ast.E));
     }
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Value Declaration", ast.V));
     }
 
     @Override
     public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createUnary("Var Array Declaration", ast.E));
     }
 
     @Override
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(createBinary("Var Array Declaration DD", ast.E, ast.C));
     }
 
     @Override
@@ -540,6 +541,11 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitPrivateDeclaration(PrivateDeclaration ast, Object o) {
         return (createBinary("PrivateDeclaration",ast.D1,ast.D2)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitSequentialCase(SequentialCase ast, Object o) {
+        return (createBinary("SequentialCase",ast.Cas1,ast.Cas2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     
