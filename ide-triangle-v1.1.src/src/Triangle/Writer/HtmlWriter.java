@@ -1,4 +1,4 @@
-package Triangle.Html;
+package Triangle.Writer;
 
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.SyntacticAnalyzer.SourceFile;
@@ -12,14 +12,13 @@ import org.w3c.dom.Document;
 
 public class HtmlWriter {
 
-    private String fileName;
 
     public HtmlWriter() {
 
     }
 
 
-    public void writeHtml(String sourceName){
+    public void write(String sourceName){
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

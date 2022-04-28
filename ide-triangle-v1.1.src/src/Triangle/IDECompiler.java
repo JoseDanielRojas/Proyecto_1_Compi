@@ -5,20 +5,15 @@
 
 package Triangle;
 
-import Triangle.CodeGenerator.Frame;
-import java.awt.event.ActionListener;
-
-import Triangle.Html.HtmlWriter;
+import Triangle.Writer.HtmlWriter;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
-import Triangle.ContextualAnalyzer.Checker;
-import Triangle.CodeGenerator.Encoder;
+import Triangle.Writer.XmlWriter;
 
 
-
-/** 
+/**
  * This is merely a reimplementation of the Triangle.Compiler class. We need
  * to get to the ASTs in order to draw them in the IDE without modifying the
  * original Triangle code.
@@ -56,7 +51,7 @@ public class IDECompiler {
         rootAST = parser.parseProgram();
 
         HtmlWriter htmlWriter = new HtmlWriter();
-        htmlWriter.writeHtml(sourceName);
+        htmlWriter.write(sourceName);
         if (report.numErrors == 0) {
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);
@@ -68,6 +63,8 @@ public class IDECompiler {
                 
                 if (report.numErrors == 0) {
                    // encoder.saveObjectProgram(sourceName.replace(".tri", ".tam"));
+                    XmlWriter xmlWriter = new XmlWriter(sourceName.replace(".tri", ".xml"));
+                    xmlWriter.write(rootAST);
                     success = true;
                 }
             }
