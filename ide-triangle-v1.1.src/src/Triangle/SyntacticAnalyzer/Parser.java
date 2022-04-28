@@ -1051,7 +1051,6 @@ public class Parser {
             TypeDenoter tAST = parseTypeDenoter();
             accept(Token.IS);
             Expression eAST = parseExpression();
-            accept(Token.END);
             finish(ProcFuncPos);
             ProcFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
               ProcFuncPos);     
