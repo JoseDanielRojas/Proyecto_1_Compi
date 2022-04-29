@@ -5,9 +5,7 @@
 
 package Core.Visitors;
 
-<<<<<<< HEAD
-import Triangle.AbstractSyntaxTrees.*;
-=======
+
 import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
 import Triangle.AbstractSyntaxTrees.ArrayDeclarationOF;
@@ -91,7 +89,6 @@ import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
 import Triangle.CodeGenerator.Field;
 import Triangle.CodeGenerator.KnownAddress;
 import Triangle.CodeGenerator.KnownRoutine;
@@ -714,60 +711,37 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitWhenCase(WhenCase aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 
     @Override
     public Object visitChooseCommand(ChooseCommand aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 
     @Override
     public Object visitIntegerCase(IntegerCase aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 
     @Override
     public Object visitCharacterCase(CharacterCase aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 
     @Override
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
-<<<<<<< HEAD
-        return null;
-=======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object visitSequentialCase(SequentialCase aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
     }
 }

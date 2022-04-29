@@ -217,6 +217,7 @@ public final class Scanner {
     return tok;
   }
 
+  // Agregado por Miguel Mesen
   public Token scanCodeToHtml() {
     Token tok;
     SourcePosition pos;
@@ -226,7 +227,6 @@ public final class Scanner {
     currentSpelling = new StringBuffer("");
     pos = new SourcePosition();
     pos.start = sourceFile.getCurrentLine();
-    System.out.println("currentChar: " + currentChar);
     if(currentChar == '!'){
       while (currentChar == '!'){
         scanSeparator();
@@ -270,5 +270,6 @@ public final class Scanner {
       return tok;
     }
   }
+  // -------------------------
 
 }

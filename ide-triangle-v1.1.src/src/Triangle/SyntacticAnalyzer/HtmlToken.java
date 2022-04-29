@@ -8,7 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-
+// Agregado por Miguel Mesen
 public class HtmlToken {
 
     private Scanner lexicalAnalyser;
@@ -37,63 +37,62 @@ public class HtmlToken {
             while (currentToken.kind != Token.EOT) {
                 if (currentToken.kind == Token.IDENTIFIER ||
                         currentToken.kind == Token.OPERATOR ||
-                        currentToken.kind > 29){
-                    Element var = document.createElement("font");
-                    var.setAttribute("color","Black");
-                    var.setAttribute("size","3");
-                    var.setAttribute("face","Courier");
-                    var.setTextContent(currentToken.spelling);
-                    paragraph.appendChild(var);
+                        currentToken.kind > 31){
+                    Element ele = document.createElement("font");
+                    ele.setAttribute("color","Black");
+                    ele.setAttribute("size","3");
+                    ele.setAttribute("face","Courier New");
+                    ele.setTextContent(currentToken.spelling);
+                    paragraph.appendChild(ele);
 
                 }
                 else if(currentToken.kind == Token.CHARLITERAL ||
                         currentToken.kind == Token.INTLITERAL){
-                    Element var = document.createElement("font");
-                    var.setAttribute("color","Blue");
-                    var.setAttribute("size","3");
-                    var.setAttribute("face","Courier");
-                    var.setTextContent(currentToken.spelling);
-                    paragraph.appendChild(var);
+                    Element ele = document.createElement("font");
+                    ele.setAttribute("color","Blue");
+                    ele.setAttribute("size","3");
+                    ele.setAttribute("face","Courier New");
+                    ele.setTextContent(currentToken.spelling);
+                    paragraph.appendChild(ele);
 
                 }
                 else if(currentToken.kind == -1){
-                    Element var = document.createElement("font");
-                    var.setAttribute("color","Green");
-                    var.setAttribute("size","3");
-                    var.setAttribute("face","Courier");
-                    var.setTextContent(currentToken.spelling);
-                    paragraph.appendChild(var);
+                    Element ele = document.createElement("font");
+                    ele.setAttribute("color","Green");
+                    ele.setAttribute("size","3");
+                    ele.setAttribute("face","Courier New");
+                    ele.setTextContent(currentToken.spelling);
+                    paragraph.appendChild(ele);
 
                 }
                 else if(currentToken.kind == -2){
-                    //Espacios
-                    Element var = document.createElement("font");
+                    Element ele = document.createElement("font");
                     if(currentToken.spelling.length()==1){
-                        var.setTextContent(" ");
+                        ele.setTextContent(" ");
 
                     }
                     else{
-                        var.setTextContent("    ");
+                        ele.setTextContent("    ");
 
                     }
-                    paragraph.appendChild(var);
+                    paragraph.appendChild(ele);
 
                 }
-                else if(currentToken.kind == -3){ //salto de linea
-                    Element var = document.createElement("font");
-                    var.setTextContent("\n");
-                    paragraph.appendChild(var);
+                else if(currentToken.kind == -3){
+                    Element ele = document.createElement("font");
+                    ele.setTextContent("\n");
+                    paragraph.appendChild(ele);
 
                 }
                 else{
-                    Element var = document.createElement("font");
+                    Element ele = document.createElement("font");
                     Element negrita = document.createElement("b");
                     negrita.setTextContent(currentToken.spelling);
-                    var.setAttribute("color","Black");
-                    var.setAttribute("size","3");
-                    var.setAttribute("face","Courier");
-                    var.appendChild(negrita);
-                    paragraph.appendChild(var);
+                    ele.setAttribute("color","Black");
+                    ele.setAttribute("size","3");
+                    ele.setAttribute("face","Courier New");
+                    ele.appendChild(negrita);
+                    paragraph.appendChild(ele);
 
                 }
                 currentToken = lexicalAnalyser.scanCodeToHtml();
@@ -108,3 +107,4 @@ public class HtmlToken {
         return null;
     }
 }
+// -------------------------

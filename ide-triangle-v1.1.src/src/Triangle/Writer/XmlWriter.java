@@ -4,7 +4,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 
 import java.io.FileWriter;
 import java.io.IOException;
-
+// Agregado por Miguel Mesen
 public class XmlWriter {
 
     private String fileName;
@@ -30,3 +30,4 @@ public class XmlWriter {
         }
     }
 }
+// -------------------------

@@ -5,6 +5,7 @@ import Triangle.AbstractSyntaxTrees.*;
 import java.io.FileWriter;
 import java.io.IOException;
 
+// Agregado por Miguel Mesen
 public class XmlWriterVisitor implements Visitor {
 
     private FileWriter fileWriter;
@@ -13,7 +14,7 @@ public class XmlWriterVisitor implements Visitor {
         this.fileWriter = fileWriter;
     }
 
-    private void write(String line) { //TODO  cambiar nombre
+    private void write(String line) {
         try {
             fileWriter.write(line);
             fileWriter.write('\n');
@@ -729,4 +730,4 @@ public class XmlWriterVisitor implements Visitor {
         return null;
     }
 }
-
+// -------------------------

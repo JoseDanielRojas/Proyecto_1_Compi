@@ -24,8 +24,6 @@ import TAM.Machine;
 import Triangle.AbstractSyntaxTrees.*;
 import Triangle.ErrorReporter;
 import Triangle.StdEnvironment;
-<<<<<<< HEAD
-=======
 import Triangle.AbstractSyntaxTrees.AST;
 import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
@@ -111,7 +109,6 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
 
 public final class Encoder implements Visitor {
 
@@ -1087,37 +1084,6 @@ public final class Encoder implements Visitor {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< HEAD
-  @Override
-  public Object visitWhenCase(WhenCase aThis, Object o) {
-    return null;
-  }
-
-  @Override
-  public Object visitChooseCommand(ChooseCommand aThis, Object o) {
-    return null;
-  }
-
-  @Override
-  public Object visitIntegerCase(IntegerCase aThis, Object o) {
-    return null;
-  }
-
-  @Override
-  public Object visitCharacterCase(CharacterCase aThis, Object o) {
-    return null;
-  }
-
-  @Override
-  public Object visitEmptyCase(EmptyCase aThis, Object o) {
-    return null;
-  }
-
-  @Override
-  public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
-    return null;
-  }
-=======
     @Override
     public Object visitWhenCase(WhenCase aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -1147,5 +1113,9 @@ public final class Encoder implements Visitor {
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
->>>>>>> 9c3efe234e96f499a7111a40d32e0069f1cbfed3
+
+  @Override
+  public Object visitSequentialCase(SequentialCase aThis, Object o) {
+    return null;
+  }
 }

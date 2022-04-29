@@ -50,8 +50,10 @@ public class IDECompiler {
         
         rootAST = parser.parseProgram();
 
+        // Agregado por Miguel Mesen
         HtmlWriter htmlWriter = new HtmlWriter();
         htmlWriter.write(sourceName);
+        // -------------------------
         if (report.numErrors == 0) {
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);
@@ -63,8 +65,11 @@ public class IDECompiler {
                 
                 if (report.numErrors == 0) {
                    // encoder.saveObjectProgram(sourceName.replace(".tri", ".tam"));
+
+                    // Agregado por Miguel Mesen
                     XmlWriter xmlWriter = new XmlWriter(sourceName.replace(".tri", ".xml"));
                     xmlWriter.write(rootAST);
+                    // -------------------------
                     success = true;
                 }
             }
