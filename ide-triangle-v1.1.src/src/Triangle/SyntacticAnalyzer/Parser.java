@@ -312,6 +312,7 @@ public class Parser {
           finish(commandPos);
           commandAST = new AssignCommand(vAST, eAST, commandPos);
         }
+        
       }
       break;
       /*
@@ -363,10 +364,7 @@ public class Parser {
       break;
 */
     case Token.SEMICOLON:
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
-        
+        break;     
         // se quita el comando vacio de single-Command la primera alternativa (?, el comando vac?o)3
 /*
     case Token.EOT:
@@ -404,6 +402,7 @@ public class Parser {
             case Token.ELSIF:
             {
                 Command ElsifC = null;
+                
                 while(currentToken.kind == Token.ELSIF){
                     accept(Token.ELSIF);
                     Expression eElsifAST = parseExpression();
