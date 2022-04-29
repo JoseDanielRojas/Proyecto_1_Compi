@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Triangle1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ide-triangle-v1.1.src/build/classes/Triangle.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -5,6 +5,7 @@
 
 package Core.Visitors;
 
+
 import Triangle.AbstractSyntaxTrees.AnyTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ArrayDeclarationDOBLEDOT;
 import Triangle.AbstractSyntaxTrees.ArrayDeclarationOF;
@@ -104,7 +105,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * Generates a DefaultTableModel, used to draw a Jable.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class TableVisitor implements Visitor {
     
@@ -720,6 +721,7 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitIntegerCase(IntegerCase aThis, Object o) {
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<PrivateDeclaration>
+<ConstDeclaration>
+<Identifier value="I"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ConstDeclaration>
+<ConstDeclaration>
+<Identifier value="I"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ConstDeclaration>
+</PrivateDeclaration>
+<EmptyCommand/>
+</LetCommand>
+</Program>
