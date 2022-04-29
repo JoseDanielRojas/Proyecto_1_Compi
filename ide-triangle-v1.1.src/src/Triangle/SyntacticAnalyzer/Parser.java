@@ -285,7 +285,7 @@ public class Parser {
     }
     return commandAST;
   }
-
+// cambios a single command hechos por sebastian campos
   Command parseSingleCommand() throws SyntaxError {
     Command commandAST = null; // in case there's a syntactic error
 
@@ -381,7 +381,7 @@ public class Parser {
       finish(commandPos);
       commandAST = new EmptyCommand(commandPos);
       break;
-    
+    // se agrega el caso de  "let" Declaration "in" Command "end"
     case Token.LET:
       {
         acceptIt();
@@ -393,7 +393,7 @@ public class Parser {
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
       break;
-      
+      //se agrega el caso de "if" Expression "then" Command ("elsif" Expression "then" Command)* "else" Command "end" 
     case Token.IF:
       {
         acceptIt();
@@ -436,7 +436,7 @@ public class Parser {
         }
       }
       break;
-      
+      //se agrega el caso de | "choose" Expression "from" Cases ["else" Command] "end"
     case Token.CHOOSE:
       {
         acceptIt();
@@ -462,7 +462,7 @@ public class Parser {
        return chooseAST;
       }
 
-      
+      //se agrega el caso de | "repeat" "while" Expression "do" Command ["leave" Command] "end" 
     case Token.REPEAT:
      {
         acceptIt();
@@ -489,6 +489,8 @@ public class Parser {
                 }
             }
             break;
+            //se agrega el caso de | "repeat" "until" Expression "do" Command ["leave" Command] "end" 
+
             case Token.UNTIL:
             {
                 acceptIt();
@@ -511,6 +513,7 @@ public class Parser {
                 }
             }
             break;
+            //se agrega el caso de | "repeat" "do" Command "while" Expression ["leave" Command] "end"
             case Token.DO:
             {
                 acceptIt();
@@ -537,6 +540,8 @@ public class Parser {
                         
                     }
                     break;
+                     //se agrega el caso de | "repeat" "do" Command "until" Expression ["leave" Command] "end" 
+
                     case Token.UNTIL:
                     {
                         acceptIt();
@@ -572,7 +577,7 @@ public class Parser {
         }
       }
       break;
-      
+      //se agrega el caso de for 
     case Token.FOR:
       {
         acceptIt();
@@ -585,6 +590,7 @@ public class Parser {
         accept(Token.DOUBLEDOT);
         Expression e2AST = parseExpression();
         switch (currentToken.kind) {
+             //se agrega el caso | "for" Identifier "from" Expression ".." Expression "do" Command ["leave" Command] "end" 
              case Token.DO:{
                  acceptIt();
                  Command c1AST = parseCommand();
@@ -603,6 +609,7 @@ public class Parser {
                  }
                  break;
              }
+             //se agrega el caso "for" Identifier "from" Expression ".." Expression "while" Expression "do" Command ["leave" Command] "end" 
              case Token.WHILE:{
                  acceptIt();
                  Expression eAST = parseExpression();
@@ -626,6 +633,7 @@ public class Parser {
                 }
              }
              break;
+             // se agrega el caso  "for" Identifier "from" Expression ".." Expression "until" Expression "do" Command ["leave" Command] "end" 
              case Token.UNTIL:{
                  acceptIt();
                  Expression eAST = parseExpression();
@@ -672,7 +680,8 @@ public class Parser {
   
   
   //Cases
-  //Hecho por Pablo
+  //Hecho por Pablo Villafuerte
+  //
   
   Cases parseCases() throws SyntaxError {
       Cases CasesAst=null;
@@ -971,7 +980,8 @@ public class Parser {
 // DECLARATIONS
 //
 ///////////////////////////////////////////////////////////////////////////////
-//Modificado por Pablo
+//Modificado por Pablo Villafuerte
+
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
@@ -987,6 +997,7 @@ public class Parser {
     }
     return declarationAST;
   }
+  //Hecho por Pablo Villafuerte
   Declaration parseCompoundDeclaration() throws SyntaxError {
       Declaration CompDeclAST = null; // in case there's a syntactic error
       SourcePosition CompDeclPos = new SourcePosition();
@@ -1051,7 +1062,6 @@ public class Parser {
             TypeDenoter tAST = parseTypeDenoter();
             accept(Token.IS);
             Expression eAST = parseExpression();
-            accept(Token.END);
             finish(ProcFuncPos);
             ProcFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
               ProcFuncPos);     
@@ -1086,6 +1096,7 @@ public class Parser {
       finish(ProcFuncsPos);
       return ProcFuncsAST;
   }
+  //----------------------------------------------------------
   Declaration parseVarDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 

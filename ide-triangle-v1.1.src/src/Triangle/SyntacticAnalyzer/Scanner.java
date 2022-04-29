@@ -127,7 +127,8 @@ public final class Scanner {
         return Token.CHARLITERAL;
       } else
         return Token.ERROR;
-
+      // se agrego el caso del doubledot y se modifico para aceptarlo
+      //sebastian campos
     case '.':
       takeIt();
       if(currentChar == '.'){

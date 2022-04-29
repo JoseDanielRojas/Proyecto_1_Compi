@@ -67,6 +67,7 @@ final class Token extends Object {
     OPERATOR	= 3,
 
     // reserved words - must be in alphabetical order...
+    // Cambios hechos por Sebastian Campos
     // se agrega el token de AND 
     AND                 = 4,          
     ARRAY		= 5,
