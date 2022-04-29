@@ -680,7 +680,8 @@ public class Parser {
   
   
   //Cases
-  //Hecho por Pablo
+  //Hecho por Pablo Villafuerte
+  //
   
   Cases parseCases() throws SyntaxError {
       Cases CasesAst=null;
@@ -979,7 +980,8 @@ public class Parser {
 // DECLARATIONS
 //
 ///////////////////////////////////////////////////////////////////////////////
-//Modificado por Pablo
+//Modificado por Pablo Villafuerte
+
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
@@ -995,6 +997,7 @@ public class Parser {
     }
     return declarationAST;
   }
+  //Hecho por Pablo Villafuerte
   Declaration parseCompoundDeclaration() throws SyntaxError {
       Declaration CompDeclAST = null; // in case there's a syntactic error
       SourcePosition CompDeclPos = new SourcePosition();
@@ -1093,6 +1096,7 @@ public class Parser {
       finish(ProcFuncsPos);
       return ProcFuncsAST;
   }
+  //----------------------------------------------------------
   Declaration parseVarDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
