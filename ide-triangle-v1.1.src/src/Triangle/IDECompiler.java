@@ -9,6 +9,7 @@ import Triangle.Writer.HtmlWriter;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.ContextualAnalyzer.Checker;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.Writer.XmlWriter;
 
@@ -55,9 +56,9 @@ public class IDECompiler {
         htmlWriter.write(sourceName);
         // -------------------------
         if (report.numErrors == 0) {
-            //System.out.println("Contextual Analysis ...");
-            //Checker checker = new Checker(report);
-           // checker.check(rootAST);
+            System.out.println("Contextual Analysis ...");
+            Checker checker = new Checker(report);
+            checker.check(rootAST);
             if (report.numErrors == 0) {
                // System.out.println("Code Generation ...");
                // Encoder encoder = new Encoder(report);

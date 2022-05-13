@@ -129,7 +129,7 @@ public interface Visitor {
 
     public Object visitWhenCase(WhenCase aThis, Object o);
 
-    public Object visitChooseCommand(ChooseCommand aThis, Object o);
+    public abstract Object visitChooseCommand(ChooseCommand ast, Object o);
 
     public Object visitIntegerCase(IntegerCase aThis, Object o);
 

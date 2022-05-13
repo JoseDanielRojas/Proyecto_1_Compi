@@ -714,9 +714,12 @@ public class TableVisitor implements Visitor {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object visitChooseCommand(ChooseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitChooseCommand(ChooseCommand ast, Object o) {
+       ast.E.visit(this, null);
+       ast.Cas.visit(this, null);
+       ast.C.visit(this, null);
+       
+       return(null);
     }
 
     @Override

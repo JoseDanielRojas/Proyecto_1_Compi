@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ChooseCommand>
+<CharacterExpression>
+<CharacterLiteral value="'a'"/>
+<CharacterExpression>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="1"/>
+</IntegerCase >
+<EmptyCase/>
+<EmptyCommand/>
+</WhenCase>
+<EmptyCommand/>
+</ChooseCommand>
+</Program>

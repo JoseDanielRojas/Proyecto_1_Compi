@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<FuncDeclaration>
+<Identifier value="I"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="a"/>
+<SimpleTypeDenoter>
+<Identifier value="T"/>
+</SimpleTypeDenoter>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<SimpleTypeDenoter>
+<Identifier value="id"/>
+</SimpleTypeDenoter>
+<IntegerExpression>
+<IntegerLiteral value="8"/>
+</IntegerExpression>
+</FuncDeclaration>
+<FuncDeclaration>
+<Identifier value="O"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="a"/>
+<SimpleTypeDenoter>
+<Identifier value="T"/>
+</SimpleTypeDenoter>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<SimpleTypeDenoter>
+<Identifier value="id"/>
+</SimpleTypeDenoter>
+<IntegerExpression>
+<IntegerLiteral value="8"/>
+</IntegerExpression>
+</FuncDeclaration>
+</SequentialDeclaration>
+<EmptyCommand/>
+</LetCommand>
+</Program>

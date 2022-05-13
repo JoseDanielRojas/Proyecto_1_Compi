@@ -665,7 +665,15 @@ public final class Checker implements Visitor {
   public Object visitCharacterLiteral(CharacterLiteral CL, Object o) {
     return StdEnvironment.charType;
   }
-
+  public Object visitChooseCommand(ChooseCommand ast, Object o) {
+        TypeDenoter eType;
+        eType = (TypeDenoter) ast.E.visit(this, null);
+        System.out.println(eType);
+        if(!eType.equals(StdEnvironment.integerType)&&!eType.equals(StdEnvironment.charType)){
+            reporter.reportError("Integer or char expression expected here", "", ast.E.position);
+        }
+        return null;
+   }
   public Object visitIdentifier(Identifier I, Object o) {
     Declaration binding = idTable.retrieve(I.spelling);
     if (binding != null)
@@ -1032,11 +1040,6 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitWhenCase(WhenCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitChooseCommand(ChooseCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
