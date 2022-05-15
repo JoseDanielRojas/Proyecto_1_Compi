@@ -2,16 +2,26 @@
 <Program>
 <ChooseCommand>
 <IntegerExpression>
-<IntegerLiteral value="1"/>
+<IntegerLiteral value="3"/>
 </IntegerExpression>
 <WhenCase>
 <IntegerCase>
 <IntegerLiteral value="1"/>
 </IntegerCase >
-<IntegerCase>
+<EmptyCase/>
+<ChooseCommand>
+<IntegerExpression>
 <IntegerLiteral value="1"/>
-</IntegerCase >
+</IntegerExpression>
+<WhenCase>
+<CharacterCase>
+<CharacterLiteral value="'b'"/>
+</CharacterCase>
+<EmptyCase/>
 <EmptyCommand/>
+</WhenCase>
+<EmptyCommand/>
+</ChooseCommand>
 </WhenCase>
 <EmptyCommand/>
 </ChooseCommand>

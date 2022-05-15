@@ -109,6 +109,7 @@ import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
+import java.util.ArrayList;
 
 public final class Checker implements Visitor {
 
@@ -665,15 +666,42 @@ public final class Checker implements Visitor {
   public Object visitCharacterLiteral(CharacterLiteral CL, Object o) {
     return StdEnvironment.charType;
   }
+  static TypeDenoter typeSelector;
   public Object visitChooseCommand(ChooseCommand ast, Object o) {
         TypeDenoter eType;
         eType = (TypeDenoter) ast.E.visit(this, null);
-        System.out.println(eType);
         if(!eType.equals(StdEnvironment.integerType)&&!eType.equals(StdEnvironment.charType)){
             reporter.reportError("Integer or char expression expected here", "", ast.E.position);
         }
+        typeSelector=eType;
+        ast.Cas.visit(this,null);
+        
+        
         return null;
    }
+  boolean repetido=false;
+  public Object visitWhenCase(WhenCase ast , Object o) {
+        TypeDenoter Cl1Type;
+        Cl1Type = (TypeDenoter) ast.CaseL.visit(this, null);
+        TypeDenoter Cl2Type = (TypeDenoter) ast.CaseL2.visit(this, null);
+        if(Cl2Type!=null){
+            if(!Cl1Type.equals(typeSelector)||!Cl2Type.equals(typeSelector)){
+                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
+           }
+        }
+        else{
+            if(!Cl1Type.equals(typeSelector)){
+                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
+           }
+        }
+        if(repetido==true){
+            repetido=false;
+            reporter.reportError("literals duplicated expected here", "", ast.CaseL2.position);
+        }
+        
+        
+        return null;
+    }
   public Object visitIdentifier(Identifier I, Object o) {
     Declaration binding = idTable.retrieve(I.spelling);
     if (binding != null)
@@ -1038,24 +1066,42 @@ public final class Checker implements Visitor {
     }
 
 
+     ArrayList<String> AnterioresIntL = new ArrayList<String>();
     @Override
-    public Object visitWhenCase(WhenCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitIntegerCase(IntegerCase ast, Object o) {
+        ast.type = StdEnvironment.integerType;
+        String IntL=ast.IL.spelling;
+        for (int i = 0; i < AnterioresIntL.size(); i++) {
+            if(AnterioresIntL.get(i).equals(IntL)){
+                repetido=true;
+            }
+        }
+        
+        AnterioresIntL.add(IntL);
+        return ast.type;
     }
-
+    
+     ArrayList<String> AnterioresCharL = new ArrayList<String>();
     @Override
-    public Object visitIntegerCase(IntegerCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitCharacterCase(CharacterCase ast, Object o) {
+        ast.type = StdEnvironment.charType;
+        
+        String CharL=ast.CL.spelling;
+        for (int i = 0; i < AnterioresCharL.size(); i++) {
+            if(AnterioresCharL.get(i).equals(CharL)){
+                repetido=true;
+            }
+        }
+        
+        AnterioresCharL.add(CharL);
+        
+        return ast.type;
     }
-
-    @Override
-    public Object visitCharacterCase(CharacterCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -1065,7 +1111,9 @@ public final class Checker implements Visitor {
 
 
     @Override
-    public Object visitSequentialCase(SequentialCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitSequentialCase(SequentialCase ast, Object o) {
+        ast.Cas1.visit(this, null);
+        ast.Cas2.visit(this, null);
+        return null;
     }
 }

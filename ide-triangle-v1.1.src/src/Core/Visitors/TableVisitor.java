@@ -709,9 +709,12 @@ public class TableVisitor implements Visitor {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object visitWhenCase(WhenCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Object visitWhenCase(WhenCase ast, Object o) {
+        ast.C.visit(this, null);
+        ast.CaseL.visit(this, null);
+        ast.CaseL2.visit(this, null);
+        return (null);
     }
 
     public Object visitChooseCommand(ChooseCommand ast, Object o) {

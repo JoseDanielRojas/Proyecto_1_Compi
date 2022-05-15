@@ -127,7 +127,7 @@ public interface Visitor {
 
     public Object visitForVarDecl(ForVarDecl aThis, Object o);
 
-    public Object visitWhenCase(WhenCase aThis, Object o);
+    public abstract Object visitWhenCase(WhenCase ast, Object o);
 
     public abstract Object visitChooseCommand(ChooseCommand ast, Object o);
 
