@@ -312,6 +312,7 @@ public class Parser {
           finish(commandPos);
           commandAST = new AssignCommand(vAST, eAST, commandPos);
         }
+        
       }
       break;
       /*
@@ -363,10 +364,7 @@ public class Parser {
       break;
 */
     case Token.SEMICOLON:
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
-        
+        break;     
         // se quita el comando vacio de single-Command la primera alternativa (?, el comando vac?o)3
 /*
     case Token.EOT:
@@ -404,6 +402,7 @@ public class Parser {
             case Token.ELSIF:
             {
                 Command ElsifC = null;
+                
                 while(currentToken.kind == Token.ELSIF){
                     accept(Token.ELSIF);
                     Expression eElsifAST = parseExpression();
@@ -690,6 +689,7 @@ public class Parser {
       start (CasesPos); 
       
        CasesAst= parseCase();
+       
        while(currentToken.kind == Token.WHEN){//revisar
            Cases CasesAst2= parseCase();
            
@@ -699,7 +699,7 @@ public class Parser {
       return CasesAst;
       
       
-      
+     
   }
  Cases parseCase() throws SyntaxError {
     Cases CaseAst=null;
@@ -710,9 +710,11 @@ public class Parser {
     Cases cslAST = parseCaseLiteral();//falta [".."]
      Cases cslAST2 = null;
     if(currentToken.kind == Token.DOUBLEDOT){
+        acceptIt();
         cslAST2 = parseCaseLiteral();
         accept(Token.THEN);
         Command cCaseAST = parseCommand();
+        
         CaseAst = new WhenCase(cslAST,cslAST2,cCaseAST, CasePos);
     }
     else{

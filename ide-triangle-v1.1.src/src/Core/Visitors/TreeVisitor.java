@@ -520,7 +520,7 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitChooseCommand(ChooseCommand ast, Object o) {
-       return(createTernary("ChooseCommand",ast.E,ast.Cas,ast.C)); 
+       return(createTernary("Choose Command",ast.E,ast.Cas,ast.C)); 
     }
 
     @Override

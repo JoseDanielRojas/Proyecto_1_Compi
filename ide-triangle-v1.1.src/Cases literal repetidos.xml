@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ChooseCommand>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+<SequentialCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="2"/>
+</IntegerCase >
+<EmptyCase/>
+<EmptyCommand/>
+</WhenCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="1"/>
+</IntegerCase >
+<EmptyCase/>
+<EmptyCommand/>
+</WhenCase>
+</SequentialCase>
+<EmptyCommand/>
+</ChooseCommand>
+</Program>

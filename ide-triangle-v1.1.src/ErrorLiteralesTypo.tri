@@ -1,0 +1,1 @@
+choose 1 from when 'a' .. 'b' then nothing end

@@ -15,6 +15,11 @@ public abstract class Cases extends AST {
     
     public Cases(SourcePosition thePosition) {
         super(thePosition);
+        type = null;
     }
+  
+ 
+
+  public TypeDenoter type;
     
 }
