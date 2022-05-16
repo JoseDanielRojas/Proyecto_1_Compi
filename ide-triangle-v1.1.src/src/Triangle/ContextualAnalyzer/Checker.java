@@ -143,6 +143,7 @@ public final class Checker implements Visitor {
     return null;
   }
 
+  // no requiere revision contextual. Sebastian Campos
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
     return null;
   }
@@ -157,7 +158,7 @@ public final class Checker implements Visitor {
   }
   
   
-
+// se revisa igual al commando original de triangulo . Sebastian Campos
   public Object visitLetCommand(LetCommand ast, Object o) {
     idTable.openScope();
     ast.D.visit(this, null);
@@ -1000,9 +1001,16 @@ public final class Checker implements Visitor {
 
   }
 
+  
+  // Cambios al analisador contextual Sebastian Campos
     @Override
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    if (! eType.equals(StdEnvironment.booleanType))
+      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+     ast.C.visit(this, null);
+    //ast.C2.visit(this, null);
+    return null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -1039,25 +1047,43 @@ public final class Checker implements Visitor {
     public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
+    //-sebastiaan Campos Zuñiga
     @Override
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+        ast.C1.visit(this, null);
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.booleanType))
+            reporter.reportError("Boolean expression expected here", "", ast.E.position);
+        ast.C2.visit(this, null);
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
+    //-sebastiaan Campos Zuñiga
     @Override
-    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.booleanType))
+            reporter.reportError("Boolean expression expected here", "", ast.E.position);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+        return null;  //To change body of generated methods, choose Tools | Templates.
     }
-
+    // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
+    //-sebastiaan Campos Zuñiga
     @Override
-    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.booleanType))
+            reporter.reportError("Boolean expression expected here", "", ast.E.position);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+        return null; //To change body of generated methods, choose Tools | Templates. //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
