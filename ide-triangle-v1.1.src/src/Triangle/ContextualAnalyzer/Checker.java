@@ -1009,7 +1009,6 @@ public final class Checker implements Visitor {
     if (! eType.equals(StdEnvironment.booleanType))
       reporter.reportError("Boolean expression expected here", "", ast.E.position);
      ast.C.visit(this, null);
-    //ast.C2.visit(this, null);
     return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1058,10 +1057,16 @@ public final class Checker implements Visitor {
         ast.C2.visit(this, null);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
-
+    // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
+    //-sebastiaan Campos Zuñiga
     @Override
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+        ast.C1.visit(this, null);
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.booleanType))
+            reporter.reportError("Boolean expression expected here", "", ast.E.position);
+        ast.C2.visit(this, null);
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
     //-sebastiaan Campos Zuñiga
