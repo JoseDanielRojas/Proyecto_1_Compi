@@ -11,12 +11,12 @@
 <EmptyCase/>
 <ChooseCommand>
 <IntegerExpression>
-<IntegerLiteral value="1"/>
+<IntegerLiteral value="4"/>
 </IntegerExpression>
 <WhenCase>
-<CharacterCase>
-<CharacterLiteral value="'b'"/>
-</CharacterCase>
+<IntegerCase>
+<IntegerLiteral value="1"/>
+</IntegerCase >
 <EmptyCase/>
 <EmptyCommand/>
 </WhenCase>

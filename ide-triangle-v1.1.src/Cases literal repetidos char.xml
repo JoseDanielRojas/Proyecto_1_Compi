@@ -1,21 +1,21 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <ChooseCommand>
-<IntegerExpression>
-<IntegerLiteral value="3"/>
-</IntegerExpression>
+<CharacterExpression>
+<CharacterLiteral value="'d'"/>
+<CharacterExpression>
 <SequentialCase>
 <WhenCase>
-<IntegerCase>
-<IntegerLiteral value="1"/>
-</IntegerCase >
+<CharacterCase>
+<CharacterLiteral value="'a'"/>
+</CharacterCase>
 <EmptyCase/>
 <EmptyCommand/>
 </WhenCase>
 <WhenCase>
-<IntegerCase>
-<IntegerLiteral value="1"/>
-</IntegerCase >
+<CharacterCase>
+<CharacterLiteral value="'a'"/>
+</CharacterCase>
 <EmptyCase/>
 <EmptyCommand/>
 </WhenCase>

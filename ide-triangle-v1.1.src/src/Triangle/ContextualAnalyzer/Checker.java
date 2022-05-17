@@ -668,6 +668,7 @@ public final class Checker implements Visitor {
     return StdEnvironment.charType;
   }
   static TypeDenoter typeSelector;
+  public static boolean nuevoChooseCommand;
   public Object visitChooseCommand(ChooseCommand ast, Object o) {
         TypeDenoter eType;
         eType = (TypeDenoter) ast.E.visit(this, null);
@@ -676,7 +677,7 @@ public final class Checker implements Visitor {
         }
         typeSelector=eType;
         ast.Cas.visit(this,null);
-        
+       
         
         return null;
    }
@@ -699,9 +700,14 @@ public final class Checker implements Visitor {
             repetido=false;
             reporter.reportError("literals duplicated expected here", "", ast.CaseL2.position);
         }
-        AnterioresCharL.clear();
-        AnterioresIntL.clear();
-         ast.C.visit(this, null);
+        
+         if(nuevoChooseCommand==true){
+            AnterioresCharL.clear();
+            AnterioresIntL.clear();
+            nuevoChooseCommand=false;
+        }
+        ast.C.visit(this, null);
+        
         
         
         return null;

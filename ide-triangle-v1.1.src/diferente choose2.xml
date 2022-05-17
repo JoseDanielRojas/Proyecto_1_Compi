@@ -13,6 +13,14 @@
 <IntegerExpression>
 <IntegerLiteral value="4"/>
 </IntegerExpression>
+<SequentialCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="2"/>
+</IntegerCase >
+<EmptyCase/>
+<EmptyCommand/>
+</WhenCase>
 <WhenCase>
 <IntegerCase>
 <IntegerLiteral value="1"/>
@@ -20,6 +28,7 @@
 <EmptyCase/>
 <EmptyCommand/>
 </WhenCase>
+</SequentialCase>
 <EmptyCommand/>
 </ChooseCommand>
 </WhenCase>

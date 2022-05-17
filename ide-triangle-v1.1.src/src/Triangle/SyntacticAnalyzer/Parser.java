@@ -103,6 +103,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.ContextualAnalyzer.Checker;
 
 public class Parser {
 
@@ -445,6 +446,7 @@ public class Parser {
         Command chooseAST=null;
         if (currentToken.kind==Token.ELSE){
             acceptIt();
+            
             Command cAST = parseCommand();
             accept(Token.END);
             finish(commandPos);
@@ -713,6 +715,9 @@ public class Parser {
         acceptIt();
         cslAST2 = parseCaseLiteral();
         accept(Token.THEN);
+        if(currentToken.kind== Token.CHOOSE){
+            Checker.nuevoChooseCommand=true;
+        }
         Command cCaseAST = parseCommand();
         
         CaseAst = new WhenCase(cslAST,cslAST2,cCaseAST, CasePos);
@@ -720,9 +725,16 @@ public class Parser {
     else{
        Cases cslemply = new EmptyCase(CasePos);
        accept(Token.THEN);
+       
+       if(currentToken.kind== Token.CHOOSE){
+            Checker.nuevoChooseCommand=true;
+       }
+       
        Command cCaseAST = parseCommand();
        CaseAst = new WhenCase(cslAST,cslemply,cCaseAST, CasePos);       
     }
+    
+    
     finish(CasePos); 
     return CaseAst;
  }
