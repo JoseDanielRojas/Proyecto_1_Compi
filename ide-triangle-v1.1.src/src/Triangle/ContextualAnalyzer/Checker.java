@@ -1033,21 +1033,39 @@ public final class Checker implements Visitor {
     }
 
     @Override
-    public Object visitForDoCommand(ForDoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+      ast.VarDe.visit(this, null);
+      TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+      if (! eType.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.C1.visit(this,null);
+      ast.C2.visit(this,null);
+
+      return null;
     }
 
     @Override
-    public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+      ast.VarDe.visit(this, null);
+      TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+      if (! eType.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.U.visit(this,null);
+      return null;
     }
 
     @Override
-    public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+//      idTable.openScope();
+      ast.VarDe.visit(this, null);
+      TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+      if (! eType.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.W.visit(this,null);
+      return null;
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
-    //-sebastiaan Campos Zuñiga
+    //-sebastiaan Campos Zuï¿½iga
     @Override
     public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
         ast.C1.visit(this, null);
@@ -1058,7 +1076,7 @@ public final class Checker implements Visitor {
         return null; //To change body of generated methods, choose Tools | Templates.
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
-    //-sebastiaan Campos Zuñiga
+    //-sebastiaan Campos Zuï¿½iga
     @Override
     public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
         ast.C1.visit(this, null);
@@ -1069,7 +1087,7 @@ public final class Checker implements Visitor {
         return null; //To change body of generated methods, choose Tools | Templates.
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
-    //-sebastiaan Campos Zuñiga
+    //-sebastiaan Campos Zuï¿½iga
     @Override
     public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
         TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
@@ -1080,7 +1098,7 @@ public final class Checker implements Visitor {
         return null;  //To change body of generated methods, choose Tools | Templates.
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
-    //-sebastiaan Campos Zuñiga
+    //-sebastiaan Campos Zuï¿½iga
     @Override
     public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
         TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
@@ -1092,8 +1110,15 @@ public final class Checker implements Visitor {
     }
 
     @Override
-    public Object visitForVarDecl(ForVarDecl aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForVarDecl(ForVarDecl ast, Object o) {
+
+      VarFormalParameter iType = (VarFormalParameter) ast.I.visit(this, null);
+      if (! iType.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.I.position);
+      TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+      if (! eType.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E.position);
+      return null;
     }
 
 
