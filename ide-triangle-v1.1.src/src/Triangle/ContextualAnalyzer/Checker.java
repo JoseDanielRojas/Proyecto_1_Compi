@@ -699,6 +699,9 @@ public final class Checker implements Visitor {
             repetido=false;
             reporter.reportError("literals duplicated expected here", "", ast.CaseL2.position);
         }
+        AnterioresCharL.clear();
+        AnterioresIntL.clear();
+         ast.C.visit(this, null);
         
         
         return null;
@@ -1145,6 +1148,7 @@ public final class Checker implements Visitor {
     public Object visitSequentialCase(SequentialCase ast, Object o) {
         ast.Cas1.visit(this, null);
         ast.Cas2.visit(this, null);
+        
         return null;
     }
 }
