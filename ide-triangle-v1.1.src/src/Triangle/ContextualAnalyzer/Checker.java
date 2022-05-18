@@ -1020,25 +1020,33 @@ public final class Checker implements Visitor {
      ast.C.visit(this, null);
     return null; //To change body of generated methods, choose Tools | Templates.
     }
-
+//Se visita el nodo para verificar el si el tipo es TypeDenoter
     @Override
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ast.E.visit(this, null);       
+        return null;
     }
-
+//Se visita el nodo para verificar el si el tipo es TypeDenoter
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ast.V.visit(this, null);
+        return null;
     }
-
+//Se visita el nodo para verificar el si el tipo es TypeDenoter
     @Override
     public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ast.E.visit(this, null);
+        return null;  
     }
-
+//Se verifica que se indique el literal numerico 
     @Override
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.integerType))
+            reporter.reportError("Integer expression expected here", "", ast.E.position);
+       ast.C.visit(this, null);
+       
+        return null;
     }
 
     @Override
