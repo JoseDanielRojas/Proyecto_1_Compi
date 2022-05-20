@@ -1111,28 +1111,7 @@ public class Parser {
       return ProcFuncsAST;
   }
   //----------------------------------------------------------
-  Declaration parseVarDeclaration() throws SyntaxError {
-    Declaration declarationAST = null; // in case there's a syntactic error
-
-    SourcePosition declarationPos = new SourcePosition();
-    start(declarationPos);
-    switch (currentToken.kind) {
-
-    case Token.COLON:
-            acceptIt();
-            TypeDenoter tAST = parseTypeDenoter();
-            finish(declarationPos);
-            declarationAST = new VarFormalDeclaration(tAST, declarationPos);
-        break;
-    case Token.BECOMES:
-            acceptIt();
-            Expression eAST = parseExpression();
-            finish(declarationPos);
-            declarationAST = new VarValueDeclaration(eAST, declarationPos);
-        break;
-    }
-    return declarationAST;
-  }
+  
 
   Declaration parseSingleDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
@@ -1157,9 +1136,20 @@ public class Parser {
       {
         acceptIt();
         Identifier iAST = parseIdentifier();
-        Declaration dAST = parseVarDeclaration();
-        finish(declarationPos);
-        declarationAST = new VarDeclaration(iAST, dAST, declarationPos);
+        switch (currentToken.kind){
+            case Token.COLON:
+            acceptIt();
+            TypeDenoter tAST = parseTypeDenoter();
+            finish(declarationPos);
+            declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+            break;
+            case Token.BECOMES:
+            acceptIt();
+            Expression eAST = parseExpression();
+            finish(declarationPos);
+            declarationAST = new VarValueDeclaration(iAST,eAST, declarationPos);
+             break;
+      }
       }
       break;
 

@@ -13,8 +13,9 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class VarValueDeclaration extends Declaration {
     
-    public VarValueDeclaration (Expression vAST, SourcePosition thePosition) {
+    public VarValueDeclaration (Identifier iAST,Expression vAST, SourcePosition thePosition) {
         super (thePosition);
+        I = iAST;
         V = vAST;
     }
 
@@ -23,4 +24,5 @@ public class VarValueDeclaration extends Declaration {
   }
 
   public Expression V;
+  public Identifier I;
 }

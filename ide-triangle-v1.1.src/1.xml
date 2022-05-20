@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<VarDeclaration>
+<Identifier value="x"/>
+<IntTypeDenoter/>
+</VarDeclaration>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</VarValueDeclaration>
+</SequentialDeclaration>
+<EmptyCommand/>
+</LetCommand>
+</Program>

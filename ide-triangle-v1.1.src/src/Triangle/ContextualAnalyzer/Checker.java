@@ -371,7 +371,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitVarDeclaration(VarDeclaration ast, Object o) {
-    ast.T = (Declaration) ast.T.visit(this, null);
+    ast.T = (TypeDenoter) ast.T.visit(this, null);
     idTable.enter (ast.I.spelling, ast);
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
@@ -714,8 +714,12 @@ public final class Checker implements Visitor {
     }
   public Object visitIdentifier(Identifier I, Object o) {
     Declaration binding = idTable.retrieve(I.spelling);
-    if (binding != null)
+    if (binding != null){
       I.decl = binding;
+        System.out.println(I.spelling);
+      
+    }
+    
     return binding;
   }
 
@@ -782,15 +786,14 @@ public final class Checker implements Visitor {
       } else if (binding instanceof VarFormalParameter) {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
+      }else if(binding instanceof VarValueDeclaration){
+            ast.type = ((VarValueDeclaration)binding).V.type;
+            ast.variable = true;
+        
       } else if (binding instanceof VarDeclaration){
-          Declaration binding2 =((VarDeclaration)binding).T;
-        if (binding2 instanceof VarFormalDeclaration) {          
-            ast.type = ((VarFormalDeclaration) binding2).E;
-            ast.variable = true;
-        }else if(binding2 instanceof VarValueDeclaration){
-            ast.type = ((VarValueDeclaration)binding2).V.type;
-            ast.variable = true;
-        }
+          ast.type = ((VarDeclaration) binding).T;
+          ast.variable = true;
+        
       } else
         reporter.reportError ("\"%\" is not a const or var identifier",
                               ast.I.spelling, ast.I.position);
