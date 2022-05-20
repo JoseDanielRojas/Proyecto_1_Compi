@@ -776,15 +776,21 @@ public final class Checker implements Visitor {
       if (binding instanceof ConstDeclaration) {
         ast.type = ((ConstDeclaration) binding).E.type;
         ast.variable = false;
-      } else if (binding instanceof VarDeclaration) {
-        ast.type = ((VarFormalDeclaration) binding).E;
-        ast.variable = true;
       } else if (binding instanceof ConstFormalParameter) {
         ast.type = ((ConstFormalParameter) binding).T;
         ast.variable = false;
       } else if (binding instanceof VarFormalParameter) {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
+      } else if (binding instanceof VarDeclaration){
+          Declaration binding2 =((VarDeclaration)binding).T;
+        if (binding2 instanceof VarFormalDeclaration) {          
+            ast.type = ((VarFormalDeclaration) binding2).E;
+            ast.variable = true;
+        }else if(binding2 instanceof VarValueDeclaration){
+            ast.type = ((VarValueDeclaration)binding2).V.type;
+            ast.variable = true;
+        }
       } else
         reporter.reportError ("\"%\" is not a const or var identifier",
                               ast.I.spelling, ast.I.position);
