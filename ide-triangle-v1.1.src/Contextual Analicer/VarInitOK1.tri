@@ -1,6 +1,6 @@
 let
 
-  var a := true
+  var a := 1
 
 in
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</VarValueDeclaration>
+<ForUntilCommand>
+<ForVarDecl>
+<Identifier value="i"/>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="k"/>
+</SimpleVname>
+</VnameExpression>
+</ForVarDecl>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
+<RepeatUntilCommand>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="k"/>
+</SimpleVname>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="k"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value="+"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</BinaryExpression>
+</AssignCommand>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value=">"/>
+<IntegerExpression>
+<IntegerLiteral value="3"/>
+</IntegerExpression>
+</BinaryExpression>
+<EmptyCommand/>
+</RepeatUntilCommand>
+</ForUntilCommand>
+</LetCommand>
+</Program>

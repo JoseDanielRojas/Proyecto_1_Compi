@@ -1,0 +1,7 @@
+let
+	var lista : array 20 .. 10 of Integer
+in
+	nothing 
+end
+
+! Error: Cota inferior es mayor que cota superior

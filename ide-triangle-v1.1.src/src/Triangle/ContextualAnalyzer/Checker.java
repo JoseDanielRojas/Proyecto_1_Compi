@@ -793,7 +793,12 @@ public final class Checker implements Visitor {
           ast.type = ((VarDeclaration) binding).T;
           ast.variable = true;
         
-      } else
+      }else if (binding instanceof ForVarDecl) {
+        ast.type = ((ForVarDecl) binding).E.type;
+        ast.variable = false;
+      }
+      
+      else
         reporter.reportError ("\"%\" is not a const or var identifier",
                               ast.I.spelling, ast.I.position);
     return ast.type;
@@ -1062,34 +1067,39 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
-      ast.VarDe.visit(this, null);
+      
       TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
       if (! eType.equals(StdEnvironment.integerType))
         reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.VarDe.visit(this, null);
       ast.C1.visit(this,null);
       ast.C2.visit(this,null);
+      idTable.closeScope();
 
       return null;
     }
 
     @Override
     public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
-      ast.VarDe.visit(this, null);
+      
       TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
       if (! eType.equals(StdEnvironment.integerType))
         reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.VarDe.visit(this, null);
       ast.U.visit(this,null);
+      idTable.closeScope();
       return null;
     }
 
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
-//      idTable.openScope();
-      ast.VarDe.visit(this, null);
+     //se revisa primero las expresiones sean Integer y se hace el scope
       TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
       if (! eType.equals(StdEnvironment.integerType))
         reporter.reportError("Integer expression expected here", "", ast.E.position);
+      ast.VarDe.visit(this, null);
       ast.W.visit(this,null);
+     
       return null;
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
@@ -1139,20 +1149,20 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
-        Declaration binding = (Declaration) ast.I.visit(this, null);
-        if (binding == null) {
-      reportUndeclared (ast.I);
-      return StdEnvironment.errorType;
-    } else if (! ((VarDeclaration) binding).T.equals(StdEnvironment.integerType)) {
-      reporter.reportError ("Integer expression expected here",
-                            ast.I.spelling, ast.I.position);
-      return StdEnvironment.errorType;
-    }
-        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-        if (! eType.equals(StdEnvironment.integerType))
-            reporter.reportError("Integer expression expected here", "", ast.E.position);
         
+         TypeDenoter iType = (TypeDenoter) ast.E.visit(this, null);
+         if (! iType.equals(StdEnvironment.integerType))
+            reporter.reportError("Integer expression expected here", "", ast.E.position);
+         else{
+             idTable.openScope();
+             idTable.enter(ast.I.spelling, ast);
+             
+             if (ast.duplicated)
+            reporter.reportError ("identifier \"%\" already declared",ast.I.spelling, ast.position);
+         }
+       
     return null;
+      
     }
 
 

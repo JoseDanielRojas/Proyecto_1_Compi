@@ -1,0 +1,10 @@
+choose 0 from
+  when 3 then putint (3) 
+  when 4 then
+! comienza choose anidado
+    choose '1' from
+      when '1' then putint (1) !OK, está en choose anidado
+      else putint (2)
+    end
+! terminó choose anidado
+end
