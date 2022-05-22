@@ -500,7 +500,7 @@ public class TreeVisitor implements Visitor {
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        return(createUnary("Var Value Declaration", ast.V));
+        return(createUnary("Var Value Declaration", ast.E));
     }
 
     @Override

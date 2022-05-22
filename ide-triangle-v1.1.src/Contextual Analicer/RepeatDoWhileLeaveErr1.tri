@@ -1,0 +1,9 @@
+repeat do
+
+    putint(1) 
+
+  while 'a' ! condición no booleana 
+  leave nothing
+
+end
+

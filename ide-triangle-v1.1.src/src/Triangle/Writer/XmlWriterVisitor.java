@@ -319,7 +319,7 @@ public class XmlWriterVisitor implements Visitor {
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
         write("<VarValueDeclaration>");
-        ast.V.visit(this, null);
+        ast.E.visit(this, null);
         write("</VarValueDeclaration>");
         return null;
     }

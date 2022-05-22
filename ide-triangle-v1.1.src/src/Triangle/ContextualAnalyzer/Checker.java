@@ -716,7 +716,6 @@ public final class Checker implements Visitor {
     Declaration binding = idTable.retrieve(I.spelling);
     if (binding != null){
       I.decl = binding;
-        System.out.println(I.spelling);
       
     }
     
@@ -787,7 +786,7 @@ public final class Checker implements Visitor {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
       }else if(binding instanceof VarValueDeclaration){
-            ast.type = ((VarValueDeclaration)binding).V.type;
+            ast.type = ((VarValueDeclaration)binding).E.type;
             ast.variable = true;
         
       } else if (binding instanceof VarDeclaration){
@@ -811,7 +810,7 @@ public final class Checker implements Visitor {
         if (! eType.equals(StdEnvironment.integerType))
           reporter.reportError ("Integer expression expected here", "",
 				ast.E.position);
-       // ast.type = ((ArrayTypeDenoter) vType).T.;
+       //ast.type = ((ArrayTypeDenoter) vType).T.;
       }
     }
     return ast.type;
@@ -1038,7 +1037,10 @@ public final class Checker implements Visitor {
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        ast.V.visit(this, null);
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        idTable.enter(ast.I.spelling, ast);
+        if(ast.duplicated)
+            reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
         return null;
     }
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
@@ -1137,14 +1139,20 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
-
-      VarFormalParameter iType = (VarFormalParameter) ast.I.visit(this, null);
-      if (! iType.equals(StdEnvironment.integerType))
-        reporter.reportError("Integer expression expected here", "", ast.I.position);
-      TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-      if (! eType.equals(StdEnvironment.integerType))
-        reporter.reportError("Integer expression expected here", "", ast.E.position);
-      return null;
+        Declaration binding = (Declaration) ast.I.visit(this, null);
+        if (binding == null) {
+      reportUndeclared (ast.I);
+      return StdEnvironment.errorType;
+    } else if (! ((VarDeclaration) binding).T.equals(StdEnvironment.integerType)) {
+      reporter.reportError ("Integer expression expected here",
+                            ast.I.spelling, ast.I.position);
+      return StdEnvironment.errorType;
+    }
+        TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.integerType))
+            reporter.reportError("Integer expression expected here", "", ast.E.position);
+        
+    return null;
     }
 
 

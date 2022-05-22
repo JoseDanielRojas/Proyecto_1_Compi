@@ -1,0 +1,7 @@
+
+let
+  var x := true
+
+in
+  nothing ! imprime 5
+end

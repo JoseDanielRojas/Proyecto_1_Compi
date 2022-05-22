@@ -13,16 +13,16 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class VarValueDeclaration extends Declaration {
     
-    public VarValueDeclaration (Identifier iAST,Expression vAST, SourcePosition thePosition) {
+    public VarValueDeclaration (Identifier iAST,Expression eAST, SourcePosition thePosition) {
         super (thePosition);
         I = iAST;
-        V = vAST;
+        E = eAST;
     }
 
   public Object visit(Visitor v, Object o) {
     return v.visitVarValueDeclaration(this, o);
   }
 
-  public Expression V;
+  public Expression E;
   public Identifier I;
 }

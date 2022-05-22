@@ -1,9 +1,12 @@
-let 
-var x: Integer;
-var x:= 1
+! Assign command successful test
 
+let
+   var v: Boolean;
+   var w: Integer;
+   var x: Char
+   
 in
-
-nothing
-
-end
+   v:= true;
+   w:= 5;
+   x:= '?'
+end 

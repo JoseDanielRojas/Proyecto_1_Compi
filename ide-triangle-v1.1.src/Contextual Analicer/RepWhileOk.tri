@@ -1,0 +1,5 @@
+let
+var x : Integer;
+var n : Integer
+in 
+repeat while (x=n) do putint(5)leave putint(9) end end

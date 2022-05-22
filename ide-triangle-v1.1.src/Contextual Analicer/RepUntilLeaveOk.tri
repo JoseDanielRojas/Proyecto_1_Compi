@@ -1,0 +1,7 @@
+let
+var x : Integer;
+var n : Integer
+in 
+x:=4;
+n:=2;
+repeat until (x=n) do putint(5) leave putint(x) end end

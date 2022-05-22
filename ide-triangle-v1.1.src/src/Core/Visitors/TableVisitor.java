@@ -646,7 +646,9 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ast.E.visit(this, null);
+        ast.C.visit(this, null);
+        return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -670,43 +672,67 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForDoCommand(ForDoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+        ast.VarDe.visit(this, null);
+        ast.E.visit(this, null);
+        ast.C1.visit(this, null);
+        ast.C2.visit(this, null);
+        return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+        ast.VarDe.visit(this, null);
+        ast.E.visit(this, null);
+        ast.U.visit(this, null);
+        return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+        ast.VarDe.visit(this, null);
+        ast.E.visit(this, null);
+        ast.W.visit(this, null);
+        return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+        ast.C1.visit(this, null);
+        ast.E.visit(this, null);
+        ast.C2.visit(this, null);
+        return (null);  //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+        ast.C1.visit(this, null);
+        ast.E.visit(this, null);
+        ast.C2.visit(this, null);
+        return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+         ast.E.visit(this, null);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+         return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+         ast.E.visit(this, null);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+         return (null);
     }
 
     @Override
-    public Object visitForVarDecl(ForVarDecl aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForVarDecl(ForVarDecl ast, Object o) {
+        ast.I.visit(this, null);
+        ast.E.visit(this, null);
+        return (null);//To change body of generated methods, choose Tools | Templates.
     }
 
     

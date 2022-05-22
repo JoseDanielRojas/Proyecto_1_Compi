@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</VarValueDeclaration>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="a"/>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

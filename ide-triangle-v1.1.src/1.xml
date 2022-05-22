@@ -2,16 +2,50 @@
 <Program>
 <LetCommand>
 <SequentialDeclaration>
+<SequentialDeclaration>
 <VarDeclaration>
-<Identifier value="x"/>
+<Identifier value="v"/>
+<BoolTypeDenoter/>
+</VarDeclaration>
+<VarDeclaration>
+<Identifier value="w"/>
 <IntTypeDenoter/>
 </VarDeclaration>
-<VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
-</VarValueDeclaration>
 </SequentialDeclaration>
-<EmptyCommand/>
+<VarDeclaration>
+<Identifier value="x"/>
+<CharTypeDenoter/>
+</VarDeclaration>
+</SequentialDeclaration>
+<SequentialCommand>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="v"/>
+</SimpleVname>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="true"/>
+</SimpleVname>
+</VnameExpression>
+</AssignCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="w"/>
+</SimpleVname>
+<IntegerExpression>
+<IntegerLiteral value="5"/>
+</IntegerExpression>
+</AssignCommand>
+</SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="x"/>
+</SimpleVname>
+<CharacterExpression>
+<CharacterLiteral value="'?'"/>
+<CharacterExpression>
+</AssignCommand>
+</SequentialCommand>
 </LetCommand>
 </Program>

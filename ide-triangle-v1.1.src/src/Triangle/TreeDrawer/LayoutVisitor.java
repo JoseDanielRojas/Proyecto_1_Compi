@@ -577,7 +577,7 @@ public class LayoutVisitor implements Visitor {
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        return layoutUnary("Bin.Expr.",ast.V);
+        return layoutUnary("Bin.Expr.",ast.E);
     }
 
     @Override
