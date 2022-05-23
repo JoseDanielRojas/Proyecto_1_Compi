@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<RecursiveProcFunc>
+<SequentialDeclaration>
+<ReProcFunction>
+<Identifier value="f"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="a"/>
+<IntTypeDenoter/>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IntTypeDenoter/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ReProcFucnticon>
+<ReProcFunction>
+<Identifier value="g"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="b"/>
+<IntTypeDenoter/>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IntTypeDenoter/>
+<IfExpression>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="b"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value=">"/>
+<IntegerExpression>
+<IntegerLiteral value="0"/>
+</IntegerExpression>
+</BinaryExpression>
+<CallExpression>
+<Identifier value="f"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="b"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value="-"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</BinaryExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+<CallExpression>
+<IntegerExpression>
+<IntegerLiteral value="0"/>
+</IntegerExpression>
+</IfExpression>
+</ReProcFucnticon>
+</SequentialDeclaration>
+</RecursiveProcFunc>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CallExpression>
+<Identifier value="f"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+<CallExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

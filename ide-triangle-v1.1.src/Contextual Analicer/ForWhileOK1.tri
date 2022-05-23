@@ -1,7 +1,6 @@
 let
 
-  var k := 1;
-  var i :=2
+  var k := 1
 
 in
 

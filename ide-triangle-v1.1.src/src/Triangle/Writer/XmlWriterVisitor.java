@@ -729,5 +729,43 @@ public class XmlWriterVisitor implements Visitor {
         write("</SequentialCase>");
         return null;
     }
+
+    @Override
+    public Object visitReProcDeclaration(ReProcDeclaration aThis, Object o) {
+        write("<ReProcDeclaration>");
+        aThis.I.visit(this,null);
+        aThis.FPS.visit(this,null);
+        aThis.C.visit(this,null);
+        write("</ReProcDeclaration>");
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRecursiveProcFunc(RecursiveProcFunc aThis, Object o) {
+        write("<RecursiveProcFunc>");
+        aThis.RecPrFun.visit(this,null);
+        write("</RecursiveProcFunc>");
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
+        //To change body of generated methods, choose Tools | Templates.
+        write("<ReProcFunction>");
+        aThis.I.visit(this,null);
+        aThis.FPS.visit(this,null);
+        aThis.T.visit(this,null);
+        aThis.E.visit(this,null);
+        write("</ReProcFucnticon>");
+        return null;
+    }
+
+   
+
+
+
+    
+
+   
 }
 // -------------------------

@@ -111,11 +111,16 @@ import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 import java.util.ArrayList;
 
+
+
 public final class Checker implements Visitor {
 
   // Commands
 
   // Always returns null. Does not use the given object.
+    
+  public int globalInt = 0;
+    
 
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     TypeDenoter vType = (TypeDenoter) ast.V.visit(this, null);
@@ -137,7 +142,9 @@ public final class Checker implements Visitor {
       ast.APS.visit(this, ((ProcDeclaration) binding).FPS);
     } else if (binding instanceof ProcFormalParameter) {
       ast.APS.visit(this, ((ProcFormalParameter) binding).FPS);
-    } else
+    } else if (binding instanceof ReProcDeclaration) {
+      ast.APS.visit(this, ((ReProcDeclaration) binding).FPS);
+    }else
       reporter.reportError("\"%\" is not a procedure identifier",
                            ast.I.spelling, ast.I.position);
     return null;
@@ -231,7 +238,11 @@ public final class Checker implements Visitor {
     } else if (binding instanceof FuncDeclaration) {
       ast.APS.visit(this, ((FuncDeclaration) binding).FPS);
       ast.type = ((FuncDeclaration) binding).T;
-    } else if (binding instanceof FuncFormalParameter) {
+    }else if (binding instanceof ReFuncDeclaration) {
+      ast.APS.visit(this, ((ReFuncDeclaration) binding).FPS);
+      ast.type = ((ReFuncDeclaration) binding).T;
+    } 
+    else if (binding instanceof FuncFormalParameter) {
       ast.APS.visit(this, ((FuncFormalParameter) binding).FPS);
       ast.type = ((FuncFormalParameter) binding).T;
     } else
@@ -509,12 +520,20 @@ public final class Checker implements Visitor {
                 binding instanceof FuncFormalParameter))
       reporter.reportError ("\"%\" is not a function identifier",
                             ast.I.spelling, ast.I.position);
+    else if (! (binding instanceof ReFuncDeclaration ||
+                binding instanceof FuncFormalParameter))
+      reporter.reportError ("\"%\" is not a function identifier",
+                            ast.I.spelling, ast.I.position);
     else if (! (fp instanceof FuncFormalParameter))
       reporter.reportError ("func actual parameter not expected here", "",
                             ast.position);
     else {
       FormalParameterSequence FPS = null;
       TypeDenoter T = null;
+      if (binding instanceof ReFuncDeclaration) {
+        FPS = ((ReFuncDeclaration) binding).FPS;
+        T = ((ReFuncDeclaration) binding).T;
+      }
       if (binding instanceof FuncDeclaration) {
         FPS = ((FuncDeclaration) binding).FPS;
         T = ((FuncDeclaration) binding).T;
@@ -542,6 +561,10 @@ public final class Checker implements Visitor {
                 binding instanceof ProcFormalParameter))
       reporter.reportError ("\"%\" is not a procedure identifier",
                             ast.I.spelling, ast.I.position);
+    else if (! (binding instanceof ReProcDeclaration ||
+                binding instanceof ProcFormalParameter))
+      reporter.reportError ("\"%\" is not a procedure identifier",
+                            ast.I.spelling, ast.I.position);
     else if (! (fp instanceof ProcFormalParameter))
       reporter.reportError ("proc actual parameter not expected here", "",
                             ast.position);
@@ -554,6 +577,16 @@ public final class Checker implements Visitor {
       if (! FPS.equals(((ProcFormalParameter) fp).FPS))
         reporter.reportError ("wrong signature for procedure \"%\"",
                               ast.I.spelling, ast.I.position);
+      if (binding instanceof ReProcDeclaration){
+        FPS = ((ReProcDeclaration) binding).FPS;
+        System.out.println("llega");
+      }
+      else
+        FPS = ((ProcFormalParameter) binding).FPS;
+      if (! FPS.equals(((ProcFormalParameter) fp).FPS))
+        reporter.reportError ("wrong signature for procedure \"%\"",
+                              ast.I.spelling, ast.I.position);
+      
     }
     return null;
   }
@@ -1206,7 +1239,7 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return null; //To change body of generated methods, choose Tools | Templates.
     }
 
 
@@ -1217,4 +1250,81 @@ public final class Checker implements Visitor {
         
         return null;
     }
+
+    @Override
+    public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
+        System.out.println(idTable.getLevel());
+        ast.RecPrFun.visit(this, null);
+        globalInt =1;
+        ast.RecPrFun.visit(this, null);
+        while(idTable.getLevel()!=1){
+             idTable.closeScope();
+        }
+        System.out.println(idTable.getLevel());
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitReProcDeclaration(ReProcDeclaration ast, Object o) {
+        
+        
+        if(globalInt==0){
+            System.out.println("identificador");
+            idTable.enter (ast.I.spelling, ast); // permits recursion
+             if (ast.duplicated){
+                reporter.reportError ("identifier \"%\" already declared",ast.I.spelling, ast.position);
+             }
+              System.out.println(idTable.getLevel());
+             System.out.println("parametros");
+             System.out.println(idTable.getLevel());
+             ast.FPS.visit(this, null);
+             idTable.openScope();
+             
+             
+        }
+        if(globalInt==1){
+            idTable.openScope();
+            System.out.println("comando");
+            ast.C.visit(this, null);
+            idTable.closeScope();
+             System.out.println(idTable.getLevel());
+        }
+        
+        
+ 
+    return null;
+    }
+
+    @Override
+    public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
+        
+        if(globalInt==0){
+            ast.T = (TypeDenoter) ast.T.visit(this, null);
+            idTable.enter (ast.I.spelling, ast); // permits recursion
+            if (ast.duplicated)
+                reporter.reportError ("identifier \"%\" already declared",
+                ast.I.spelling, ast.position);
+        }
+                ast.FPS.visit(this, null);
+               idTable.openScope();
+                
+        
+        if(globalInt==1){
+             idTable.openScope();
+            TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+            if (! ast.T.equals(eType))
+                reporter.reportError ("body of function \"%\" has wrong type",ast.I.spelling, ast.E.position);
+             idTable.closeScope();
+        }
+            
+        
+        
+    return null;
+  } //To change body of generated methods, choose Tools | Templates.
+    
+
+  
+
+
+ 
 }

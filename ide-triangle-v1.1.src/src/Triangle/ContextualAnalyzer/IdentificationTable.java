@@ -105,4 +105,8 @@ public final class IdentificationTable {
     return attr;
   }
 
+    public int getLevel() {
+        return level;
+    }
+
 }

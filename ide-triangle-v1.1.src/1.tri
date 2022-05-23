@@ -1,12 +1,15 @@
-! Assign command successful test
-
+!  lets anidados, con error
 let
-   var v: Boolean;
-   var w: Integer;
-   var x: Char
-   
+
+  var a := 1 ! debe inferir que a : Integer
+
 in
-   v:= true;
-   w:= 5;
-   x:= '?'
-end 
+
+  let
+    const b ~ a ; ! es visible aquí, debe inferir que b es entera
+    var   a := 8 ! debe inferir que nueva a : Char
+  in
+    putint (a) !ERROR: esta es la nueva a, que es de tipo Char, falla como parámetro de putint
+  end
+
+end

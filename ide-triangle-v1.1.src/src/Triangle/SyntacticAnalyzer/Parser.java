@@ -73,6 +73,8 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ReFuncDeclaration;
+import Triangle.AbstractSyntaxTrees.ReProcDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
@@ -103,6 +105,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.RecursiveProcFunc;
 import Triangle.ContextualAnalyzer.Checker;
 
 public class Parser {
@@ -111,6 +114,7 @@ public class Parser {
   private ErrorReporter errorReporter;
   private Token currentToken;
   private SourcePosition previousTokenPosition;
+  
 
   public Parser(Scanner lexer, ErrorReporter reporter) {
     lexicalAnalyser = lexer;
@@ -1020,8 +1024,12 @@ public class Parser {
         case Token.RECURSIVE:
         {
             acceptIt();
-            CompDeclAST = parseProcFuncs();   
+            Declaration CompDecl = parseProcFuncs();
             accept( Token.END);
+            finish(CompDeclPos);
+            CompDeclAST=new RecursiveProcFunc(CompDecl,CompDeclPos);
+            
+            
         }
         break;
         case Token.PRIVATE:
@@ -1062,7 +1070,7 @@ public class Parser {
             Command cAST = parseSingleCommand();
             accept(Token.END);
             finish(ProcFuncPos);
-            ProcFuncAST = new ProcDeclaration(iAST, fpsAST, cAST, ProcFuncPos);
+            ProcFuncAST = new ReProcDeclaration(iAST, fpsAST, cAST, ProcFuncPos);
         }
         break;
         case Token.FUNC:
@@ -1077,7 +1085,7 @@ public class Parser {
             accept(Token.IS);
             Expression eAST = parseExpression();
             finish(ProcFuncPos);
-            ProcFuncAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
+            ProcFuncAST = new ReFuncDeclaration(iAST, fpsAST, tAST, eAST,
               ProcFuncPos);     
         }
         break;
@@ -1102,7 +1110,6 @@ public class Parser {
       
       ProcFuncsAST = new SequentialDeclaration (ProcFuncsAST, pf2AST, ProcFuncsPos); 
       while (currentToken.kind == Token.AND) {
-          System.out.println("While AND");
           acceptIt();
           Declaration pfnAST = parseProcFunc();
           ProcFuncsAST = new SequentialDeclaration (ProcFuncsAST, pfnAST, ProcFuncsPos);          

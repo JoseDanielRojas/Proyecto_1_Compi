@@ -141,4 +141,17 @@ public interface Visitor {
 
     public Object visitSequentialCase(SequentialCase aThis, Object o);
 
+
+    public Object visitReProcDeclaration(ReProcDeclaration aThis, Object o);
+
+
+    public Object visitRecursiveProcFunc(RecursiveProcFunc aThis, Object o);
+
+    public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o);
+
+   
+
+
+
+
 }

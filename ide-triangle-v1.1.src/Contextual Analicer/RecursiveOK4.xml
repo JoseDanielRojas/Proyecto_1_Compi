@@ -1,0 +1,73 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<RecursiveProcFunc>
+<SequentialDeclaration>
+<ReProcFunction>
+<Identifier value="f"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="a"/>
+<IntTypeDenoter/>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IntTypeDenoter/>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+<Operator value="+"/>
+<CallExpression>
+<Identifier value="g"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="a"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value="-"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</BinaryExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+<CallExpression>
+</BinaryExpression>
+</ReProcFucnticon>
+<ReProcFunction>
+<Identifier value="g"/>
+<SingleFormalParameterSequence>
+<ConstFormalParameter>
+<Identifier value="b"/>
+<IntTypeDenoter/>
+</ConstFormalParameter>
+</SingleFormalParameterSequence>
+<IntTypeDenoter/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ReProcFucnticon>
+</SequentialDeclaration>
+</RecursiveProcFunc>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CallExpression>
+<Identifier value="f"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+<CallExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

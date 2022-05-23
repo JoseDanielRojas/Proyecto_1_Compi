@@ -1,10 +1,9 @@
 let
 
   var k := 1
-  
 
 in
-	i : true;
+
   for i from k .. 10 do ! determinar que k se evalúa una sola vez al inicio del repeat for
 
     k := k + 1 ; 

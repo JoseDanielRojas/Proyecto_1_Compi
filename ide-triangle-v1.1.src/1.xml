@@ -1,51 +1,39 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <LetCommand>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</VarValueDeclaration>
+<LetCommand>
 <SequentialDeclaration>
-<SequentialDeclaration>
-<VarDeclaration>
-<Identifier value="v"/>
-<BoolTypeDenoter/>
-</VarDeclaration>
-<VarDeclaration>
-<Identifier value="w"/>
-<IntTypeDenoter/>
-</VarDeclaration>
-</SequentialDeclaration>
-<VarDeclaration>
-<Identifier value="x"/>
-<CharTypeDenoter/>
-</VarDeclaration>
-</SequentialDeclaration>
-<SequentialCommand>
-<SequentialCommand>
-<AssignCommand>
-<SimpleVname>
-<Identifier value="v"/>
-</SimpleVname>
+<ConstDeclaration>
+<Identifier value="b"/>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="true"/>
+<Identifier value="a"/>
 </SimpleVname>
 </VnameExpression>
-</AssignCommand>
-<AssignCommand>
-<SimpleVname>
-<Identifier value="w"/>
-</SimpleVname>
+</ConstDeclaration>
+<VarValueDeclaration>
 <IntegerExpression>
-<IntegerLiteral value="5"/>
+<IntegerLiteral value="8"/>
 </IntegerExpression>
-</AssignCommand>
-</SequentialCommand>
-<AssignCommand>
+</VarValueDeclaration>
+</SequentialDeclaration>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
 <SimpleVname>
-<Identifier value="x"/>
+<Identifier value="a"/>
 </SimpleVname>
-<CharacterExpression>
-<CharacterLiteral value="'?'"/>
-<CharacterExpression>
-</AssignCommand>
-</SequentialCommand>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
 </LetCommand>
 </Program>

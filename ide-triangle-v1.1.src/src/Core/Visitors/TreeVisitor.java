@@ -59,8 +59,11 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ReFuncDeclaration;
+import Triangle.AbstractSyntaxTrees.ReProcDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveProcFunc;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
@@ -547,6 +550,30 @@ public class TreeVisitor implements Visitor {
     public Object visitSequentialCase(SequentialCase ast, Object o) {
         return (createBinary("SequentialCase",ast.Cas1,ast.Cas2)); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Object visitReProcDeclaration(ReProcDeclaration ast, Object o) {
+        return(createTernary("Recursive Proc Delcaration",ast.I,ast.FPS,ast.C)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
+        return(createUnary("RecursiveProcFunc",ast.RecPrFun)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
+        return(createQuaternary("Recursice Func Declaration",ast.I,ast.FPS,ast.T,ast.E));
+         //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+   
+
+   
+
+    
 
     
 

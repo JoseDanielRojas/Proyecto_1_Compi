@@ -6,7 +6,7 @@ recursive
 
   proc a() ~ put('Z') end ! tiene el end
   and
-  func m(): Integer ~ 10
+  func n(): Integer ~ 10
 
 end
 

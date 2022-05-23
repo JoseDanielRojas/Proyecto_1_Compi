@@ -5,11 +5,17 @@
 </head>
 <body>
 <pre>
-<font color="Black" face="Courier New" size="3"><b>let</b></font><font> </font><font>
-</font><font color="Black" face="Courier New" size="3"><b>var</b></font><font> </font><font color="Black" face="Courier New" size="3">x</font><font color="Black" face="Courier New" size="3">:</font><font> </font><font color="Black" face="Courier New" size="3">Integer</font><font color="Black" face="Courier New" size="3">;</font><font>
-</font><font color="Black" face="Courier New" size="3"><b>var</b></font><font> </font><font color="Black" face="Courier New" size="3">x</font><font color="Black" face="Courier New" size="3">:=</font><font> </font><font color="Blue" face="Courier New" size="3">1</font><font>
+<font color="Green" face="Courier New" size="3">!  lets anidados, con error&#13;&#13;
+</font><font color="Black" face="Courier New" size="3"><b>let</b></font><font>
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>var</b></font><font> </font><font color="Black" face="Courier New" size="3">a</font><font> </font><font color="Black" face="Courier New" size="3">:=</font><font> </font><font color="Blue" face="Courier New" size="3">1</font><font> </font><font color="Green" face="Courier New" size="3">! debe inferir que a : Integer&#13;&#13;
+</font><font>
 </font><font color="Black" face="Courier New" size="3"><b>in</b></font><font>
-</font><font color="Black" face="Courier New" size="3"><b>nothing</b></font><font>
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>let</b></font><font>
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>const</b></font><font> </font><font color="Black" face="Courier New" size="3">b</font><font> </font><font color="Black" face="Courier New" size="3">~</font><font> </font><font color="Black" face="Courier New" size="3">a</font><font> </font><font color="Black" face="Courier New" size="3">;</font><font> </font><font color="Green" face="Courier New" size="3">! es visible aqu&iacute;, debe inferir que b es entera&#13;&#13;
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>var</b></font><font>    </font><font color="Black" face="Courier New" size="3">a</font><font> </font><font color="Black" face="Courier New" size="3">:=</font><font> </font><font color="Blue" face="Courier New" size="3">8</font><font> </font><font color="Green" face="Courier New" size="3">! debe inferir que nueva a : Char&#13;&#13;
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>in</b></font><font>
+</font><font>    </font><font color="Black" face="Courier New" size="3">putint</font><font> </font><font color="Black" face="Courier New" size="3">(</font><font color="Black" face="Courier New" size="3">a</font><font color="Black" face="Courier New" size="3">)</font><font> </font><font color="Green" face="Courier New" size="3">!ERROR: esta es la nueva a, que es de tipo Char, falla como par&aacute;metro de putint&#13;&#13;
+</font><font>    </font><font color="Black" face="Courier New" size="3"><b>end</b></font><font>
 </font><font color="Black" face="Courier New" size="3"><b>end</b></font>
 </pre>
 </body>
