@@ -1072,6 +1072,7 @@ public final class Checker implements Visitor {
         ast.E.visit(this, null);       
         return null;
     }
+    // Cambios al analisador contextual Sebastian Campos
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
@@ -1097,7 +1098,9 @@ public final class Checker implements Visitor {
        
         return null;
     }
-
+// se agrega al analizador contexual para cheaquear que E2 sea un valor de tipo Integer ademas que se visita FOR VAR delcar para revisar su tipo que sea INT se protege y despues
+    // se revisa contexrualmete el Until con la forma del repeat
+    //-sebastiaan Campos Zu�iga
     @Override
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
       
@@ -1111,7 +1114,9 @@ public final class Checker implements Visitor {
 
       return null;
     }
-
+// se agrega al analizador contexual para cheaquear que E2 sea un valor de tipo Integer ademas que se visita FOR VAR delcar para revisar su tipo que sea INT se protege y despues
+    // se revisa contexrualmete el Until con la forma del repeat
+    //-sebastiaan Campos Zu�iga
     @Override
     public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
       
@@ -1123,7 +1128,9 @@ public final class Checker implements Visitor {
       idTable.closeScope();
       return null;
     }
-
+// se agrega al analizador contexual para cheaquear que E2 sea un valor de tipo Integer ademas que se visita FOR VAR delcar para revisar su tipo que sea INT se protege y despues
+    // se revisa contexrualmete el Until con la forma del repeat
+    //-sebastiaan Campos Zu�iga
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
      //se revisa primero las expresiones sean Integer y se hace el scope
@@ -1132,7 +1139,7 @@ public final class Checker implements Visitor {
         reporter.reportError("Integer expression expected here", "", ast.E.position);
       ast.VarDe.visit(this, null);
       ast.W.visit(this,null);
-     
+     idTable.closeScope();
       return null;
     }
     // se agrega al analizador contexual para cheaquear que sea un valor de tipo booleano
@@ -1179,7 +1186,8 @@ public final class Checker implements Visitor {
          ast.C2.visit(this, null);
         return null; //To change body of generated methods, choose Tools | Templates. //To change body of generated methods, choose Tools | Templates.
     }
-
+     //-sebastiaan Campos Zu�iga
+    // se revisa el arbol que protege el identificador del for
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
         
@@ -1238,7 +1246,11 @@ public final class Checker implements Visitor {
     }
 
     @Override
-    public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
+    public Object visitPrivateDeclaration(PrivateDeclaration ast, Object o) {
+         idTable.openScope();
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+        
        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1269,14 +1281,10 @@ public final class Checker implements Visitor {
         
         
         if(globalInt==0){
-            System.out.println("identificador");
             idTable.enter (ast.I.spelling, ast); // permits recursion
              if (ast.duplicated){
                 reporter.reportError ("identifier \"%\" already declared",ast.I.spelling, ast.position);
              }
-              System.out.println(idTable.getLevel());
-             System.out.println("parametros");
-             System.out.println(idTable.getLevel());
              ast.FPS.visit(this, null);
              idTable.openScope();
              
@@ -1284,7 +1292,6 @@ public final class Checker implements Visitor {
         }
         if(globalInt==1){
             idTable.openScope();
-            System.out.println("comando");
             ast.C.visit(this, null);
             idTable.closeScope();
              System.out.println(idTable.getLevel());
