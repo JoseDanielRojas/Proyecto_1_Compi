@@ -34,6 +34,7 @@ public final class IdentificationTable {
     level ++;
   }
 
+
   // Closes the topmost level in the identification table, discarding
   // all entries belonging to that level.
 

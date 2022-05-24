@@ -1238,8 +1238,12 @@ public final class Checker implements Visitor {
     }
 
     @Override
-    public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
-       return null; //To change body of generated methods, choose Tools | Templates.
+    public Object visitPrivateDeclaration(PrivateDeclaration ast, Object o) {
+        idTable.openScope();
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+        idTable.closeScope();
+      return null;
     }
 
 
