@@ -579,7 +579,6 @@ public final class Checker implements Visitor {
                               ast.I.spelling, ast.I.position);
       if (binding instanceof ReProcDeclaration){
         FPS = ((ReProcDeclaration) binding).FPS;
-        System.out.println("llega");
       }
       else
         FPS = ((ProcFormalParameter) binding).FPS;
@@ -1273,14 +1272,12 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
-        System.out.println(idTable.getLevel());
         ast.RecPrFun.visit(this, null);
         globalInt =1;
         ast.RecPrFun.visit(this, null);
         while(idTable.getLevel()!=1){
              idTable.closeScope();
         }
-        System.out.println(idTable.getLevel());
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1302,7 +1299,6 @@ public final class Checker implements Visitor {
             idTable.openScope();
             ast.C.visit(this, null);
             idTable.closeScope();
-             System.out.println(idTable.getLevel());
         }
         
         
