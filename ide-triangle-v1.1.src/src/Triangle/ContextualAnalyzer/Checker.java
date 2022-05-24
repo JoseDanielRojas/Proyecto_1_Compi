@@ -1023,6 +1023,7 @@ public final class Checker implements Visitor {
     return null; //To change body of generated methods, choose Tools | Templates.
     }
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
+//Jose Rojas
     @Override
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
         ast.E.visit(this, null);       
@@ -1030,6 +1031,7 @@ public final class Checker implements Visitor {
     }
     // Cambios al analisador contextual Sebastian Campos
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
+//Jose Rojas
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
         TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
@@ -1039,12 +1041,14 @@ public final class Checker implements Visitor {
         return null;
     }
 //Se visita el nodo para verificar el si el tipo es TypeDenoter
+//Jose Rojas
     @Override
     public Object visitArrayDeclarationOF(ArrayDeclarationOF ast, Object o) {
          ast.E.visit(this, null);
         return null;  
     }
 //Se verifica que se indique el literal numerico 
+//Jose Rojas
     @Override
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
         TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
