@@ -700,51 +700,7 @@ public final class Checker implements Visitor {
   public Object visitCharacterLiteral(CharacterLiteral CL, Object o) {
     return StdEnvironment.charType;
   }
-  static TypeDenoter typeSelector;
-  public static boolean nuevoChooseCommand;
-  public Object visitChooseCommand(ChooseCommand ast, Object o) {
-        TypeDenoter eType;
-        eType = (TypeDenoter) ast.E.visit(this, null);
-        if(!eType.equals(StdEnvironment.integerType)&&!eType.equals(StdEnvironment.charType)){
-            reporter.reportError("Integer or char expression expected here", "", ast.E.position);
-        }
-        typeSelector=eType;
-        ast.Cas.visit(this,null);
-       
-        
-        return null;
-   }
-  boolean repetido=false;
-  public Object visitWhenCase(WhenCase ast , Object o) {
-        TypeDenoter Cl1Type;
-        Cl1Type = (TypeDenoter) ast.CaseL.visit(this, null);
-        TypeDenoter Cl2Type = (TypeDenoter) ast.CaseL2.visit(this, null);
-        if(Cl2Type!=null){
-            if(!Cl1Type.equals(typeSelector)||!Cl2Type.equals(typeSelector)){
-                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
-           }
-        }
-        else{
-            if(!Cl1Type.equals(typeSelector)){
-                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
-           }
-        }
-        if(repetido==true){
-            repetido=false;
-            reporter.reportError("literals duplicated expected here", "", ast.CaseL2.position);
-        }
-        
-         if(nuevoChooseCommand==true){
-            AnterioresCharL.clear();
-            AnterioresIntL.clear();
-            nuevoChooseCommand=false;
-        }
-        ast.C.visit(this, null);
-        
-        
-        
-        return null;
-    }
+
   public Object visitIdentifier(Identifier I, Object o) {
     Declaration binding = idTable.retrieve(I.spelling);
     if (binding != null){
@@ -1205,8 +1161,55 @@ public final class Checker implements Visitor {
     return null;
       
     }
+       //hecho por Pablo Villafuerte
+  static TypeDenoter typeSelector;
+  public static boolean nuevoChooseCommand;
+  public Object visitChooseCommand(ChooseCommand ast, Object o) {
+        TypeDenoter eType;
+        eType = (TypeDenoter) ast.E.visit(this, null);
+        if(!eType.equals(StdEnvironment.integerType)&&!eType.equals(StdEnvironment.charType)){
+            reporter.reportError("Integer or char expression expected here", "", ast.E.position);
+        }
+        typeSelector=eType;
+        ast.Cas.visit(this,null);
+       
+        
+        return null;
+   }
+   //hecho por Pablo Villafuerte
+  boolean repetido=false;
+  public Object visitWhenCase(WhenCase ast , Object o) {
+        TypeDenoter Cl1Type;
+        Cl1Type = (TypeDenoter) ast.CaseL.visit(this, null);
+        TypeDenoter Cl2Type = (TypeDenoter) ast.CaseL2.visit(this, null);
+        if(Cl2Type!=null){
+            if(!Cl1Type.equals(typeSelector)||!Cl2Type.equals(typeSelector)){
+                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
+           }
+        }
+        else{
+            if(!Cl1Type.equals(typeSelector)){
+                reporter.reportError("literals must be same type of expression expected here", "", ast.CaseL.position);
+           }
+        }
+        if(repetido==true){
+            repetido=false;
+            reporter.reportError("literals duplicated expected here", "", ast.CaseL2.position);
+        }
+        
+         if(nuevoChooseCommand==true){
+            AnterioresCharL.clear();
+            AnterioresIntL.clear();
+            nuevoChooseCommand=false;
+        }
+        ast.C.visit(this, null);
+        
+        
+        
+        return null;
+    }
 
-
+     //hecho por Pablo Villafuerte
      ArrayList<String> AnterioresIntL = new ArrayList<String>();
     @Override
     public Object visitIntegerCase(IntegerCase ast, Object o) {
@@ -1239,12 +1242,12 @@ public final class Checker implements Visitor {
         return ast.type;
     }
     
-
+     //hecho por Pablo Villafuerte
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
         return null;
     }
-
+    //hecho por Pablo Villafuerte
     @Override
     public Object visitPrivateDeclaration(PrivateDeclaration ast, Object o) {
         idTable.openScope();
@@ -1255,7 +1258,7 @@ public final class Checker implements Visitor {
 
     }
 
-
+     //hecho por Pablo Villafuerte
     @Override
     public Object visitSequentialCase(SequentialCase ast, Object o) {
         ast.Cas1.visit(this, null);
