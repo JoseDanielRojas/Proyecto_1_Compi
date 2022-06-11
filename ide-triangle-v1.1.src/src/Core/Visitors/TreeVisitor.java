@@ -91,6 +91,7 @@ import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.TreeDrawer.Drawer;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -145,15 +146,15 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
-        return(createQuaternary("For Command", ast.VarDe, ast.E,ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
+        return(createQuaternary("For  do Command", ast.VarDe, ast.E,ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
     
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
-        return(createTernary("For Command",ast.VarDe ,ast.E,ast.W)); //To change body of generated methods, choose Tools | Templates.
+        return(createTernary("For while Command",ast.VarDe ,ast.E,ast.W)); //To change body of generated methods, choose Tools | Templates.
     }
 
     public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
-        return(createTernary("For Command", ast.VarDe, ast.E,ast.U));  //To change body of generated methods, choose Tools | Templates.
+        return(createTernary("For until Command", ast.VarDe, ast.E,ast.U));  //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
@@ -414,6 +415,8 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitProgram(Program ast, Object obj) {
+        Drawer dibujar = new Drawer();
+        dibujar.draw(ast);
         return(createUnary("Program", ast.C));
     }
     // </editor-fold>

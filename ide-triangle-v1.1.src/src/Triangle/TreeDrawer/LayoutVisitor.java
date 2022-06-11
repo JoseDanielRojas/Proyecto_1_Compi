@@ -594,95 +594,95 @@ public class LayoutVisitor implements Visitor {
     }
 
     @Override
-    public Object visitForDoCommand(ForDoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+        return(layoutQuaternary("For Command", ast.VarDe, ast.E,ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+         return(layoutTernary("For until Command", ast.VarDe, ast.E,ast.U)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+        return(layoutTernary("For while Command",ast.VarDe ,ast.E,ast.W)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+        return(layoutTernary("RepeatDoUntil Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+        return(layoutTernary("RepeatDoWhile Command", ast.C1, ast.E,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+        return(layoutTernary("RepeatUntilDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+        return(layoutTernary("RepeatWhileDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitForVarDecl(ForVarDecl aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
-    @Override
-    public Object visitWhenCase(WhenCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitChooseCommand(ChooseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitIntegerCase(IntegerCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitCharacterCase(CharacterCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitEmptyCase(EmptyCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForVarDecl(ForVarDecl ast, Object o) {
+        return(layoutBinary("ForVarDecl", ast.I, ast.E));//To change body of generated methods, choose Tools | Templates.
     }
 
 
     @Override
-    public Object visitSequentialCase(SequentialCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitWhenCase(WhenCase ast, Object o) {
+         return(layoutTernary("WhenCase",ast.CaseL,ast.CaseL2,ast.C));  //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitReProcDeclaration(ReProcDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitChooseCommand(ChooseCommand ast, Object o) {
+         return(layoutTernary("Choose Command",ast.E,ast.Cas,ast.C)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRecursiveProcFunc(RecursiveProcFunc aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitIntegerCase(IntegerCase ast, Object o) {
+        return(layoutUnary("IntegerCase",ast.IL));//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitCharacterCase(CharacterCase ast, Object o) {
+        return(layoutUnary("CharacterCase",ast.CL)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitEmptyCase(EmptyCase ast, Object o) {
+         return(layoutNullary("Empty Case")); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitPrivateDeclaration(PrivateDeclaration ast, Object o) {
+        return (layoutBinary("PrivateDeclaration",ast.D1,ast.D2)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public Object visitSequentialCase(SequentialCase ast, Object o) {
+         return (layoutBinary("SequentialCase",ast.Cas1,ast.Cas2));  //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitReProcDeclaration(ReProcDeclaration ast, Object o) {
+         return(layoutTernary("Recursive Proc Delcaration",ast.I,ast.FPS,ast.C)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
+        return(layoutUnary("RecursiveProcFunc",ast.RecPrFun)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
+        return(layoutQuaternary("Recursice Func Declaration",ast.I,ast.FPS,ast.T,ast.E));//To change body of generated methods, choose Tools | Templates.
     }
 
   
