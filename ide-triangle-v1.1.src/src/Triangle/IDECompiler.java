@@ -9,6 +9,7 @@ import Triangle.Writer.HtmlWriter;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.CodeGenerator.Encoder;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.Writer.XmlWriter;
@@ -39,7 +40,7 @@ public class IDECompiler {
      */
     public boolean compileProgram(String sourceName) {
         System.out.println("********** " +
-                           "Triangle Compiler (IDE-Triangle 1.0)" +
+                           "Triangle Compiler (IDE-Triangle 14.0)" +
                            " **********");
         
         System.out.println("Syntactic Analysis ...");
@@ -60,12 +61,12 @@ public class IDECompiler {
             Checker checker = new Checker(report);
             checker.check(rootAST);
             if (report.numErrors == 0) {
-               // System.out.println("Code Generation ...");
-               // Encoder encoder = new Encoder(report);
-                //encoder.encodeRun(rootAST, false);
+               System.out.println("Code Generation ...");
+                Encoder encoder = new Encoder(report);
+                encoder.encodeRun(rootAST, false);
                 
                 if (report.numErrors == 0) {
-                   // encoder.saveObjectProgram(sourceName.replace(".tri", ".tam"));
+                    encoder.saveObjectProgram(sourceName.replace(".tri", ".tam"));
 
                     // Agregado por Miguel Mesen
                     XmlWriter xmlWriter = new XmlWriter(sourceName.replace(".tri", ".xml"));

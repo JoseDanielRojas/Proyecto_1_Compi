@@ -1,39 +1,4 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
-<LetCommand>
-<VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
-</VarValueDeclaration>
-<LetCommand>
-<SequentialDeclaration>
-<ConstDeclaration>
-<Identifier value="b"/>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VnameExpression>
-</ConstDeclaration>
-<VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="8"/>
-</IntegerExpression>
-</VarValueDeclaration>
-</SequentialDeclaration>
-<CallCommand>
-<Identifier value="putint"/>
-<SingleActualParameterSequence>
-<ConstActualParameter>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VnameExpression>
-</ConstActualParameter>
-</SingleActualParameterSequence>
-</CallCommand>
-</LetCommand>
-</LetCommand>
+<EmptyCommand/>
 </Program>

@@ -25,29 +25,6 @@
 </VnameExpression>
 <Operator value=">"/>
 <IntegerExpression>
-<IntegerLiteral value="2"/>
-</IntegerExpression>
-</BinaryExpression>
-<CallCommand>
-<Identifier value="put"/>
-<SingleActualParameterSequence>
-<ConstActualParameter>
-<CharacterExpression>
-<CharacterLiteral value="'2'"/>
-<CharacterExpression>
-</ConstActualParameter>
-</SingleActualParameterSequence>
-</CallCommand>
-<SequentialCommand>
-<ElisifCommand>
-<BinaryExpression>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VnameExpression>
-<Operator value="="/>
-<IntegerExpression>
 <IntegerLiteral value="0"/>
 </IntegerExpression>
 </BinaryExpression>
@@ -56,23 +33,21 @@
 <SingleActualParameterSequence>
 <ConstActualParameter>
 <CharacterExpression>
-<CharacterLiteral value="'0'"/>
+<CharacterLiteral value="'M'"/>
 <CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-</ElisifCommand>
 <CallCommand>
 <Identifier value="put"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
 <CharacterExpression>
-<CharacterLiteral value="'n'"/>
+<CharacterLiteral value="'m'"/>
 <CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-</SequentialCommand>
 </IfCommand>
 </SequentialCommand>
 </LetCommand>

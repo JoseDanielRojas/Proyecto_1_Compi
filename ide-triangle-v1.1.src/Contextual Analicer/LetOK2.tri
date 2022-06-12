@@ -1,11 +1,9 @@
 let
 
-  var a : Integer
+  var a : Boolean
 
 in
-  a := 0 ;
-  a := a + 1 ;
-  putint (a) 
+ nothing
 
 end
 

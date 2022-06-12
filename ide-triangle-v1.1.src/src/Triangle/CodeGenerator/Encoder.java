@@ -131,6 +131,7 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
+      
     return null;
   }
 
