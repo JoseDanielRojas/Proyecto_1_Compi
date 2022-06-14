@@ -755,19 +755,20 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitIntegerCase(IntegerCase aThis, Object o) {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitIntegerCase(IntegerCase aThis, Object o) {      
+      return(null);
     }
 
     @Override
-    public Object visitCharacterCase(CharacterCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitCharacterCase(CharacterCase ast, Object o) {
+        ast.CL.visit(this, null);
+      
+        return(null);
     }
 
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      return null;
     }
 
     @Override

@@ -1085,30 +1085,64 @@ public final class Encoder implements Visitor {
     public Object visitForVarDecl(ForVarDecl aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    static Expression ChExpr; 
     @Override
-    public Object visitWhenCase(WhenCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitWhenCase(WhenCase ast, Object o) {
+         Frame frame = (Frame) o;
+         
+         int jumpifAddr, jumpAddr;
+         
+         ChExpr.visit(this,frame); 
+         ast.CaseL.visit(this, frame);
+         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
+             Machine.gtDisplacement);
+         jumpifAddr = nextInstrAddr;
+         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+         ast.C.visit(this, frame);
+         jumpAddr = nextInstrAddr;
+        // emit(Machine.JUMPop, 0, Machine.CBr, 0);
+         patch(jumpifAddr, nextInstrAddr);
+        
+         //ast.CaseL2.visit(this, frame);
+
+        return null;
     }
 
     @Override
-    public Object visitChooseCommand(ChooseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitChooseCommand(ChooseCommand ast, Object o) {
+        Frame frame = (Frame) o;
+      //  Integer valSize = (Integer) ast..visit(this, null);
+        int jumpAddr;
+        ChExpr=ast.E;
+        ast.E.visit(this, frame);
+
+        //jumpAddr = nextInstrAddr;
+        //emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        ast.Cas.visit(this, frame);
+        
+        ast.C.visit(this, frame);
+        return null;
     }
 
     @Override
-    public Object visitIntegerCase(IntegerCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitIntegerCase(IntegerCase ast, Object o) {
+         Frame frame = (Frame) o;
+        Integer valSize = (Integer) ast.type.visit(this, null);
+        emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
+        return valSize;
     }
 
     @Override
-    public Object visitCharacterCase(CharacterCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitCharacterCase(CharacterCase ast, Object o) {
+        Frame frame = (Frame) o;
+        Integer valSize = (Integer) ast.type.visit(this, null);
+        emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
+        return valSize;
     }
 
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return null;
     }
 
     @Override
@@ -1118,8 +1152,12 @@ public final class Encoder implements Visitor {
 
 
     @Override
-    public Object visitSequentialCase(SequentialCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitSequentialCase(SequentialCase ast, Object o) {
+         Frame frame = (Frame) o;
+//         Integer valSize = (Integer) ast.type.visit(this, null);
+         ast.Cas1.visit(this, frame);
+         ast.Cas2.visit(this, frame);
+         return null;
     }
 
     @Override

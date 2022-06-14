@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ChooseCommand>
+<IntegerExpression>
+<IntegerLiteral value="2"/>
+</IntegerExpression>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="2"/>
+</IntegerCase >
+<EmptyCase/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="3"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</WhenCase>
+<EmptyCommand/>
+</ChooseCommand>
+</Program>
