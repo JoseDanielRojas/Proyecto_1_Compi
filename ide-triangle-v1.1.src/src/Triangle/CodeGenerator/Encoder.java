@@ -1082,19 +1082,38 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
+         Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+        
+        jumpAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        ast.E.visit(this, frame);
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, jumpAddr);
+        ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
+         Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+        
+        jumpAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        ast.E.visit(this, frame);
+        
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, jumpAddr);
+        ast.C2.visit(this, frame);
+        
+        return null;//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
         Frame frame = (Frame) o;
         int jumpAddr, loopAddr;
+
         jumpAddr = nextInstrAddr;
         emit(Machine.JUMPop, 0, Machine.CBr, 0);
         loopAddr = nextInstrAddr;
@@ -1103,7 +1122,6 @@ public final class Encoder implements Visitor {
         ast.E.visit(this, frame);
         emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
         ast.C2.visit(this, frame);
-        patch(jumpAddr, nextInstrAddr); //To change body of generated methods, choose Tools | Templates.
         return null;
     }
 
@@ -1111,6 +1129,7 @@ public final class Encoder implements Visitor {
     public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
         int jumpAddr, loopAddr;
+
         jumpAddr = nextInstrAddr;
         emit(Machine.JUMPop, 0, Machine.CBr, 0);
         loopAddr = nextInstrAddr;
@@ -1119,7 +1138,6 @@ public final class Encoder implements Visitor {
         ast.E.visit(this, frame);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
         ast.C2.visit(this, frame);
-        patch(jumpAddr, nextInstrAddr);//To change body of generated methods, choose Tools | Templates.
         return null;
     }
 

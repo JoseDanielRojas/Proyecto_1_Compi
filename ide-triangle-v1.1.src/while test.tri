@@ -1,0 +1,5 @@
+let
+var x : Integer;
+var n : Integer
+in 
+repeat while (true) do putint(5) leave put('S') end end
