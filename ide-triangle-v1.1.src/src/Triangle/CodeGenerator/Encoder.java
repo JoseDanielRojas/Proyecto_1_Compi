@@ -1090,18 +1090,29 @@ public final class Encoder implements Visitor {
     public Object visitWhenCase(WhenCase ast, Object o) {
          Frame frame = (Frame) o;
          
-         int jumpifAddr, jumpAddr;
+         int jumpifAddr1,jumpifAddr2, jumpAddr;
          
          ChExpr.visit(this,frame); 
          ast.CaseL.visit(this, frame);
          emit(Machine.CALLop, Machine.SBr, Machine.PBr,
              Machine.gtDisplacement);
-         jumpifAddr = nextInstrAddr;
+         jumpifAddr1 = nextInstrAddr;
          emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+         
+         
+         ChExpr.visit(this,frame); 
+         ast.CaseL.visit(this, frame);
+         
+         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
+             Machine.ltDisplacement);
+         jumpifAddr2= nextInstrAddr;
+         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+         
          ast.C.visit(this, frame);
          jumpAddr = nextInstrAddr;
         // emit(Machine.JUMPop, 0, Machine.CBr, 0);
-         patch(jumpifAddr, nextInstrAddr);
+         patch(jumpifAddr1, nextInstrAddr);
+          patch(jumpifAddr2, nextInstrAddr);
         
          //ast.CaseL2.visit(this, frame);
 
