@@ -1,0 +1,21 @@
+! con token elsif
+
+let
+
+  var a : Integer
+
+in
+  getint (var a);
+  if a > 2 then 
+    putint (2)
+  elsif a = 1 then
+    putint (1)
+  elsif a = 0 then
+     putint (0)
+elsif a = 4 then
+     putint (0)
+  else
+    putint (6)
+  end ! del if compuesto
+
+end ! del let

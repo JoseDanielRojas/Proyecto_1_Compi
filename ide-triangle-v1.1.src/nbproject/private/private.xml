@@ -6,15 +6,20 @@
         <group>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/CodeGenerator/Encoder.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/IDE/IDEInterpreter.java</file>
-            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/IDE/IDEDisassembler.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/IDE/package.html</file>
-            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/Console/InputRedirector.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/IDECompiler.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/SyntacticAnalyzer/Parser.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/TAM/Interpreter.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/Console/OutputRedirector.java</file>
-            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/TAM/Disassembler.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/TAM/Machine.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/AbstractSyntaxTrees/IfCommand.java</file>
             <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/GUI/Main.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/AbstractSyntaxTrees/ElsifCommand.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Triangle/TreeDrawer/LayoutVisitor.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/IDE/IDEDisassembler.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/Console/InputRedirector.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/Core/Visitors/TreeVisitor.java</file>
+            <file>file:/C:/Users/Sebastian%20Campos/Documents/GitHub/Proyecto_1_Compi/ide-triangle-v1.1.src/src/TAM/Disassembler.java</file>
         </group>
     </open-files>
 </project-private>
