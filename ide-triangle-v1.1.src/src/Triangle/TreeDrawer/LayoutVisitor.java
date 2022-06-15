@@ -570,7 +570,7 @@ public class LayoutVisitor implements Visitor {
 
     @Override
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return(layoutBinary("ELSIF Command", ast.E, ast.C)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

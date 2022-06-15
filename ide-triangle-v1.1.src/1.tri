@@ -1,1 +1,1 @@
-nothing
+if true then putint(9) else  putint(5) end

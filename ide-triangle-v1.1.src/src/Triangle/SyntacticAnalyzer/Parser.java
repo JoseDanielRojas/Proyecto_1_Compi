@@ -407,22 +407,29 @@ public class Parser {
             case Token.ELSIF:
             {
                 Command ElsifC = null;
-                
+                SequentialCommand SeqElsifAST = null;
+                accept(Token.ELSIF);
+                Expression eElsifAST = parseExpression();
+                accept(Token.THEN);
+                Command cElsifAST = parseCommand();
+                ElsifC = new ElsifCommand(eElsifAST, cElsifAST, commandPos);
                 while(currentToken.kind == Token.ELSIF){
                     accept(Token.ELSIF);
-                    Expression eElsifAST = parseExpression();
+                    eElsifAST = parseExpression();
                     accept(Token.THEN);
-                    Command cElsifAST = parseCommand();
-                    ElsifC = new ElsifCommand(eElsifAST, cElsifAST, commandPos);   
+                    cElsifAST = parseCommand();
+                    Command ElsifC2 = new ElsifCommand(eElsifAST, cElsifAST, commandPos);
+                    ElsifC = new SequentialCommand(ElsifC, ElsifC2, commandPos);
+                    
                     }
-                accept(Token.ELSE);
-                Command c2AST = parseCommand();
-                ElsifC = new SequentialCommand(ElsifC, c2AST, commandPos);
-                accept(Token.END);
-                finish(commandPos);
-                commandAST = new IfCommand(eAST, c1AST, ElsifC, commandPos);
+                    accept(Token.ELSE);
+                    Command c2AST = parseCommand();
+                    ElsifC = new SequentialCommand(ElsifC, c2AST, commandPos);
+                    accept(Token.END);
+                    finish(commandPos);
+                    commandAST = new IfCommand(eAST, c1AST, ElsifC, commandPos);
+                    break;
             }
-            break;
             case Token.ELSE:
             {
                 accept(Token.ELSE);

@@ -131,10 +131,9 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
-      
     return null;
   }
-
+    static int jumpAddrGb;
   public Object visitIfCommand(IfCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpifAddr, jumpAddr;
@@ -148,9 +147,32 @@ public final class Encoder implements Visitor {
     patch(jumpifAddr, nextInstrAddr);
     ast.C2.visit(this, frame);
     patch(jumpAddr, nextInstrAddr);
+    patch(jumpAddrGb, nextInstrAddr);
     return null;
   }
   
+  
+  @Override
+    public Object visitElsifCommand(ElsifCommand ast, Object o) {
+        Frame frame = (Frame) o;
+        int jumpifAddr;
+         
+        Integer valSize = (Integer) ast.E.visit(this, frame);
+        jumpifAddr = nextInstrAddr;
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0);
+        
+        ast.C.visit(this, frame);
+        jumpAddrGb = nextInstrAddr;
+        System.out.println(jumpAddrGb);
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+      
+        patch(jumpifAddr, nextInstrAddr);
+       
+        
+     
+
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
   
   
 
@@ -1021,10 +1043,7 @@ public final class Encoder implements Visitor {
     }
   }
 
-    @Override
-    public Object visitElsifCommand(ElsifCommand ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
@@ -1058,7 +1077,8 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -1072,13 +1092,35 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitRepeatUntilCommand(RepeatUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
+        Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+        jumpAddr = nextInstrAddr;
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        loopAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        patch(jumpAddr, nextInstrAddr);
+        ast.E.visit(this, frame);
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+        ast.C2.visit(this, frame);
+        patch(jumpAddr, nextInstrAddr); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
-    public Object visitRepeatWhileCommand(RepeatWhileCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
+        Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+        jumpAddr = nextInstrAddr;
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        loopAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        patch(jumpAddr, nextInstrAddr);
+        ast.E.visit(this, frame);
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+        ast.C2.visit(this, frame);
+        patch(jumpAddr, nextInstrAddr);//To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
