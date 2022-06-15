@@ -777,8 +777,11 @@ public class TableVisitor implements Visitor {
     }
 
     @Override
-    public Object visitSequentialCase(SequentialCase aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitSequentialCase(SequentialCase ast, Object o) {
+        ast.Cas1.visit(this, null);
+        ast.Cas2.visit(this, null);
+      
+        return(null);
     }
 
     @Override

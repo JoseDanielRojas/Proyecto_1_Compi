@@ -110,6 +110,7 @@ import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhenCase;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import java.util.ArrayList;
 
 public final class Encoder implements Visitor {
 
@@ -133,7 +134,7 @@ public final class Encoder implements Visitor {
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
     return null;
   }
-    static int jumpAddrGb;
+  static ArrayList <Integer> jumpAddrGb=new ArrayList();
   public Object visitIfCommand(IfCommand ast, Object o) {
     Frame frame = (Frame) o;
     int jumpifAddr, jumpAddr;
@@ -147,7 +148,10 @@ public final class Encoder implements Visitor {
     patch(jumpifAddr, nextInstrAddr);
     ast.C2.visit(this, frame);
     patch(jumpAddr, nextInstrAddr);
-    patch(jumpAddrGb, nextInstrAddr);
+      for (int i = 0; i < jumpAddrGb.size(); i++) {
+          patch(jumpAddrGb.get(i), nextInstrAddr);     
+      }
+    
     return null;
   }
   
@@ -162,8 +166,8 @@ public final class Encoder implements Visitor {
         emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0);
         
         ast.C.visit(this, frame);
-        jumpAddrGb = nextInstrAddr;
-        System.out.println(jumpAddrGb);
+        jumpAddrGb.add(nextInstrAddr);
+       // jumpAddrGb = nextInstrAddr;
         emit(Machine.JUMPop, 0, Machine.CBr, 0);
       
         patch(jumpifAddr, nextInstrAddr);
@@ -1150,18 +1154,29 @@ public final class Encoder implements Visitor {
     public Object visitWhenCase(WhenCase ast, Object o) {
          Frame frame = (Frame) o;
          
-         int jumpifAddr, jumpAddr;
+         int jumpifAddr1,jumpifAddr2, jumpAddr;
          
          ChExpr.visit(this,frame); 
          ast.CaseL.visit(this, frame);
          emit(Machine.CALLop, Machine.SBr, Machine.PBr,
              Machine.gtDisplacement);
-         jumpifAddr = nextInstrAddr;
+         jumpifAddr1 = nextInstrAddr;
          emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+         
+         
+         ChExpr.visit(this,frame); 
+         ast.CaseL.visit(this, frame);
+         
+         emit(Machine.CALLop, Machine.SBr, Machine.PBr,
+             Machine.ltDisplacement);
+         jumpifAddr2= nextInstrAddr;
+         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+         
          ast.C.visit(this, frame);
          jumpAddr = nextInstrAddr;
         // emit(Machine.JUMPop, 0, Machine.CBr, 0);
-         patch(jumpifAddr, nextInstrAddr);
+         patch(jumpifAddr1, nextInstrAddr);
+          patch(jumpifAddr2, nextInstrAddr);
         
          //ast.CaseL2.visit(this, frame);
 
