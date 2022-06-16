@@ -1155,6 +1155,7 @@ public final class Encoder implements Visitor {
          Frame frame = (Frame) o;
          
          int jumpifAddr1,jumpifAddr2, jumpAddr;
+         int jumpifAddr3,jumpifAddr4;
          
          ChExpr.visit(this,frame); 
          ast.CaseL.visit(this, frame);
@@ -1173,11 +1174,38 @@ public final class Encoder implements Visitor {
          emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
          
          ast.C.visit(this, frame);
-        
+         
          //jumpAddr = nextInstrAddr;
          emit(Machine.JUMPop, 0, Machine.CBr, JumpFDCGlobal);
          patch(jumpifAddr1, nextInstrAddr);
           patch(jumpifAddr2, nextInstrAddr);
+         if(ast.CaseL2.visit(this, frame)!=null){//rango
+             ChExpr.visit(this,frame); //Dup
+             ast.CaseL.visit(this, frame);
+             
+             emit(Machine.CALLop, Machine.SBr, Machine.PBr,
+             Machine.ltDisplacement);
+             jumpifAddr3 = nextInstrAddr;
+             emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+             
+             ChExpr.visit(this,frame); //Dup
+             ast.CaseL2.visit(this, frame);
+             
+             emit(Machine.CALLop, Machine.SBr, Machine.PBr,
+             Machine.gtDisplacement);
+             jumpifAddr4 = nextInstrAddr;
+             emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
+             
+              ast.C.visit(this, frame);
+         
+             emit(Machine.JUMPop, 0, Machine.CBr, JumpFDCGlobal);
+             
+             patch(jumpifAddr3, nextInstrAddr);
+             patch(jumpifAddr4, nextInstrAddr);
+             
+         }
+        
+         
         
          //ast.CaseL2.visit(this, frame);
 

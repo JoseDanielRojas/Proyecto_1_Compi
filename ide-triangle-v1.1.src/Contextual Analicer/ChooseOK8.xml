@@ -1,0 +1,93 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ChooseCommand>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value="6"/>
+</IntegerExpression>
+<Operator value="*"/>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value="2"/>
+</IntegerExpression>
+<Operator value="+"/>
+<IntegerExpression>
+<IntegerLiteral value="2"/>
+</IntegerExpression>
+</BinaryExpression>
+</BinaryExpression>
+<SequentialCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="2"/>
+</IntegerCase >
+<IntegerCase>
+<IntegerLiteral value="13"/>
+</IntegerCase >
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="123"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</WhenCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="24"/>
+</IntegerCase >
+<EmptyCase/>
+<ChooseCommand>
+<BinaryExpression>
+<IntegerExpression>
+<IntegerLiteral value="2"/>
+</IntegerExpression>
+<Operator value="+"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</BinaryExpression>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="3"/>
+</IntegerCase >
+<EmptyCase/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="243"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</WhenCase>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="242"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ChooseCommand>
+</WhenCase>
+</SequentialCase>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value="'E'"/>
+<CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ChooseCommand>
+</Program>
