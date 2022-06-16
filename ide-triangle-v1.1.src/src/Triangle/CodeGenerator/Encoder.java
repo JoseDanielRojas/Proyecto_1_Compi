@@ -1155,8 +1155,9 @@ public final class Encoder implements Visitor {
          emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, 0);
          
          ast.C.visit(this, frame);
-         jumpAddr = nextInstrAddr;
-        // emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        
+         //jumpAddr = nextInstrAddr;
+         emit(Machine.JUMPop, 0, Machine.CBr, JumpFDCGlobal);
          patch(jumpifAddr1, nextInstrAddr);
           patch(jumpifAddr2, nextInstrAddr);
         
@@ -1164,20 +1165,29 @@ public final class Encoder implements Visitor {
 
         return null;
     }
-
+    static int JumpFDCGlobal; 
     @Override
     public Object visitChooseCommand(ChooseCommand ast, Object o) {
         Frame frame = (Frame) o;
       //  Integer valSize = (Integer) ast..visit(this, null);
-        int jumpAddr;
+        int jumpVerCasos,jumpFDC;
         ChExpr=ast.E;
         ast.E.visit(this, frame);
-
-        //jumpAddr = nextInstrAddr;
-        //emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        
+        
+        
+        jumpVerCasos = nextInstrAddr;
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        jumpFDC= nextInstrAddr;
+        JumpFDCGlobal=nextInstrAddr;
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        patch(jumpVerCasos, nextInstrAddr);
         ast.Cas.visit(this, frame);
         
+       
         ast.C.visit(this, frame);
+        patch(jumpFDC, nextInstrAddr);
+        emit(Machine.POPop, 0, 0, 1);
         return null;
     }
 

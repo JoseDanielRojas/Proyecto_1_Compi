@@ -1,4 +1,4 @@
-choose 3 from
+choose 2 from
   
   when 2 then putint (3)
 

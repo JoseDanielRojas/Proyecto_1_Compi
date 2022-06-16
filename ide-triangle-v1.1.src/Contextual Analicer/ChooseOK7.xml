@@ -2,14 +2,16 @@
 <Program>
 <ChooseCommand>
 <IntegerExpression>
-<IntegerLiteral value="2"/>
+<IntegerLiteral value="7"/>
 </IntegerExpression>
 <SequentialCase>
 <WhenCase>
 <IntegerCase>
-<IntegerLiteral value="3"/>
+<IntegerLiteral value="0"/>
 </IntegerCase >
-<EmptyCase/>
+<IntegerCase>
+<IntegerLiteral value="8"/>
+</IntegerCase >
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
@@ -23,7 +25,7 @@
 </WhenCase>
 <WhenCase>
 <IntegerCase>
-<IntegerLiteral value="2"/>
+<IntegerLiteral value="17"/>
 </IntegerCase >
 <EmptyCase/>
 <CallCommand>
@@ -38,6 +40,15 @@
 </CallCommand>
 </WhenCase>
 </SequentialCase>
-<EmptyCommand/>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value="'E'"/>
+<CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
 </ChooseCommand>
 </Program>

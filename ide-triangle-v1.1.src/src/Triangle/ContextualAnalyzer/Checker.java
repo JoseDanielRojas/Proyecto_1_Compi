@@ -1175,7 +1175,7 @@ public final class Checker implements Visitor {
         }
         typeSelector=eType;
         ast.Cas.visit(this,null);
-       
+        ast.C.visit(this, null);
         
         return null;
    }
