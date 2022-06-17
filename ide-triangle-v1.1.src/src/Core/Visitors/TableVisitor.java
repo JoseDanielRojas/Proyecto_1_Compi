@@ -37,6 +37,7 @@ import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilCommand;
 import Triangle.AbstractSyntaxTrees.ForVarDecl;
 import Triangle.AbstractSyntaxTrees.ForWhileCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileExtraCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -799,6 +800,14 @@ public class TableVisitor implements Visitor {
     @Override
     public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
+       ast.E.visit(this, null);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+         return (null); //To change body of generated methods, choose Tools | Templates.
     }
 
     

@@ -402,6 +402,7 @@ public final class Encoder implements Visitor {
     extraSize = ((Integer) ast.T.visit(this, null)).intValue();
     emit(Machine.PUSHop, 0, 0, extraSize);
     ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+    
     writeTableDetails(ast);
     return new Integer(extraSize);
   }
@@ -1056,12 +1057,14 @@ public final class Encoder implements Visitor {
 // YA esta talvez
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-         Frame frame = (Frame) o;
-    int extraSize;
-
+        Frame frame = (Frame) o;
+        int extraSize;
     int valSize = ((Integer) ast.E.visit(this, frame));
       ast.entity = new UnknownValue(valSize, frame.level, frame.size);
       extraSize = valSize;
+      
+    emit(Machine.PUSHop, 0, 0, extraSize);
+    ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
     writeTableDetails(ast);
     return extraSize;
     }
@@ -1083,12 +1086,34 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return null;//To change body of generated methods, choose Tools | Templates.
     }
-
+    static int InAddr,extraSize;
     @Override
-    public Object visitForWhileCommand(ForWhileCommand aThis, Object o) {
+    public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
+        Frame frame = (Frame) o;
+         int jumpAddr,forJump;
+         InAddr = nextInstrAddr;
+        ast.VarDe.visit(this, frame);
+        forJump = nextInstrAddr;
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
         
+        ast.E.visit(this, frame);
+        
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
+        jumpAddr = nextInstrAddr;
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, jumpAddr);
+        
+        
+       
+        ast.W.visit(this, frame);
+         emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        emit(Machine.JUMPop,  0, Machine.CBr,forJump );
+        patch(jumpAddr, nextInstrAddr);
+        emit(Machine.POPop,0,0,extraSize);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1149,19 +1174,23 @@ public final class Encoder implements Visitor {
         ast.E.visit(this, frame);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
         ast.C2.visit(this, frame);
+       
         return null;
     }
 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
         Frame frame = (Frame) o;
-    int extraSize;
-
-    int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
-      ast.entity = new UnknownValue(valSize, frame.level, frame.size);
-      extraSize = valSize;
-    writeTableDetails(ast);
-    return new Integer(extraSize);
+        int valSize = ((Integer) ast.E.visit(this, frame));
+        ast.entity = new UnknownValue(valSize, frame.level, frame.size);
+        extraSize = valSize;
+        emit(Machine.PUSHop, 0, 0, extraSize);
+        ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+        writeTableDetails(ast);
+        ast.E.visit(this, frame);
+        
+        
+        return extraSize;
     }
     static Expression ChExpr; 
     @Override
@@ -1303,6 +1332,31 @@ public final class Encoder implements Visitor {
     @Override
     public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
+         Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+
+        jumpAddr = nextInstrAddr;
+        
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        
+        loopAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        patch(jumpAddr, nextInstrAddr);
+        
+        ast.E.visit(this, frame);
+        
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+        ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
+        
+         return null;
     }
 
    

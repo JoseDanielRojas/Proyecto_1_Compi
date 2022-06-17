@@ -3,24 +3,31 @@
 <LetCommand>
 <VarValueDeclaration>
 <IntegerExpression>
-<IntegerLiteral value="8"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 </VarValueDeclaration>
-<LetCommand>
-<SequentialDeclaration>
-<ConstDeclaration>
-<Identifier value="b"/>
+<ForWhileCommand>
+<ForVarDecl>
+<Identifier value="i"/>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="a"/>
+<Identifier value="k"/>
 </SimpleVname>
 </VnameExpression>
-</ConstDeclaration>
-<VarValueDeclaration>
+</ForVarDecl>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
+<RepeatWhileCommand>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="k"/>
+</SimpleVname>
 <BinaryExpression>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="b"/>
+<Identifier value="k"/>
 </SimpleVname>
 </VnameExpression>
 <Operator value="+"/>
@@ -28,20 +35,33 @@
 <IntegerLiteral value="1"/>
 </IntegerExpression>
 </BinaryExpression>
-</VarValueDeclaration>
-</SequentialDeclaration>
+</AssignCommand>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="a"/>
+<Identifier value="i"/>
 </SimpleVname>
 </VnameExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-</LetCommand>
+</SequentialCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value="&lt;"/>
+<IntegerExpression>
+<IntegerLiteral value="3"/>
+</IntegerExpression>
+</BinaryExpression>
+<EmptyCommand/>
+</RepeatWhileCommand>
+</ForWhileCommand>
 </LetCommand>
 </Program>

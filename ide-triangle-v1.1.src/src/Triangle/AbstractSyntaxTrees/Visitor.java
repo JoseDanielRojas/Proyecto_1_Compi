@@ -149,6 +149,8 @@ public interface Visitor {
 
     public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o);
 
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand aThis, Object o);
+
    
 
 

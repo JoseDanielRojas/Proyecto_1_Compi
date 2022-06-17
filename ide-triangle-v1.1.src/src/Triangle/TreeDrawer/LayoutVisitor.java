@@ -49,6 +49,7 @@ import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilCommand;
 import Triangle.AbstractSyntaxTrees.ForVarDecl;
 import Triangle.AbstractSyntaxTrees.ForWhileCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileExtraCommand;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -683,6 +684,11 @@ public class LayoutVisitor implements Visitor {
     @Override
     public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
         return(layoutQuaternary("Recursice Func Declaration",ast.I,ast.FPS,ast.T,ast.E));//To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
+        return(layoutTernary("ForWhileDo Command", ast.E, ast.C1,ast.C2)); //To change body of generated methods, choose Tools | Templates.
     }
 
   

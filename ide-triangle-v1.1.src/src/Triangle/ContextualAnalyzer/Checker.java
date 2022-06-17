@@ -1332,6 +1332,16 @@ public final class Checker implements Visitor {
         
     return null;
   } //To change body of generated methods, choose Tools | Templates.
+
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
+          TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+        if (! eType.equals(StdEnvironment.booleanType))
+            reporter.reportError("Boolean expression expected here", "", ast.E.position);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
     
 
   

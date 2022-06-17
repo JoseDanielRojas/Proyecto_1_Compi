@@ -760,6 +760,16 @@ public class XmlWriterVisitor implements Visitor {
         return null;
     }
 
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand aThis, Object o) {
+         write("<RepeatWhileCommand>");
+        aThis.C1.visit(this,null);
+        aThis.E.visit(this,null);
+        aThis.C2.visit(this,null);
+        write("</RepeatWhileCommand>"); 
+        return null;//To change body of generated methods, choose Tools | Templates.
+    }
+
    
 
 

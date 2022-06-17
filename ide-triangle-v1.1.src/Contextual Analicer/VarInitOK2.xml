@@ -2,46 +2,33 @@
 <Program>
 <LetCommand>
 <VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="8"/>
-</IntegerExpression>
-</VarValueDeclaration>
-<LetCommand>
-<SequentialDeclaration>
-<ConstDeclaration>
-<Identifier value="b"/>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VnameExpression>
-</ConstDeclaration>
-<VarValueDeclaration>
 <BinaryExpression>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="b"/>
-</SimpleVname>
-</VnameExpression>
-<Operator value="+"/>
+<BinaryExpression>
 <IntegerExpression>
 <IntegerLiteral value="1"/>
 </IntegerExpression>
+<Operator value="*"/>
+<IntegerExpression>
+<IntegerLiteral value="3"/>
+</IntegerExpression>
+</BinaryExpression>
+<Operator value="+"/>
+<IntegerExpression>
+<IntegerLiteral value="7"/>
+</IntegerExpression>
 </BinaryExpression>
 </VarValueDeclaration>
-</SequentialDeclaration>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="a"/>
+<Identifier value="x"/>
 </SimpleVname>
 </VnameExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-</LetCommand>
 </LetCommand>
 </Program>
