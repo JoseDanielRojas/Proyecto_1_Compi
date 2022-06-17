@@ -661,7 +661,9 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ast.E.visit(this, null);
+         ast.I.visit(this, null);
+        return (null); 
     }
 
     @Override

@@ -1,0 +1,41 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<SequentialDeclaration>
+<VarValueDeclaration>
+<CharacterExpression>
+<CharacterLiteral value="'n'"/>
+<CharacterExpression>
+</VarValueDeclaration>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="5"/>
+</IntegerExpression>
+</VarValueDeclaration>
+</SequentialDeclaration>
+<SequentialCommand>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="n"/>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="5"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</SequentialCommand>
+</LetCommand>
+</Program>

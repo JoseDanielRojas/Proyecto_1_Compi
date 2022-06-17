@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<VarDeclaration>
+<Identifier value="a"/>
+<BoolTypeDenoter/>
+</VarDeclaration>
+<EmptyCommand/>
+</LetCommand>
+</Program>

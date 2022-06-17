@@ -1053,10 +1053,17 @@ public final class Encoder implements Visitor {
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+// YA esta talvez
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Frame frame = (Frame) o;
+    int extraSize;
+
+    int valSize = ((Integer) ast.E.visit(this, frame));
+      ast.entity = new UnknownValue(valSize, frame.level, frame.size);
+      extraSize = valSize;
+    writeTableDetails(ast);
+    return extraSize;
     }
 
     @Override
@@ -1071,7 +1078,7 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitForDoCommand(ForDoCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -1146,8 +1153,15 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitForVarDecl(ForVarDecl aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitForVarDecl(ForVarDecl ast, Object o) {
+        Frame frame = (Frame) o;
+    int extraSize;
+
+    int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
+      ast.entity = new UnknownValue(valSize, frame.level, frame.size);
+      extraSize = valSize;
+    writeTableDetails(ast);
+    return new Integer(extraSize);
     }
     static Expression ChExpr; 
     @Override
