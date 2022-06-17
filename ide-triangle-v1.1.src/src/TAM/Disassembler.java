@@ -324,6 +324,7 @@ public class Disassembler {
 
       case Machine.HALTop:
         System.out.print ("HALT  ");
+        
     }
   }
 

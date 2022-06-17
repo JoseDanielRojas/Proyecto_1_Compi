@@ -1230,8 +1230,11 @@ public final class Encoder implements Visitor {
         patch(jumpVerCasos, nextInstrAddr);
         ast.Cas.visit(this, frame);
         
-       
+        
         ast.C.visit(this, frame);
+        if(ast.C.visit(this, frame)==null){
+            emit(Machine.HALTop,0,0,1);
+        }
         patch(jumpFDC, nextInstrAddr);
         emit(Machine.POPop, 0, 0, 1);
         return null;

@@ -44,7 +44,7 @@ public class Interpreter {
   final static int
     running = 0, halted = 1, failedDataStoreFull = 2, failedInvalidCodeAddress = 3,
     failedInvalidInstruction = 4, failedOverflow = 5, failedZeroDivide = 6,
-    failedIOError = 7;
+    failedIOError = 7,CASEERROR=8;
 
   static long
     accumulator;
@@ -206,6 +206,10 @@ public class Interpreter {
       case failedIOError:
         System.out.println("Program has failed due to an IO error.");
         break;
+      case CASEERROR:
+          System.out.println("HALT Unmached Case");
+          
+          break;
     }
     if (status != halted)
       dump();
@@ -568,7 +572,11 @@ public class Interpreter {
             CP = CP + 1;
           break;
         case Machine.HALTop:
-          status = halted;
+          if(d==1){
+              status=CASEERROR;
+          }else{
+            status = halted;
+          }
           break;
       }
       if ((CP < CB) || (CP >= CT))
