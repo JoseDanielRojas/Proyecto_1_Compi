@@ -1125,24 +1125,30 @@ public final class Encoder implements Visitor {
         Frame frame = (Frame) o;
          int jumpAddr,forJump,repetir;
         // InAddr = nextInstrAddr;
-        ast.E.visit(this, frame);
+        
        
         //forJump = nextInstrAddr;
         //emit(Machine.LOADop,1,Machine.SBr,InAddr);
         
         int extraSize = ((Integer) ast.VarDe.visit(this, frame)).intValue();
         System.out.println(extraSize);
-        forJump=nextInstrAddr;
-        emit(Machine.JUMPop,  0, Machine.CBr,0 );
-        repetir=nextInstrAddr;
+        ast.E.visit(this, frame);
+       // forJump=nextInstrAddr;
+        //emit(Machine.JUMPop,  0, Machine.CBr,0 );
+       // repetir=nextInstrAddr;
        
         ast.W.visit(this, frame);
           
-        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
-        patch(forJump, nextInstrAddr);
-        emit(Machine.LOADop,2,Machine.STr,-2);
-        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.geDisplacement);
-        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+       // patch(forJump, nextInstrAddr);
+       emit(Machine.LOADop,1,Machine.SBr,InAddr);
+       // ast.E.visit(this, frame);
+      //  emit(Machine.LOADop,1,Machine.SBr,storeExp-1);
+       // emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.ltDisplacement);
+        //emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
         System.out.println();
         emit(Machine.POPop,0,0,2);
