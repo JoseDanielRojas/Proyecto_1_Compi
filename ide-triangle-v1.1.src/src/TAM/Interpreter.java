@@ -211,7 +211,7 @@ public class Interpreter {
           
           break;
     }
-    if (status != halted)
+    if (status != 30)
       dump();
   }
 

@@ -1112,7 +1112,7 @@ public final class Encoder implements Visitor {
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
         
-        emit(Machine.POPop,0,0,2);
+        emit(Machine.POPop,0,0,4);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1185,7 +1185,7 @@ public final class Encoder implements Visitor {
        // extraSize = valSize;
         emit(Machine.PUSHop, 0, 0, 1);
         ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
-//        InAddr = frame.size;
+        InAddr = frame.size;
        writeTableDetails(ast);
         ast.E.visit(this, frame);
         emit(Machine.STOREop,1,Machine.SBr,frame.size);
@@ -1347,10 +1347,10 @@ public final class Encoder implements Visitor {
         
         loopAddr = nextInstrAddr;
         ast.C1.visit(this, frame);
-        //emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        //emit(Machine.LOADLop,1,1,1);
-        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
-        //emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
         patch(jumpAddr, nextInstrAddr);
         
         ast.E.visit(this, frame);
