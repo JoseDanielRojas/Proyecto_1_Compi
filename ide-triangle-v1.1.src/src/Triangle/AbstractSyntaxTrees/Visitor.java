@@ -151,6 +151,8 @@ public interface Visitor {
 
     public Object visitForWhileExtraCommand(ForWhileExtraCommand aThis, Object o);
 
+    public Object visitForUntilExtraCommand(ForUntilExtraCommand aThis, Object o);
+
    
 
 

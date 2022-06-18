@@ -34,6 +34,7 @@ import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilExtraCommand;
 import Triangle.AbstractSyntaxTrees.ForVarDecl;
 import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileExtraCommand;
@@ -574,6 +575,11 @@ public class TreeVisitor implements Visitor {
     @Override
     public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
        return(createTernary("ForWhileDo Command", ast.E, ast.C1,ast.C2));  //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForUntilExtraCommand(ForUntilExtraCommand ast, Object o) {
+        return(createTernary("ForUntilDo Command", ast.E, ast.C1,ast.C2));
     }
 
    

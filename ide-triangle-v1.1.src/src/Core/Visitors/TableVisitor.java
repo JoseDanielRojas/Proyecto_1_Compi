@@ -35,6 +35,7 @@ import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilExtraCommand;
 import Triangle.AbstractSyntaxTrees.ForVarDecl;
 import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileExtraCommand;
@@ -805,6 +806,14 @@ public class TableVisitor implements Visitor {
     @Override
     public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
        ast.E.visit(this, null);
+         ast.C1.visit(this, null);
+         ast.C2.visit(this, null);
+         return (null); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitForUntilExtraCommand(ForUntilExtraCommand ast, Object o) {
+          ast.E.visit(this, null);
          ast.C1.visit(this, null);
          ast.C2.visit(this, null);
          return (null); //To change body of generated methods, choose Tools | Templates.

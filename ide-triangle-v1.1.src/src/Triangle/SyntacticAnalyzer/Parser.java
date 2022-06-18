@@ -48,6 +48,7 @@ import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilExtraCommand;
 import Triangle.AbstractSyntaxTrees.ForVarDecl;
 import Triangle.AbstractSyntaxTrees.ForWhileCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileExtraCommand;
@@ -655,7 +656,7 @@ public class Parser {
                  if(currentToken.kind == Token.LEAVE){
                      acceptIt();
                      Command c2AST = parseCommand();
-                     RepeatUntilCommand UntilAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
+                     ForUntilExtraCommand UntilAST = new ForUntilExtraCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
                      // hacer el ast y agregarlo al for
@@ -663,7 +664,7 @@ public class Parser {
                  }
                  else{
                      Command c2AST = new EmptyCommand(commandPos);
-                     RepeatUntilCommand UntilAST = new RepeatUntilCommand(eAST, c1AST,c2AST,commandPos);
+                     ForUntilExtraCommand UntilAST = new ForUntilExtraCommand(eAST, c1AST,c2AST,commandPos);
                      accept(Token.END);
                      finish(commandPos);
                      commandAST = new ForUntilCommand(DeAST, e2AST,UntilAST,commandPos);
