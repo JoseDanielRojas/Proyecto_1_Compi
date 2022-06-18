@@ -114,7 +114,7 @@ import java.util.ArrayList;
 
 public final class Encoder implements Visitor {
 
-
+static int InAddr;
   // Commands
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     Frame frame = (Frame) o;
@@ -1116,10 +1116,48 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
-         return null;//To change body of generated methods, choose Tools | Templates.
+    public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
+         Frame frame = (Frame) o;
+         int jumpAddr,forJump,repetir;
+        int extraSize = ((Integer) ast.VarDe.visit(this, frame));
+        System.out.println(extraSize);
+        ast.E.visit(this, frame);
+        ast.U.visit(this, frame);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+       emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        System.out.println();
+        emit(Machine.POPop,0,0,2);
+        return null; //To change body of generated methods, choose Tools | Templates.
     }
-    static int InAddr;
+    
+    @Override
+    public Object visitForUntilExtraCommand(ForUntilExtraCommand ast, Object o) {
+         Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+
+        jumpAddr = nextInstrAddr;
+        
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        
+        loopAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        patch(jumpAddr, nextInstrAddr);
+        
+        ast.E.visit(this, frame);
+        
+        emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+        ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
+        
+         return null;
+    }
+    
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1400,10 +1438,7 @@ public final class Encoder implements Visitor {
          return null;
     }
 
-    @Override
-    public Object visitForUntilExtraCommand(ForUntilExtraCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
    
 

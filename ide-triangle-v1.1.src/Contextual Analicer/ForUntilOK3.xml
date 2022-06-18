@@ -1,52 +1,28 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
-<LetCommand>
-<VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
-</VarValueDeclaration>
 <ForUntilCommand>
 <ForVarDecl>
 <Identifier value="i"/>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="k"/>
-</SimpleVname>
-</VnameExpression>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
 </ForVarDecl>
 <IntegerExpression>
 <IntegerLiteral value="10"/>
 </IntegerExpression>
 <ForUntilCommand>
-<SequentialCommand>
-<AssignCommand>
-<SimpleVname>
-<Identifier value="k"/>
-</SimpleVname>
-<BinaryExpression>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="k"/>
-</SimpleVname>
-</VnameExpression>
-<Operator value="+"/>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
-</BinaryExpression>
-</AssignCommand>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-</SequentialCommand>
 <BinaryExpression>
 <VnameExpression>
 <SimpleVname>
@@ -61,5 +37,4 @@
 <EmptyCommand/>
 </ForUntilCommand>
 </ForUntilCommand>
-</LetCommand>
 </Program>

@@ -3,21 +3,21 @@
 <LetCommand>
 <VarValueDeclaration>
 <IntegerExpression>
-<IntegerLiteral value="1"/>
+<IntegerLiteral value="10"/>
 </IntegerExpression>
 </VarValueDeclaration>
 <ForUntilCommand>
 <ForVarDecl>
 <Identifier value="i"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ForVarDecl>
 <VnameExpression>
 <SimpleVname>
 <Identifier value="k"/>
 </SimpleVname>
 </VnameExpression>
-</ForVarDecl>
-<IntegerExpression>
-<IntegerLiteral value="10"/>
-</IntegerExpression>
 <ForUntilCommand>
 <SequentialCommand>
 <AssignCommand>
