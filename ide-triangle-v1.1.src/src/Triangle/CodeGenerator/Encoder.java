@@ -1080,7 +1080,38 @@ public final class Encoder implements Visitor {
     }
 
     @Override
-    public Object visitForDoCommand(ForDoCommand aThis, Object o) {
+    public Object visitForDoCommand(ForDoCommand ast, Object o) {
+         Frame frame = (Frame) o;
+         int jumpAddr,forJump,repetir;
+        
+       
+        //forJump = nextInstrAddr;
+        //emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        int exprAddr = nextInstrAddr;
+        ast.E.visit(this, frame);
+        ast.VarDe.visit(this, frame);
+        
+
+        forJump=nextInstrAddr;
+        emit(Machine.JUMPop,  0, Machine.CBr,0 );
+        repetir=nextInstrAddr;
+       
+        ast.C1.visit(this, frame);
+          
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        patch(forJump, nextInstrAddr);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+       // ast.E.visit(this, frame);
+        emit(Machine.LOADop,1,Machine.SBr,exprAddr);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
+        //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
+        System.out.println();
+        ast.C2.visit(this, frame);
+        emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1088,7 +1119,7 @@ public final class Encoder implements Visitor {
     public Object visitForUntilCommand(ForUntilCommand aThis, Object o) {
          return null;//To change body of generated methods, choose Tools | Templates.
     }
-    static int InAddr,extraSize;
+    static int InAddr;
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1098,21 +1129,23 @@ public final class Encoder implements Visitor {
        
         //forJump = nextInstrAddr;
         //emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        ast.VarDe.visit(this, frame);
+        
+        int extraSize = ((Integer) ast.VarDe.visit(this, frame)).intValue();
+        System.out.println(extraSize);
         forJump=nextInstrAddr;
         emit(Machine.JUMPop,  0, Machine.CBr,0 );
         repetir=nextInstrAddr;
        
         ast.W.visit(this, frame);
-        
+          
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
         patch(forJump, nextInstrAddr);
         emit(Machine.LOADop,2,Machine.STr,-2);
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.geDisplacement);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
-        
-        emit(Machine.POPop,0,0,4);
+        System.out.println();
+        emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1180,19 +1213,19 @@ public final class Encoder implements Visitor {
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
         Frame frame = (Frame) o;
-       // int valSize = ((Integer) ast.E.visit(this, frame));
-       // ast.entity = new UnknownValue(valSize, frame.level, frame.size);
-       // extraSize = valSize;
+        
+
         emit(Machine.PUSHop, 0, 0, 1);
         ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
         InAddr = frame.size;
        writeTableDetails(ast);
-        ast.E.visit(this, frame);
+        int valSize = ((Integer) ast.E.visit(this, frame));
+        
         emit(Machine.STOREop,1,Machine.SBr,frame.size);
         
-        
-       // return extraSize;
-       return 1;
+        System.out.println(valSize);
+        return valSize;
+    
     }
     static Expression ChExpr; 
     @Override

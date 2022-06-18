@@ -3,21 +3,21 @@
 <LetCommand>
 <VarValueDeclaration>
 <IntegerExpression>
-<IntegerLiteral value="1"/>
+<IntegerLiteral value="10"/>
 </IntegerExpression>
 </VarValueDeclaration>
 <ForDoCommand>
 <ForVarDecl>
 <Identifier value="i"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ForVarDecl>
 <VnameExpression>
 <SimpleVname>
 <Identifier value="k"/>
 </SimpleVname>
 </VnameExpression>
-</ForVarDecl>
-<IntegerExpression>
-<IntegerLiteral value="10"/>
-</IntegerExpression>
 <SequentialCommand>
 <AssignCommand>
 <SimpleVname>
@@ -39,11 +39,9 @@
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="i"/>
-</SimpleVname>
-</VnameExpression>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>

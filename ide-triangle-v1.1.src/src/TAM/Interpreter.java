@@ -176,6 +176,7 @@ public class Interpreter {
       }
     }
     System.out.println ("");
+    System.out.println(ST+"-"+SB+"_"+HT+"-"+HB+"-"+data[SB]);
   }
 
   static void showStatus () {

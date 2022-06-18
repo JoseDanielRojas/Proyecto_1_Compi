@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ForDoCommand>
+<ForVarDecl>
+<Identifier value="i"/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ForVarDecl>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+<EmptyCommand/>
+</ForDoCommand>
+</Program>

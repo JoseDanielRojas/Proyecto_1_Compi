@@ -1,0 +1,64 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<ChooseCommand>
+<IntegerExpression>
+<IntegerLiteral value="0"/>
+</IntegerExpression>
+<SequentialCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="3"/>
+</IntegerCase >
+<EmptyCase/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="3"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</WhenCase>
+<WhenCase>
+<IntegerCase>
+<IntegerLiteral value="4"/>
+</IntegerCase >
+<EmptyCase/>
+<ChooseCommand>
+<CharacterExpression>
+<CharacterLiteral value="'1'"/>
+<CharacterExpression>
+<WhenCase>
+<CharacterCase>
+<CharacterLiteral value="'1'"/>
+</CharacterCase>
+<EmptyCase/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</WhenCase>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="2"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ChooseCommand>
+</WhenCase>
+</SequentialCase>
+<EmptyCommand/>
+</ChooseCommand>
+</Program>
