@@ -1078,7 +1078,7 @@ public final class Encoder implements Visitor {
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    static int storeExp;
     @Override
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1087,10 +1087,10 @@ public final class Encoder implements Visitor {
        
         //forJump = nextInstrAddr;
         //emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        int exprAddr = nextInstrAddr;
-        ast.E.visit(this, frame);
-        ast.VarDe.visit(this, frame);
         
+        ast.VarDe.visit(this, frame);
+       
+        ast.E.visit(this, frame);
 
         forJump=nextInstrAddr;
         emit(Machine.JUMPop,  0, Machine.CBr,0 );
@@ -1105,13 +1105,13 @@ public final class Encoder implements Visitor {
         patch(forJump, nextInstrAddr);
         emit(Machine.LOADop,1,Machine.SBr,InAddr);
        // ast.E.visit(this, frame);
-        emit(Machine.LOADop,1,Machine.SBr,exprAddr);
+        emit(Machine.LOADop,1,Machine.SBr,storeExp-1);
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
         System.out.println();
         ast.C2.visit(this, frame);
-        emit(Machine.POPop,0,0,2);
+        emit(Machine.POPop,0,0,3);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -1220,7 +1220,7 @@ public final class Encoder implements Visitor {
         InAddr = frame.size;
        writeTableDetails(ast);
         int valSize = ((Integer) ast.E.visit(this, frame));
-        
+        storeExp=nextInstrAddr;
         emit(Machine.STOREop,1,Machine.SBr,frame.size);
         
         System.out.println(valSize);
