@@ -1,11 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
-<LetCommand>
-<VarValueDeclaration>
-<IntegerExpression>
-<IntegerLiteral value="10"/>
-</IntegerExpression>
-</VarValueDeclaration>
 <ForWhileCommand>
 <ForVarDecl>
 <Identifier value="i"/>
@@ -13,19 +7,19 @@
 <IntegerLiteral value="1"/>
 </IntegerExpression>
 </ForVarDecl>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="k"/>
-</SimpleVname>
-</VnameExpression>
+<IntegerExpression>
+<IntegerLiteral value="10"/>
+</IntegerExpression>
 <RepeatWhileCommand>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
 <ConstActualParameter>
-<IntegerExpression>
-<IntegerLiteral value="1"/>
-</IntegerExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
@@ -40,8 +34,18 @@
 <IntegerLiteral value="3"/>
 </IntegerExpression>
 </BinaryExpression>
-<EmptyCommand/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="i"/>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
 </RepeatWhileCommand>
 </ForWhileCommand>
-</LetCommand>
 </Program>

@@ -29,7 +29,7 @@
 <Identifier value="i"/>
 </SimpleVname>
 </VnameExpression>
-<Operator value=">"/>
+<Operator value="&lt;"/>
 <IntegerExpression>
 <IntegerLiteral value="3"/>
 </IntegerExpression>

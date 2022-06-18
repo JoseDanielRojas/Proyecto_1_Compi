@@ -1,12 +1,14 @@
 let
 
-  var k := 1
+  var k := 10
 
 in
-	putint(k);
-  for i from k .. 10 while i < 3 do ! determinar que k se evalÃºa una sola vez al inicio del repeat for
 
-    k := k + 1  ! debe imprimir 2 unos
+  for i from 1 .. k while i < 3 do ! determinar que k se evalúa una sola vez
+
+  
+
+    putint (1) ! debe imprimir 2 unos
 
   end
 

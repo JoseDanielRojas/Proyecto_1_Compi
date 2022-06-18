@@ -1,0 +1,9 @@
+for i from 1 .. 10 while i < 3 do
+
+    putint (i) ! debe imprimir del 1 al 2
+
+leave
+
+    putint (i) ! debe imprimir 3
+
+end
