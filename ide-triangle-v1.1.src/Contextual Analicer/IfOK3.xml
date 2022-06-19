@@ -1,21 +1,11 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <LetCommand>
-<VarDeclaration>
-<Identifier value="a"/>
-<IntTypeDenoter/>
-</VarDeclaration>
-<SequentialCommand>
-<CallCommand>
-<Identifier value="getint"/>
-<SingleActualParameterSequence>
-<VarActualParameter>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VarActualParameter>
-</SingleActualParameterSequence>
-</CallCommand>
+<VarValueDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="5"/>
+</IntegerExpression>
+</VarValueDeclaration>
 <IfCommand>
 <BinaryExpression>
 <VnameExpression>
@@ -23,9 +13,9 @@
 <Identifier value="a"/>
 </SimpleVname>
 </VnameExpression>
-<Operator value=">"/>
+<Operator value="&lt;"/>
 <IntegerExpression>
-<IntegerLiteral value="2"/>
+<IntegerLiteral value="3"/>
 </IntegerExpression>
 </BinaryExpression>
 <CallCommand>
@@ -38,7 +28,6 @@
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-<SequentialCommand>
 <SequentialCommand>
 <ElisifCommand>
 <BinaryExpression>
@@ -63,30 +52,6 @@
 </SingleActualParameterSequence>
 </CallCommand>
 </ElisifCommand>
-<ElisifCommand>
-<BinaryExpression>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="a"/>
-</SimpleVname>
-</VnameExpression>
-<Operator value="="/>
-<IntegerExpression>
-<IntegerLiteral value="0"/>
-</IntegerExpression>
-</BinaryExpression>
-<CallCommand>
-<Identifier value="put"/>
-<SingleActualParameterSequence>
-<ConstActualParameter>
-<CharacterExpression>
-<CharacterLiteral value="'0'"/>
-<CharacterExpression>
-</ConstActualParameter>
-</SingleActualParameterSequence>
-</CallCommand>
-</ElisifCommand>
-</SequentialCommand>
 <CallCommand>
 <Identifier value="put"/>
 <SingleActualParameterSequence>
@@ -99,6 +64,5 @@
 </CallCommand>
 </SequentialCommand>
 </IfCommand>
-</SequentialCommand>
 </LetCommand>
 </Program>

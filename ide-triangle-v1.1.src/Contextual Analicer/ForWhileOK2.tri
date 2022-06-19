@@ -4,10 +4,11 @@ let
 
 in
 
-
   for i from 1 .. k while i < 3 do ! determinar que k se evalúa una sola vez
-	 putint(i); 
-     k := k + 1 ! debe imprimir 2 unos
+
+    k := k + 1 ; 
+
+    putint (1) ! debe imprimir 2 unos
 
   end
 

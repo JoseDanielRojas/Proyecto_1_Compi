@@ -1,7 +1,7 @@
-choose 6 * (2 + 2) from
+choose 1 * (2 + 2) from
   when 2 .. 13 then putint (123)
   when 24 then
-    choose 2 + 1 from
+    choose 2 - 1 from
       !no importa que se repita 3 (interseca con range 2 .. 13), pues está en choose anidado
       when 3 then putint (243) 
       else putint (242)

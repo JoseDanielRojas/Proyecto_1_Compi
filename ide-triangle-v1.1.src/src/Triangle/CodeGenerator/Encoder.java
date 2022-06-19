@@ -155,26 +155,18 @@ static int InAddr;
     return null;
   }
   
-  
+  // hecho por sebastian CAmpos
   @Override
     public Object visitElsifCommand(ElsifCommand ast, Object o) {
         Frame frame = (Frame) o;
         int jumpifAddr;
-         
         Integer valSize = (Integer) ast.E.visit(this, frame);
         jumpifAddr = nextInstrAddr;
         emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0);
-        
         ast.C.visit(this, frame);
         jumpAddrGb.add(nextInstrAddr);
-       // jumpAddrGb = nextInstrAddr;
         emit(Machine.JUMPop, 0, Machine.CBr, 0);
-      
         patch(jumpifAddr, nextInstrAddr);
-       
-        
-     
-
         return null; //To change body of generated methods, choose Tools | Templates.
     }
   
@@ -1054,19 +1046,16 @@ static int InAddr;
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-// YA esta talvez
+// Hecho por Sebastian Campos Zuñiga
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
         Frame frame = (Frame) o;
         int extraSize;
-    int valSize = ((Integer) ast.E.visit(this, frame));
-      ast.entity = new UnknownValue(valSize, frame.level, frame.size);
-      extraSize = valSize;
-      
-    emit(Machine.PUSHop, 0, 0, extraSize);
-    ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
-    writeTableDetails(ast);
-    return extraSize;
+        int valSize = ((Integer) ast.E.visit(this, frame));
+        extraSize = valSize;
+        emit(Machine.PUSHop, 0, 0, extraSize);
+        ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+        return extraSize;
     }
 
     @Override
@@ -1078,43 +1067,34 @@ static int InAddr;
     public Object visitArrayDeclarationDOBLEDOT(ArrayDeclarationDOBLEDOT ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
     static int storeExp;
     @Override
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
          Frame frame = (Frame) o;
-         int jumpAddr,forJump,repetir;
-        
-       
-        //forJump = nextInstrAddr;
-        //emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        
+         int forJump,repetir;
         ast.VarDe.visit(this, frame);
-       
         ast.E.visit(this, frame);
-
         forJump=nextInstrAddr;
         emit(Machine.JUMPop,  0, Machine.CBr,0 );
         repetir=nextInstrAddr;
-       
         ast.C1.visit(this, frame);
-          
         emit(Machine.LOADop,1,Machine.SBr,InAddr);
         emit(Machine.LOADLop,1,1,1);
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
         emit(Machine.STOREop,1,Machine.SBr,InAddr);
         patch(forJump, nextInstrAddr);
         emit(Machine.LOADop,1,Machine.SBr,InAddr);
-       // ast.E.visit(this, frame);
         emit(Machine.LOADop,1,Machine.SBr,storeExp-1);
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
-        //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
-       // System.out.println();
+
         ast.C2.visit(this, frame);
         emit(Machine.POPop,0,0,3);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
-
+ // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
     @Override
     public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1157,46 +1137,50 @@ static int InAddr;
         
          return null;
     }
-    
+    // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
          int jumpAddr,forJump,repetir;
-        // InAddr = nextInstrAddr;
-        
-       
-        //forJump = nextInstrAddr;
-        //emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        
         int extraSize = ((Integer) ast.VarDe.visit(this, frame)).intValue();
       //  System.out.println(extraSize);
         ast.E.visit(this, frame);
-       // forJump=nextInstrAddr;
-        //emit(Machine.JUMPop,  0, Machine.CBr,0 );
-       // repetir=nextInstrAddr;
-       
+        repetir=nextInstrAddr;
         ast.W.visit(this, frame);
-          
         emit(Machine.LOADop,1,Machine.SBr,InAddr);
         emit(Machine.LOADLop,1,1,1);
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
         emit(Machine.STOREop,1,Machine.SBr,InAddr);
-       // patch(forJump, nextInstrAddr);
-       emit(Machine.LOADop,1,Machine.SBr,InAddr);
-       // ast.E.visit(this, frame);
-      //  emit(Machine.LOADop,1,Machine.SBr,storeExp-1);
-       // emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.ltDisplacement);
-        //emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
-        //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
-     //   System.out.println();
+
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
+
         emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
-
+    // Hecho por Sebastian Campos Zuñiga v y Pablo César Villafuerte Umaña 
+    @Override
+    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
+         Frame frame = (Frame) o;
+        int jumpAddr, loopAddr;
+        jumpAddr = nextInstrAddr;
+        emit(Machine.JUMPop, 0, Machine.CBr, 0);
+        loopAddr = nextInstrAddr;
+        ast.C1.visit(this, frame);
+        emit(Machine.LOADop,1,Machine.SBr,InAddr);
+        emit(Machine.LOADLop,1,1,1);
+        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
+        emit(Machine.STOREop,1,Machine.SBr,InAddr);
+        patch(jumpAddr, nextInstrAddr);
+        ast.E.visit(this, frame);
+        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+        ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
+         return null;
+    }
+// Hecho por Sebastian Campos Zuñiga 
     @Override
     public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
          Frame frame = (Frame) o;
-        int jumpAddr, loopAddr;
+        int jumpAddr;
         
         jumpAddr = nextInstrAddr;
         ast.C1.visit(this, frame);
@@ -1205,22 +1189,21 @@ static int InAddr;
         ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
         return null;
     }
-
+// Hecho por Sebastian Campos Zuñiga 
     @Override
     public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
          Frame frame = (Frame) o;
-        int jumpAddr, loopAddr;
+        int jumpAddr;
         
         jumpAddr = nextInstrAddr;
         ast.C1.visit(this, frame);
         ast.E.visit(this, frame);
-        
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, jumpAddr);
         ast.C2.visit(this, frame);
         
         return null;//To change body of generated methods, choose Tools | Templates.
     }
-
+// Hecho por Sebastian Campos Zuñiga 
     @Override
     public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1236,7 +1219,7 @@ static int InAddr;
         ast.C2.visit(this, frame);
         return null;
     }
-
+// Hecho por Sebastian Campos Zuñiga 
     @Override
     public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1253,7 +1236,7 @@ static int InAddr;
        
         return null;
     }
-
+// Hecho por Sebastian Campos Zuñiga  y Pablo César Villafuerte Umaña 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
         Frame frame = (Frame) o;
@@ -1408,30 +1391,7 @@ static int InAddr;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
-         Frame frame = (Frame) o;
-        int jumpAddr, loopAddr;
-
-        jumpAddr = nextInstrAddr;
-        
-        emit(Machine.JUMPop, 0, Machine.CBr, 0);
-        
-        loopAddr = nextInstrAddr;
-        ast.C1.visit(this, frame);
-        emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        emit(Machine.LOADLop,1,1,1);
-        emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
-        emit(Machine.STOREop,1,Machine.SBr,InAddr);
-        patch(jumpAddr, nextInstrAddr);
-        
-        ast.E.visit(this, frame);
-        
-        emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
-        ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
-        
-         return null;
-    }
+    
 
     
 

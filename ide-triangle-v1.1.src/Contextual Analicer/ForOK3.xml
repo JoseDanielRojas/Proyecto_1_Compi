@@ -22,6 +22,15 @@
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-<EmptyCommand/>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="9"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
 </ForDoCommand>
 </Program>

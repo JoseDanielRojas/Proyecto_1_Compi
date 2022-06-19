@@ -1,13 +1,20 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <LetCommand>
-<VarValueDeclaration>
+<VarDeclaration>
+<Identifier value="x"/>
+<IntTypeDenoter/>
+</VarDeclaration>
+<SequentialCommand>
+<AssignCommand>
+<SimpleVname>
+<Identifier value="x"/>
+</SimpleVname>
 <IntegerExpression>
 <IntegerLiteral value="1"/>
 </IntegerExpression>
-</VarValueDeclaration>
-<SequentialCommand>
-<SequentialCommand>
+</AssignCommand>
+<RepeatDoUntilCommand>
 <SequentialCommand>
 <CallCommand>
 <Identifier value="putint"/>
@@ -21,11 +28,6 @@
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
-<CallCommand>
-<Identifier value="puteol"/>
-</EmptyActualParameterSequence>
-</CallCommand>
-</SequentialCommand>
 <AssignCommand>
 <SimpleVname>
 <Identifier value="x"/>
@@ -38,23 +40,33 @@
 </VnameExpression>
 <Operator value="+"/>
 <IntegerExpression>
-<IntegerLiteral value="21"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 </BinaryExpression>
 </AssignCommand>
 </SequentialCommand>
-<CallCommand>
-<Identifier value="putint"/>
-<SingleActualParameterSequence>
-<ConstActualParameter>
+<BinaryExpression>
 <VnameExpression>
 <SimpleVname>
 <Identifier value="x"/>
 </SimpleVname>
 </VnameExpression>
+<Operator value=">"/>
+<IntegerExpression>
+<IntegerLiteral value="5"/>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value="'U'"/>
+<CharacterExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>
 </CallCommand>
+</RepeatDoUntilCommand>
 </SequentialCommand>
 </LetCommand>
 </Program>

@@ -1,4 +1,4 @@
-choose 9 from
+choose 1 from
 
   when 0 .. 8 then putint (1) 
 

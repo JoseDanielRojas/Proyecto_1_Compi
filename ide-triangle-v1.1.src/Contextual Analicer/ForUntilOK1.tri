@@ -10,7 +10,6 @@ in
 
     putint (1) ! debe imprimir 3 unos
 
-
   end
 
 end

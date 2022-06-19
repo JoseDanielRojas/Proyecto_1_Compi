@@ -661,7 +661,7 @@ public class TableVisitor implements Visitor {
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+// hecho por sebastian campos
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
         try {
@@ -744,10 +744,9 @@ public class TableVisitor implements Visitor {
          ast.C2.visit(this, null);
          return (null);
     }
-
+// hecho por sebastian campos
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
-   
         try {
       addIdentifier(ast.I.spelling, 
               ast.E.toString(), 

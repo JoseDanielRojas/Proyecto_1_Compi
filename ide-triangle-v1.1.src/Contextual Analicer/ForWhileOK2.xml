@@ -20,18 +20,6 @@
 </VnameExpression>
 <ForWhileCommand>
 <SequentialCommand>
-<CallCommand>
-<Identifier value="putint"/>
-<SingleActualParameterSequence>
-<ConstActualParameter>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="i"/>
-</SimpleVname>
-</VnameExpression>
-</ConstActualParameter>
-</SingleActualParameterSequence>
-</CallCommand>
 <AssignCommand>
 <SimpleVname>
 <Identifier value="k"/>
@@ -48,6 +36,16 @@
 </IntegerExpression>
 </BinaryExpression>
 </AssignCommand>
+<CallCommand>
+<Identifier value="putint"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
 </SequentialCommand>
 <BinaryExpression>
 <VnameExpression>
