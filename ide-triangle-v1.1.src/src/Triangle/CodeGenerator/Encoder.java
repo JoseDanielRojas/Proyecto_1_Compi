@@ -1254,6 +1254,7 @@ static int InAddr;
         return valSize;
     
     }
+    //Hecho por Pablo Villafuerte Umaña
     static Expression ChExpr; 
     @Override
     public Object visitWhenCase(WhenCase ast, Object o) {
@@ -1311,6 +1312,7 @@ static int InAddr;
          }
         return null;
     }
+     //Hecho por Pablo Villafuerte Umaña
     static int JumpFDCGlobal; 
     @Override
     public Object visitChooseCommand(ChooseCommand ast, Object o) {
@@ -1339,7 +1341,7 @@ static int InAddr;
         emit(Machine.POPop, 0, 0, 1);
         return null;
     }
-
+     //Hecho por Pablo Villafuerte Umaña
     @Override
     public Object visitIntegerCase(IntegerCase ast, Object o) {
          Frame frame = (Frame) o;
@@ -1347,7 +1349,7 @@ static int InAddr;
         emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
         return valSize;
     }
-
+     //Hecho por Pablo Villafuerte Umaña
     @Override
     public Object visitCharacterCase(CharacterCase ast, Object o) {
         Frame frame = (Frame) o;
@@ -1355,7 +1357,7 @@ static int InAddr;
         emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
         return valSize;
     }
-
+     //Hecho por Pablo Villafuerte Umaña
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
        return null;
@@ -1365,7 +1367,7 @@ static int InAddr;
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+     //Hecho por Pablo Villafuerte Umaña
 
     @Override
     public Object visitSequentialCase(SequentialCase ast, Object o) {
