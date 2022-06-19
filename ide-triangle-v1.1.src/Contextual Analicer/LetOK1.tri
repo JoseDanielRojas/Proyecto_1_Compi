@@ -1,9 +1,8 @@
 ! let con variable inicializada
 let
-  var n := 'n' ;
-  var s := 5
+  var n := 1 
 in
 
-  put(n);putint(5) ! sin error, variable declarada con inicialización e inferencia del tipo
+  putint(n) ! sin error, variable declarada con inicialización e inferencia del tipo
 
 end

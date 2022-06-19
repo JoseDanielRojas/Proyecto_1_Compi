@@ -1,7 +1,7 @@
 !  lets anidados 
 let
 
-  var a := 8 ! debe inferir que a : Integer
+  var a := 1 ! debe inferir que a : Integer
 
 in
 

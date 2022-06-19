@@ -8,7 +8,7 @@ in
     x := x +1
 
   while x < 5 ! Debe imprimir 1, 2, 3, 4
-  leave put('W')
+  leave put ('W')
   end
 
 end
