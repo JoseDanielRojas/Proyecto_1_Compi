@@ -1109,7 +1109,7 @@ static int InAddr;
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
         emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
-        System.out.println();
+       // System.out.println();
         ast.C2.visit(this, frame);
         emit(Machine.POPop,0,0,3);
         return null; //To change body of generated methods, choose Tools | Templates.
@@ -1120,7 +1120,7 @@ static int InAddr;
          Frame frame = (Frame) o;
          int jumpAddr,forJump,repetir;
         int extraSize = ((Integer) ast.VarDe.visit(this, frame));
-        System.out.println(extraSize);
+      //  System.out.println(extraSize);
         ast.E.visit(this, frame);
         ast.U.visit(this, frame);
         emit(Machine.LOADop,1,Machine.SBr,InAddr);
@@ -1128,7 +1128,7 @@ static int InAddr;
         emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.addDisplacement);
         emit(Machine.STOREop,1,Machine.SBr,InAddr);
        emit(Machine.LOADop,1,Machine.SBr,InAddr);
-        System.out.println();
+      //  System.out.println();
         emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
@@ -1169,7 +1169,7 @@ static int InAddr;
         //emit(Machine.LOADop,1,Machine.SBr,InAddr);
         
         int extraSize = ((Integer) ast.VarDe.visit(this, frame)).intValue();
-        System.out.println(extraSize);
+      //  System.out.println(extraSize);
         ast.E.visit(this, frame);
        // forJump=nextInstrAddr;
         //emit(Machine.JUMPop,  0, Machine.CBr,0 );
@@ -1188,7 +1188,7 @@ static int InAddr;
        // emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.ltDisplacement);
         //emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, repetir);
         //emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.gtDisplacement);
-        System.out.println();
+     //   System.out.println();
         emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
@@ -1267,7 +1267,7 @@ static int InAddr;
         storeExp=nextInstrAddr;
         emit(Machine.STOREop,1,Machine.SBr,frame.size);
         
-        System.out.println(valSize);
+        //System.out.println(valSize);
         return valSize;
     
     }
@@ -1326,11 +1326,6 @@ static int InAddr;
              patch(jumpifAddr4, nextInstrAddr);
              
          }
-        
-         
-        
-         //ast.CaseL2.visit(this, frame);
-
         return null;
     }
     static int JumpFDCGlobal; 

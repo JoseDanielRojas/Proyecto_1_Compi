@@ -10,7 +10,7 @@
 <IntegerExpression>
 <IntegerLiteral value="10"/>
 </IntegerExpression>
-<RepeatWhileCommand>
+<ForWhileCommand>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
@@ -35,6 +35,6 @@
 </IntegerExpression>
 </BinaryExpression>
 <EmptyCommand/>
-</RepeatWhileCommand>
+</ForWhileCommand>
 </ForWhileCommand>
 </Program>

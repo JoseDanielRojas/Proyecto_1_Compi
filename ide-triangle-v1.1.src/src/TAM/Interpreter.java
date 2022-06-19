@@ -176,7 +176,7 @@ public class Interpreter {
       }
     }
     System.out.println ("");
-    System.out.println(ST+"-"+SB+"_"+HT+"-"+HB+"-"+data[SB]);
+    //System.out.println(ST+"-"+SB+"_"+HT+"-"+HB+"-"+data[SB]);
   }
 
   static void showStatus () {
@@ -212,7 +212,7 @@ public class Interpreter {
           
           break;
     }
-    if (status != 30)
+    if (status != halted)
       dump();
   }
 
