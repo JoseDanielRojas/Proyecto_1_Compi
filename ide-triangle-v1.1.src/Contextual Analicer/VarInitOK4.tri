@@ -1,5 +1,6 @@
 let
-
+var s := true;
+var o := true;
   var x := 1
 
 in

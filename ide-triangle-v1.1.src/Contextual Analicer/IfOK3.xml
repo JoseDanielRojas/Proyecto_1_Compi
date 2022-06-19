@@ -39,6 +39,30 @@
 </SingleActualParameterSequence>
 </CallCommand>
 <SequentialCommand>
+<SequentialCommand>
+<ElisifCommand>
+<BinaryExpression>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="a"/>
+</SimpleVname>
+</VnameExpression>
+<Operator value="="/>
+<IntegerExpression>
+<IntegerLiteral value="1"/>
+</IntegerExpression>
+</BinaryExpression>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<CharacterExpression>
+<CharacterLiteral value="'1'"/>
+<CharacterExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</ElisifCommand>
 <ElisifCommand>
 <BinaryExpression>
 <VnameExpression>
@@ -62,6 +86,7 @@
 </SingleActualParameterSequence>
 </CallCommand>
 </ElisifCommand>
+</SequentialCommand>
 <CallCommand>
 <Identifier value="put"/>
 <SingleActualParameterSequence>

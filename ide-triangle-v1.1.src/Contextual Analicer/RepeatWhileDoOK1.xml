@@ -1,24 +1,20 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <LetCommand>
-<VarValueDeclaration>
+<SequentialDeclaration>
+<ConstDeclaration>
+<Identifier value="b"/>
 <IntegerExpression>
 <IntegerLiteral value="10"/>
 </IntegerExpression>
-</VarValueDeclaration>
-<ForWhileCommand>
-<ForVarDecl>
-<Identifier value="i"/>
+</ConstDeclaration>
+<VarValueDeclaration>
 <IntegerExpression>
-<IntegerLiteral value="1"/>
+<IntegerLiteral value="15"/>
 </IntegerExpression>
-</ForVarDecl>
-<VnameExpression>
-<SimpleVname>
-<Identifier value="k"/>
-</SimpleVname>
-</VnameExpression>
-<ForWhileCommand>
+</VarValueDeclaration>
+</SequentialDeclaration>
+<RepeatWhileCommand>
 <SequentialCommand>
 <CallCommand>
 <Identifier value="putint"/>
@@ -26,7 +22,7 @@
 <ConstActualParameter>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="i"/>
+<Identifier value="a"/>
 </SimpleVname>
 </VnameExpression>
 </ConstActualParameter>
@@ -34,15 +30,15 @@
 </CallCommand>
 <AssignCommand>
 <SimpleVname>
-<Identifier value="k"/>
+<Identifier value="a"/>
 </SimpleVname>
 <BinaryExpression>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="k"/>
+<Identifier value="a"/>
 </SimpleVname>
 </VnameExpression>
-<Operator value="+"/>
+<Operator value="-"/>
 <IntegerExpression>
 <IntegerLiteral value="1"/>
 </IntegerExpression>
@@ -52,16 +48,17 @@
 <BinaryExpression>
 <VnameExpression>
 <SimpleVname>
-<Identifier value="i"/>
+<Identifier value="a"/>
 </SimpleVname>
 </VnameExpression>
-<Operator value="&lt;"/>
-<IntegerExpression>
-<IntegerLiteral value="3"/>
-</IntegerExpression>
+<Operator value=">"/>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="b"/>
+</SimpleVname>
+</VnameExpression>
 </BinaryExpression>
 <EmptyCommand/>
-</ForWhileCommand>
-</ForWhileCommand>
+</RepeatWhileCommand>
 </LetCommand>
 </Program>

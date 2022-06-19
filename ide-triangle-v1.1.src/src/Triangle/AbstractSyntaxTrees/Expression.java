@@ -23,5 +23,10 @@ public abstract class Expression extends AST {
     type = null;
   }
 
+   
+    public String toString() {
+        return  type.toString().substring(29, 37);
+    }
+
   public TypeDenoter type;
 }

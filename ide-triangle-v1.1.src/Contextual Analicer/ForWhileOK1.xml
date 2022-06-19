@@ -18,7 +18,7 @@
 <Identifier value="k"/>
 </SimpleVname>
 </VnameExpression>
-<RepeatWhileCommand>
+<ForWhileCommand>
 <CallCommand>
 <Identifier value="putint"/>
 <SingleActualParameterSequence>
@@ -41,7 +41,7 @@
 </IntegerExpression>
 </BinaryExpression>
 <EmptyCommand/>
-</RepeatWhileCommand>
+</ForWhileCommand>
 </ForWhileCommand>
 </LetCommand>
 </Program>

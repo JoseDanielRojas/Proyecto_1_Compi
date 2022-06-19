@@ -121,6 +121,7 @@ public class TableVisitor implements Visitor {
   // <editor-fold defaultstate="collapsed" desc=" Commands ">
   // Commands
   public Object visitAssignCommand(AssignCommand ast, Object o) { 
+      
       ast.V.visit(this, null);
       ast.E.visit(this, null);
       
@@ -663,6 +664,15 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
+        try {
+      addIdentifier(ast.I.spelling, 
+              ast.E.toString(), 
+              (ast.entity!=null?ast.entity.size:0), 
+              ((KnownAddress)ast.entity).address.level, 
+              ((KnownAddress)ast.entity).address.displacement, 
+              -1);
+      } catch (NullPointerException e) { }
+       
          ast.E.visit(this, null);
          ast.I.visit(this, null);
         return (null); 
@@ -737,6 +747,16 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
+   
+        try {
+      addIdentifier(ast.I.spelling, 
+              ast.E.toString(), 
+              (ast.entity!=null?ast.entity.size:0), 
+              ((KnownAddress)ast.entity).address.level, 
+              ((KnownAddress)ast.entity).address.displacement, 
+              -1);
+        } catch (NullPointerException e) { }
+    
         ast.I.visit(this, null);
         ast.E.visit(this, null);
         return (null);//To change body of generated methods, choose Tools | Templates.

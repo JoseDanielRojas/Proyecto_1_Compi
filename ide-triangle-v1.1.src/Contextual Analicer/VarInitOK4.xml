@@ -1,11 +1,29 @@
 <?xml version="1.0" standalone="yes"?>
 <Program>
 <LetCommand>
+<SequentialDeclaration>
+<SequentialDeclaration>
+<VarValueDeclaration>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="true"/>
+</SimpleVname>
+</VnameExpression>
+</VarValueDeclaration>
+<VarValueDeclaration>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="true"/>
+</SimpleVname>
+</VnameExpression>
+</VarValueDeclaration>
+</SequentialDeclaration>
 <VarValueDeclaration>
 <IntegerExpression>
 <IntegerLiteral value="1"/>
 </IntegerExpression>
 </VarValueDeclaration>
+</SequentialDeclaration>
 <SequentialCommand>
 <SequentialCommand>
 <SequentialCommand>
