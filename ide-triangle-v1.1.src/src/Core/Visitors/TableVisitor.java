@@ -806,20 +806,43 @@ public class TableVisitor implements Visitor {
       
         return(null);
     }
-
+    // Hecho por Miguel Mesen
     @Override
-    public Object visitReProcDeclaration(ReProcDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitReProcDeclaration(ReProcDeclaration ast, Object o) {
+        try {
+            addIdentifier(ast.I.spelling, "KnownRoutine",
+                    (ast.entity!=null?ast.entity.size:0),
+                    ((KnownRoutine)ast.entity).address.level,
+                    ((KnownRoutine)ast.entity).address.displacement,
+                    -1);
+        } catch (NullPointerException e) { }
+
+        ast.FPS.visit(this, null);
+        ast.C.visit(this, null);
+
+        return(null);
     }
-
+    // Hecho por Miguel Mesen
     @Override
-    public Object visitRecursiveProcFunc(RecursiveProcFunc aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
+        try {
+            addIdentifier(ast.I.spelling,
+                    "KnownRoutine",
+                    (ast.entity!=null?ast.entity.size:0),
+                    ((KnownRoutine)ast.entity).address.level,
+                    ((KnownRoutine)ast.entity).address.displacement,
+                    -1);
+        } catch (NullPointerException e) { }
+        ast.FPS.visit(this, null);
+        ast.T.visit(this, null);
+        ast.E.visit(this, null);
+        return(null);
     }
-
+    // Hecho por Miguel Mesen
     @Override
-    public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
+        ast.RecPrFun.visit(this, null);
+        return (null);
     }
 
     @Override

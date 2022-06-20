@@ -366,15 +366,40 @@ static int InAddr;
     return new Integer(0);
   }
 
+  // Hecho por Miguel Mesen
   public Object visitSequentialDeclaration(SequentialDeclaration ast, Object o) {
-    Frame frame = (Frame) o;
-    int extraSize1, extraSize2;
-
-    extraSize1 = ((Integer) ast.D1.visit(this, frame)).intValue();
-    Frame frame1 = new Frame (frame, extraSize1);
-    extraSize2 = ((Integer) ast.D2.visit(this, frame1)).intValue();
-    return new Integer(extraSize1 + extraSize2);
+    Frame frame1 = (Frame) o;
+    int jumpAddr1,jumpAddr2;
+    jumpAddr2 = nextInstrAddr;
+    if(ast.D2 != null){
+      emit(Machine.JUMPop, 0, Machine.CBr, 0);
+      ast.D2.entity = new KnownRoutine(Machine.closureSize, frame1.level, nextInstrAddr);
+      writeTableDetails(ast.D2);
+    } else{
+      emit(Machine.JUMPop, 0, Machine.CBr, 0);
+      ast.D1.entity = new KnownRoutine(Machine.closureSize, frame1.level, nextInstrAddr);
+      writeTableDetails(ast.D1);
+    }
+    int newValue = (Integer)ast.D1.visit(this,o);
+    Frame frame2 = new Frame (frame1.level, frame1.size + newValue);
+    if(ast.D2 != null){
+      jumpAddr1 = nextInstrAddr;
+      emit(Machine.JUMPop, 0, Machine.CBr, 0);
+      ast.D1.entity = new KnownRoutine(Machine.closureSize, frame1.level, nextInstrAddr);
+      writeTableDetails(ast.D1);
+      newValue += (Integer)ast.D2.visit(this, frame2);
+      patch(jumpAddr1, nextInstrAddr);
+      patch(jumpAddr2,jumpAddr1);
+      KnownRoutine routine = (KnownRoutine)ast.D1.entity;
+      ast.D1.entity = ast.D2.entity;
+      ast.D2.entity = routine;
+      patchRe(nextInstrAddr,jumpAddr1 + 1, jumpAddr2 + 1);
+    } else{
+      ast.D1.entity = ast.D2.entity;
+    }
+    return newValue;
   }
+
 
   public Object visitTypeDeclaration(TypeDeclaration ast, Object o) {
     // just to ensure the type's representation is decided
@@ -902,6 +927,18 @@ static int InAddr;
     Machine.code[addr].d = d;
   }
 
+  // Hecho por Miguel Mesen
+  private void patchRe(int addr,int d1, int d2){
+    for (int i = 0; i < addr; i++){
+      if(Machine.code[i].d == d1 && Machine.code[i].op == Machine.CALLop){
+        Machine.code[i].d = d2;
+      }
+      else if(Machine.code[i].d == d2 && Machine.code[i].op == Machine.CALLop){
+        Machine.code[i].d = d1;
+      }
+    }
+  }
+
   // DATA REPRESENTATION
 
   public int characterValuation (String spelling) {
@@ -1046,7 +1083,7 @@ static int InAddr;
     public Object visitVarFormalDeclaration(VarFormalDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-// Hecho por Sebastian Campos Zuñiga
+// Hecho por Sebastian Campos Zuï¿½iga
     @Override
     public Object visitVarValueDeclaration(VarValueDeclaration ast, Object o) {
         Frame frame = (Frame) o;
@@ -1068,7 +1105,7 @@ static int InAddr;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
+    // Hecho por Sebastian Campos Zuï¿½iga y Pablo Cï¿½sar Villafuerte Umaï¿½a 
     static int storeExp;
     @Override
     public Object visitForDoCommand(ForDoCommand ast, Object o) {
@@ -1094,7 +1131,7 @@ static int InAddr;
         emit(Machine.POPop,0,0,3);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
- // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
+ // Hecho por Sebastian Campos Zuï¿½iga y Pablo Cï¿½sar Villafuerte Umaï¿½a 
     @Override
     public Object visitForUntilCommand(ForUntilCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1137,7 +1174,7 @@ static int InAddr;
         
          return null;
     }
-    // Hecho por Sebastian Campos Zuñiga y Pablo César Villafuerte Umaña 
+    // Hecho por Sebastian Campos Zuï¿½iga y Pablo Cï¿½sar Villafuerte Umaï¿½a 
     @Override
     public Object visitForWhileCommand(ForWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1157,7 +1194,7 @@ static int InAddr;
         emit(Machine.POPop,0,0,2);
         return null; //To change body of generated methods, choose Tools | Templates.
     }
-    // Hecho por Sebastian Campos Zuñiga v y Pablo César Villafuerte Umaña 
+    // Hecho por Sebastian Campos Zuï¿½iga v y Pablo Cï¿½sar Villafuerte Umaï¿½a 
     @Override
     public Object visitForWhileExtraCommand(ForWhileExtraCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1176,7 +1213,7 @@ static int InAddr;
         ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
          return null;
     }
-// Hecho por Sebastian Campos Zuñiga 
+// Hecho por Sebastian Campos Zuï¿½iga 
     @Override
     public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1189,7 +1226,7 @@ static int InAddr;
         ast.C2.visit(this, frame); //To change body of generated methods, choose Tools | Templates.
         return null;
     }
-// Hecho por Sebastian Campos Zuñiga 
+// Hecho por Sebastian Campos Zuï¿½iga 
     @Override
     public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
          Frame frame = (Frame) o;
@@ -1203,7 +1240,7 @@ static int InAddr;
         
         return null;//To change body of generated methods, choose Tools | Templates.
     }
-// Hecho por Sebastian Campos Zuñiga 
+// Hecho por Sebastian Campos Zuï¿½iga 
     @Override
     public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1219,7 +1256,7 @@ static int InAddr;
         ast.C2.visit(this, frame);
         return null;
     }
-// Hecho por Sebastian Campos Zuñiga 
+// Hecho por Sebastian Campos Zuï¿½iga 
     @Override
     public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) {
         Frame frame = (Frame) o;
@@ -1236,7 +1273,7 @@ static int InAddr;
        
         return null;
     }
-// Hecho por Sebastian Campos Zuñiga  y Pablo César Villafuerte Umaña 
+// Hecho por Sebastian Campos Zuï¿½iga  y Pablo Cï¿½sar Villafuerte Umaï¿½a 
     @Override
     public Object visitForVarDecl(ForVarDecl ast, Object o) {
         Frame frame = (Frame) o;
@@ -1254,7 +1291,7 @@ static int InAddr;
         return valSize;
     
     }
-    //Hecho por Pablo Villafuerte Umaña
+    //Hecho por Pablo Villafuerte Umaï¿½a
     static Expression ChExpr; 
     @Override
     public Object visitWhenCase(WhenCase ast, Object o) {
@@ -1312,7 +1349,7 @@ static int InAddr;
          }
         return null;
     }
-     //Hecho por Pablo Villafuerte Umaña
+     //Hecho por Pablo Villafuerte Umaï¿½a
     static int JumpFDCGlobal; 
     @Override
     public Object visitChooseCommand(ChooseCommand ast, Object o) {
@@ -1341,7 +1378,7 @@ static int InAddr;
         emit(Machine.POPop, 0, 0, 1);
         return null;
     }
-     //Hecho por Pablo Villafuerte Umaña
+     //Hecho por Pablo Villafuerte Umaï¿½a
     @Override
     public Object visitIntegerCase(IntegerCase ast, Object o) {
          Frame frame = (Frame) o;
@@ -1349,7 +1386,7 @@ static int InAddr;
         emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
         return valSize;
     }
-     //Hecho por Pablo Villafuerte Umaña
+     //Hecho por Pablo Villafuerte Umaï¿½a
     @Override
     public Object visitCharacterCase(CharacterCase ast, Object o) {
         Frame frame = (Frame) o;
@@ -1357,7 +1394,7 @@ static int InAddr;
         emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
         return valSize;
     }
-     //Hecho por Pablo Villafuerte Umaña
+     //Hecho por Pablo Villafuerte Umaï¿½a
     @Override
     public Object visitEmptyCase(EmptyCase aThis, Object o) {
        return null;
@@ -1367,7 +1404,7 @@ static int InAddr;
     public Object visitPrivateDeclaration(PrivateDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     //Hecho por Pablo Villafuerte Umaña
+     //Hecho por Pablo Villafuerte Umaï¿½a
 
     @Override
     public Object visitSequentialCase(SequentialCase ast, Object o) {
@@ -1378,20 +1415,45 @@ static int InAddr;
          return null;
     }
 
+    // Hecho por Miguel Mesen
     @Override
-    public Object visitReProcDeclaration(ReProcDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object visitReProcDeclaration(ReProcDeclaration ast, Object o) {
+      Frame frame = (Frame) o;
+      int argsSize = 0;
+      if (frame.level == Machine.maxRoutineLevel)
+        reporter.reportRestriction("can't nest routines so deeply");
+      else {
+        Frame frame1 = new Frame(frame.level + 1, 0);
+        argsSize = ((Integer) ast.FPS.visit(this, frame1)).intValue();
+        Frame frame2 = new Frame(frame.level + 1, Machine.linkDataSize);
+        ast.C.visit(this, frame2);
+      }
+      emit(Machine.RETURNop, 0, 0, argsSize);
+      return new Integer(0);
     }
 
-    @Override
-    public Object visitRecursiveProcFunc(RecursiveProcFunc aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  // Hecho por Miguel Mesen
+  @Override
+    public Object visitReFuncDeclaration(ReFuncDeclaration ast, Object o) {
+      Frame frame = (Frame) o;
+      int argsSize = 0, valSize = 0;
+      if (frame.level == Machine.maxRoutineLevel)
+        reporter.reportRestriction("can't nest routines more than 7 deep");
+      else {
+        Frame frame1 = new Frame(frame.level + 1, 0);
+        argsSize = ((Integer) ast.FPS.visit(this, frame1)).intValue();
+        Frame frame2 = new Frame(frame.level + 1, Machine.linkDataSize);
+        valSize = ((Integer) ast.E.visit(this, frame2)).intValue();
+      }
+      emit(Machine.RETURNop, valSize, 0, argsSize);
+      return new Integer(0);
     }
 
-    @Override
-    public Object visitReFuncDeclaration(ReFuncDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  // Hecho por Miguel Mesen
+  @Override
+  public Object visitRecursiveProcFunc(RecursiveProcFunc ast, Object o) {
+    return  ast.RecPrFun.visit(this,o);
+  }
 
     
 
