@@ -3,7 +3,7 @@
 <ChooseCommand>
 <BinaryExpression>
 <IntegerExpression>
-<IntegerLiteral value="6"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 <Operator value="*"/>
 <BinaryExpression>
@@ -45,7 +45,7 @@
 <IntegerExpression>
 <IntegerLiteral value="2"/>
 </IntegerExpression>
-<Operator value="+"/>
+<Operator value="-"/>
 <IntegerExpression>
 <IntegerLiteral value="1"/>
 </IntegerExpression>

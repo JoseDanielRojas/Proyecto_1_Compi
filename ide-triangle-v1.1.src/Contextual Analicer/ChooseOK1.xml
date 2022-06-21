@@ -2,11 +2,11 @@
 <Program>
 <ChooseCommand>
 <IntegerExpression>
-<IntegerLiteral value="2"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 <WhenCase>
 <IntegerCase>
-<IntegerLiteral value="2"/>
+<IntegerLiteral value="1"/>
 </IntegerCase >
 <EmptyCase/>
 <CallCommand>
@@ -14,7 +14,7 @@
 <SingleActualParameterSequence>
 <ConstActualParameter>
 <IntegerExpression>
-<IntegerLiteral value="3"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 </ConstActualParameter>
 </SingleActualParameterSequence>

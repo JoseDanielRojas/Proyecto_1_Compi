@@ -130,8 +130,9 @@ static int InAddr;
     ast.I.visit(this, new Frame(frame.level, argsSize));
     return null;
   }
-
+  static boolean ElseVacio=false;
   public Object visitEmptyCommand(EmptyCommand ast, Object o) {
+    ElseVacio=true;
     return null;
   }
   static ArrayList <Integer> jumpAddrGb=new ArrayList();
@@ -1334,9 +1335,12 @@ static int InAddr;
         
         
         ast.C.visit(this, frame);
-        if(ast.C.visit(this, frame)==null){
+        if(ElseVacio==true){
             emit(Machine.HALTop,0,0,1);
+            ElseVacio=false;
         }
+            
+        
         patch(jumpFDC, nextInstrAddr);
         emit(Machine.POPop, 0, 0, 1);
         return null;

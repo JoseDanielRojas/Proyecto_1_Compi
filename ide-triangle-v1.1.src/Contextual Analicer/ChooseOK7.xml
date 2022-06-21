@@ -2,7 +2,7 @@
 <Program>
 <ChooseCommand>
 <IntegerExpression>
-<IntegerLiteral value="9"/>
+<IntegerLiteral value="1"/>
 </IntegerExpression>
 <SequentialCase>
 <WhenCase>
